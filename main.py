@@ -4,14 +4,13 @@ Jeoloji Takip Botu
 - config.json'dan kaynakları ve anahtar kelimeleri okur.
 - Crossref Akademik API üzerinden makaleleri arar (GitHub IP engellerine takılmaz).
 - seen_urls.json hafıza dosyasıyla daha önce gönderilmiş URL'leri atlar.
-- Google Gemini API (gemini-pro) ile makale özetlerini Türkçe 3 maddeye çevirir.
+- Gemini REST API ile makale özetlerini Türkçe 3 maddeye çevirir (Kütüphanesiz, %100 uyumlu).
 - Telegram üzerinden kullanıcıya bildirim gönderir.
 - Google Sheets arşivleme butonunu destekler.
 """
 
 import json
 import gspread
-import base64
 import os
 import sys
 import logging
@@ -19,9 +18,7 @@ import logging.handlers
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from time import sleep
-
 import requests
-import google.generativeai as genai
 
 # ─── Logging ────────────────────────────────────────────────────────────────
 LOG_FORMAT = "%(asctime)s [%(levelname)s] %(message)s"
@@ -123,10 +120,8 @@ def handle_callbacks(entries: list[dict[str, str]]):
 
 MAX_RETRIES = 3
 RETRY_BACKOFF_BASE = 2
-
 CONFIG_PATH = Path(__file__).parent / "config.json"
 SEEN_URLS_PATH = Path(__file__).parent / "seen_urls.json"
-SEEN_URLS_MAX_AGE_DAYS = 30
 
 def load_config() -> dict:
     if not CONFIG_PATH.exists():
@@ -134,21 +129,19 @@ def load_config() -> dict:
         sys.exit(1)
     try:
         with open(CONFIG_PATH, "r", encoding="utf-8") as f:
-            config = json.load(f)
-    except (json.JSONDecodeError, OSError) as exc:
+            return json.load(f)
+    except Exception as exc:
         logger.error("config.json okunamadı: %s", exc)
         sys.exit(1)
-    return config
 
 def load_seen_urls() -> dict[str, str]:
     if not SEEN_URLS_PATH.exists():
         return {}
     try:
         with open(SEEN_URLS_PATH, "r", encoding="utf-8") as f:
-            data: dict[str, str] = json.load(f)
-    except (json.JSONDecodeError, OSError):
+            return json.load(f)
+    except Exception:
         return {}
-    return data
 
 def save_seen_urls(seen_urls: dict[str, str]) -> None:
     try:
@@ -158,23 +151,13 @@ def save_seen_urls(seen_urls: dict[str, str]) -> None:
         logger.error("seen_urls.json yazılamadı: %s", exc)
 
 def fetch_semantic_entries(anahtar_kelimeler: list[str], seen_urls: dict[str, str]) -> list[dict[str, str]]:
-    """Akademik makaleleri çeker ve Gemini ile özetler (Crossref API)."""
     if not GEMINI_API_KEY:
         logger.error("GEMINI_API_KEY yok, özetleme atlanıyor.")
-        return []
-
-    genai.configure(api_key=GEMINI_API_KEY)
-    try:
-        # Sorun çıkaran flash modeli yerine, %100 çalışan gemini-pro modeli kullanılıyor
-        model = genai.GenerativeModel('gemini-pro')
-    except Exception as e:
-        logger.error("Gemini başlatılamadı: %s", e)
         return []
 
     entries = []
     for kelime in anahtar_kelimeler:
         url = "https://api.crossref.org/works"
-        # En yeni makaleleri getirmesi için sort=published ayarı eklendi
         params = {
             "query": kelime,
             "select": "title,URL,abstract",
@@ -187,12 +170,9 @@ def fetch_semantic_entries(anahtar_kelimeler: list[str], seen_urls: dict[str, st
             if resp.status_code != 200:
                 continue
                 
-            data = resp.json()
-            items = data.get("message", {}).get("items", [])
-            
+            items = resp.json().get("message", {}).get("items", [])
             for paper in items:
                 link = paper.get("URL")
-                
                 if not link or link in seen_urls:
                     continue
                     
@@ -200,22 +180,28 @@ def fetch_semantic_entries(anahtar_kelimeler: list[str], seen_urls: dict[str, st
                 title = title_list[0] if title_list else "Başlıksız"
                 abstract = paper.get("abstract", "Özet metni sunucu tarafından sağlanmadı.")
                 
+                # Gemini Doğrudan (Kütüphanesiz) REST API İstediği
                 prompt = (
                     f"Sen uzman bir jeologsun. Aşağıdaki makale bilgilerini incele ve "
                     f"anlaşılır bir dille Türkçe 3 maddelik kısa bir özet çıkar.\n\n"
                     f"Başlık: {title}\nÖzet: {abstract}"
                 )
                 
+                gemini_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={GEMINI_API_KEY}"
+                gemini_payload = {"contents": [{"parts": [{"text": prompt}]}]}
+                
                 try:
-                    response = model.generate_content(prompt)
-                    summary = response.text.strip()
-                    entries.append({
-                        "title": title,
-                        "link": link,
-                        "summary": summary
-                    })
+                    resp_gemini = requests.post(gemini_url, json=gemini_payload, timeout=20)
+                    if resp_gemini.status_code == 200:
+                        data_gemini = resp_gemini.json()
+                        # Eğer bloklanırsa veya boş dönerse kontrol ediyoruz
+                        if "candidates" in data_gemini and len(data_gemini["candidates"]) > 0:
+                            summary = data_gemini["candidates"][0]["content"]["parts"][0]["text"].strip()
+                            entries.append({"title": title, "link": link, "summary": summary})
+                    else:
+                        logger.error("Gemini API REST Hatası: %s %s", resp_gemini.status_code, resp_gemini.text)
                 except Exception as e:
-                    logger.error("Gemini API Hatası: %s", e)
+                    logger.error("Gemini İstek Hatası: %s", e)
                     
         except Exception as e:
             logger.error("Makale API Hatası (%s): %s", kelime, e)
@@ -257,10 +243,8 @@ def main() -> None:
         anahtar_kelimeler = config["anahtar_kelimeler"]
         seen_urls = load_seen_urls()
 
-        # Makaleleri çek ve özetle
         entries = fetch_semantic_entries(anahtar_kelimeler, seen_urls)
 
-        # Sadece yeni içerik VARSA mesaj gönder
         if entries:
             header = (
                 f"🌍 *Jeoloji Takip Botu*\n"
