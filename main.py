@@ -148,12 +148,15 @@ def summarize_text(title: str, abstract: str) -> str:
 def fetch_semantic_entries(anahtar_kelimeler: list[str], seen_urls: dict[str, str]) -> list[dict[str, str]]:
     entries = []
     for kelime in anahtar_kelimeler:
-        url = "https://api.crossref.org/works"
+                url = "https://api.crossref.org/works"
         params = {"query": kelime, "select": "title,URL,abstract", "sort": "published", "order": "desc", "rows": 2}
+        headers = {"User-Agent": "JeolojiBot/1.0 (mailto:jeolojibot@example.com)"}
         
         try:
-            resp = requests.get(url, params=params, timeout=15)
-            if resp.status_code != 200: continue
+            resp = requests.get(url, params=params, headers=headers, timeout=15)
+            if resp.status_code != 200: 
+                logger.error("Crossref Hatası: %s", resp.status_code)
+                continue
             
             items = resp.json().get("message", {}).get("items", [])
             for paper in items:
