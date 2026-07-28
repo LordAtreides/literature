@@ -1,8 +1,8 @@
 """
-Jeoloji Takip Botu (Nihai Sürüm v2)
+Jeoloji Takip Botu (Nihai Sürüm v3)
 ====================================
 - Crossref API ile akademik makale arar.
-- Google ListModels API ile TÜM modelleri keşfeder, çalışanı bulana kadar dener.
+- Başlangıçta tek bir test ile çalışan Gemini modelini bulur, sonra hep onu kullanır.
 - Sadece Telegram'a başarıyla gönderilen makaleleri hafızaya kaydeder.
 - Google Sheets arşivleme butonunu destekler.
 """
@@ -116,38 +116,51 @@ def handle_callbacks(entries):
     except Exception:
         pass
 
-# ─── Gemini: TÜM Modelleri Keşfet ──────────────────────────────────────────
-def discover_all_gemini_models():
-    """Google ListModels API ile generateContent destekleyen TÜM modelleri döndürür."""
+# ─── Gemini: Çalışan Modeli Bul ────────────────────────────────────────────
+def find_working_gemini_model():
+    """Başlangıçta tek bir test ile 41 modelden çalışanı bulur ve döndürür."""
     if not GEMINI_API_KEY:
         logger.error("GEMINI_API_KEY tanımlanmamış!")
-        return []
-    url = f"https://generativelanguage.googleapis.com/v1beta/models?key={GEMINI_API_KEY}"
-    try:
-        resp = requests.get(url, timeout=10)
-        logger.info("ListModels API yanıt kodu: %s", resp.status_code)
-        if resp.status_code != 200:
-            logger.error("ListModels başarısız: %s", resp.text[:500])
-            return []
-        models = resp.json().get("models", [])
-        result = []
-        for m in models:
-            methods = m.get("supportedGenerationMethods", [])
-            name = m.get("name", "")
-            if "generateContent" in methods:
-                result.append(name)
-        logger.info("Keşfedilen toplam model sayısı: %d", len(result))
-        for r in result:
-            logger.info("  → %s", r)
-        return result
-    except Exception as e:
-        logger.error("Model keşif hatası: %s", e)
-    return []
+        return None
 
-def summarize_with_gemini(model_list, title, abstract):
-    """Model listesindeki her modeli sırayla dener, ilk çalışanı kullanır."""
+    # 1. Tüm modelleri listele
+    list_url = f"https://generativelanguage.googleapis.com/v1beta/models?key={GEMINI_API_KEY}"
+    try:
+        resp = requests.get(list_url, timeout=10)
+        if resp.status_code != 200:
+            logger.error("ListModels başarısız: %s", resp.status_code)
+            return None
+        all_models = resp.json().get("models", [])
+    except Exception as e:
+        logger.error("ListModels hatası: %s", e)
+        return None
+
+    # generateContent destekleyenleri filtrele
+    candidates = [m["name"] for m in all_models if "generateContent" in m.get("supportedGenerationMethods", [])]
+    logger.info("generateContent destekleyen model sayısı: %d", len(candidates))
+
+    # 2. Kısa bir test mesajıyla çalışanı bul
+    test_payload = {"contents": [{"parts": [{"text": "Merhaba, 1+1 kaç?"}]}]}
+    for model_name in candidates:
+        url = f"https://generativelanguage.googleapis.com/v1beta/{model_name}:generateContent?key={GEMINI_API_KEY}"
+        try:
+            resp = requests.post(url, json=test_payload, timeout=10)
+            if resp.status_code == 200:
+                data = resp.json()
+                if "candidates" in data and data["candidates"]:
+                    logger.info("✅ ÇALIŞAN MODEL BULUNDU: %s", model_name)
+                    return model_name
+            logger.info("❌ %s çalışmadı (%s), sonraki deneniyor...", model_name, resp.status_code)
+        except Exception:
+            continue
+
+    logger.error("Hiçbir Gemini modeli çalışmadı!")
+    return None
+
+def summarize_with_gemini(working_model, title, abstract):
+    """Daha önce bulunan çalışan model ile Türkçe özet üretir."""
     fallback = abstract[:500] + "..." if len(abstract) > 500 else abstract
-    if not model_list or not GEMINI_API_KEY:
+    if not working_model or not GEMINI_API_KEY:
         return fallback
 
     prompt = (
@@ -155,29 +168,19 @@ def summarize_with_gemini(model_list, title, abstract):
         "anlaşılır bir dille Türkçe 3 maddelik kısa bir özet çıkar.\n\n"
         f"Başlık: {title}\nÖzet: {abstract}"
     )
-    payload = {"contents": [{"parts": [{"text": prompt}]}]}
-
-    for model_name in model_list:
-        url = f"https://generativelanguage.googleapis.com/v1beta/{model_name}:generateContent?key={GEMINI_API_KEY}"
-        try:
-            resp = requests.post(url, json=payload, timeout=20)
-            if resp.status_code == 200:
-                data = resp.json()
-                if "candidates" in data and data["candidates"]:
-                    logger.info("✅ Gemini başarılı (model: %s)", model_name)
-                    return data["candidates"][0]["content"]["parts"][0]["text"].strip()
-            else:
-                logger.warning("Model %s başarısız (%s), sonraki deneniyor...", model_name, resp.status_code)
-                continue
-        except Exception as e:
-            logger.warning("Model %s hata: %s, sonraki deneniyor...", model_name, e)
-            continue
-
-    logger.warning("Hiçbir Gemini modeli çalışmadı, orijinal özet kullanılacak.")
+    url = f"https://generativelanguage.googleapis.com/v1beta/{working_model}:generateContent?key={GEMINI_API_KEY}"
+    try:
+        resp = requests.post(url, json={"contents": [{"parts": [{"text": prompt}]}]}, timeout=20)
+        if resp.status_code == 200:
+            data = resp.json()
+            if "candidates" in data and data["candidates"]:
+                return data["candidates"][0]["content"]["parts"][0]["text"].strip()
+    except Exception as e:
+        logger.error("Gemini özet hatası: %s", e)
     return fallback
 
 # ─── Crossref API ile Makale Çekme ─────────────────────────────────────────
-def fetch_articles(anahtar_kelimeler, seen_urls, model_list):
+def fetch_articles(anahtar_kelimeler, seen_urls, working_model):
     entries = []
     headers = {"User-Agent": "JeolojiBot/1.0 (mailto:jeolojibot@example.com)"}
 
@@ -209,7 +212,7 @@ def fetch_articles(anahtar_kelimeler, seen_urls, model_list):
                 title = title_list[0] if title_list else "Başlıksız"
                 abstract = paper.get("abstract", "Özet sunucu tarafından sağlanmadı.")
 
-                summary = summarize_with_gemini(model_list, title, abstract)
+                summary = summarize_with_gemini(working_model, title, abstract)
                 entries.append({"title": title, "link": link, "summary": summary})
                 logger.info("📄 Yeni makale: %s", title[:80])
         except Exception as e:
@@ -232,14 +235,13 @@ def send_telegram(message, reply_markup=None):
     for attempt in range(3):
         try:
             resp = requests.post(url, json=payload, timeout=20)
-            logger.info("Telegram yanıt kodu: %s", resp.status_code)
             if resp.status_code == 200:
                 return True
             elif resp.status_code == 429:
                 sleep(2)
                 continue
             else:
-                logger.error("Telegram hata detayı: %s", resp.text[:300])
+                logger.error("Telegram hata: %s", resp.text[:300])
                 return False
         except Exception as e:
             logger.error("Telegram gönderim hatası: %s", e)
@@ -255,29 +257,23 @@ def main():
         logger.critical("TELEGRAM_BOT_TOKEN veya TELEGRAM_CHAT_ID tanımlanmamış!")
         sys.exit(1)
 
-    logger.info("Telegram Token: %s...%s", TELEGRAM_BOT_TOKEN[:8], TELEGRAM_BOT_TOKEN[-4:])
-    logger.info("Telegram Chat ID: %s", TELEGRAM_CHAT_ID)
-
     config = load_config()
     anahtar_kelimeler = config["anahtar_kelimeler"]
     seen_urls = load_seen_urls()
-    logger.info("Anahtar kelimeler: %s", anahtar_kelimeler)
     logger.info("Hafızadaki URL sayısı: %d", len(seen_urls))
 
-    # TÜM Gemini modellerini keşfet
-    model_list = discover_all_gemini_models()
+    # Başlangıçta tek seferlik test ile çalışan modeli bul
+    logger.info("🔎 Çalışan Gemini modeli aranıyor...")
+    working_model = find_working_gemini_model()
+    if not working_model:
+        logger.warning("⚠️ Gemini kullanılamıyor, makaleler orijinal özetleriyle gönderilecek.")
 
     # Makaleleri çek ve özetle
-    entries = fetch_articles(anahtar_kelimeler, seen_urls, model_list)
+    entries = fetch_articles(anahtar_kelimeler, seen_urls, working_model)
     logger.info("Toplam yeni makale sayısı: %d", len(entries))
 
     if entries:
-        header = (
-            f"🌍 *Jeoloji Takip Botu*\n"
-            f"📅 {now}\n"
-            f"📊 {len(entries)} yeni içerik\n"
-            f"{'─' * 30}\n"
-        )
+        header = f"🌍 *Jeoloji Takip Botu*\n📅 {now}\n📊 {len(entries)} yeni içerik\n{'─' * 30}\n"
         send_telegram(header)
 
         successfully_sent = []
@@ -296,21 +292,20 @@ def main():
 
             if send_telegram(msg, reply_markup=keyboard):
                 successfully_sent.append(entry)
-                logger.info("✅ Telegram'a gönderildi: %s", title[:60])
+                logger.info("✅ Gönderildi: %s", title[:60])
             else:
-                logger.error("❌ Telegram'a gönderilemedi: %s", title[:60])
+                logger.error("❌ Gönderilemedi: %s", title[:60])
 
         now_iso = datetime.now(timezone.utc).isoformat()
         for entry in successfully_sent:
             seen_urls[entry["link"]] = now_iso
-
         if successfully_sent:
             save_seen_urls(seen_urls)
             logger.info("%d URL hafızaya kaydedildi.", len(successfully_sent))
 
         handle_callbacks(entries)
     else:
-        logger.info("Yeni makale bulunamadı. Telegram'a mesaj gönderilmeyecek.")
+        logger.info("Yeni makale bulunamadı.")
 
     logger.info("═══ İşlem tamamlandı ═══")
 
