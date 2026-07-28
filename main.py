@@ -248,7 +248,7 @@ def send_telegram(message, reply_markup=None):
     payload = {
         "chat_id": TELEGRAM_CHAT_ID,
         "text": message,
-        "parse_mode": "Markdown",
+        "parse_mode": "HTML",
         "disable_web_page_preview": True,
     }
     if reply_markup:
@@ -295,21 +295,24 @@ def main():
     logger.info("Toplam yeni makale sayısı: %d", len(entries))
 
     if entries:
-        header = f"🌍 *Jeoloji Takip Botu*\n📅 {now}\n📊 {len(entries)} yeni içerik\n{'─' * 30}\n"
+                header = f"🌍 <b>Jeoloji Takip Botu</b>\n📅 {now}\n📊 {len(entries)} yeni içerik\n{'─' * 30}\n"
         send_telegram(header)
 
         successfully_sent = []
         for idx, entry in enumerate(entries):
-            title = entry.get("title", "Başlıksız").replace("*", "\\*")
-            summary = entry.get("summary", "")
+            raw_title = entry.get("title", "Başlıksız")
+            safe_title = raw_title.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+            raw_summary = entry.get("summary", "")
+            safe_summary = raw_summary.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
-            lines = [ln.strip() for ln in summary.splitlines() if ln.strip()][:5]
+            lines = [ln.strip() for ln in safe_summary.splitlines() if ln.strip()][:5]
             bullets = "\n".join(
                 ln if ln.startswith("-") or ln.startswith("*") else f"- {ln}"
                 for ln in lines
             )
 
-            msg = f"*{title}*\n{bullets}\n\n[Detaylı Oku]({entry.get('link')})"
+            link = entry.get("link", "")
+            msg = f"<b>{safe_title}</b>\n{bullets}\n\n<a href=\"{link}\">Detaylı Oku</a>"
             keyboard = {"inline_keyboard": [[{"text": "Arşive Kaydet 📁", "callback_data": f"archive_{idx}"}]]}
 
             if send_telegram(msg, reply_markup=keyboard):
