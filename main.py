@@ -1,8 +1,8 @@
 """
-Jeoloji Takip Botu (Nihai Sürüm v3)
+Jeoloji Takip Botu (Nihai Sürüm v4)
 ====================================
 - Crossref API ile akademik makale arar.
-- Başlangıçta tek bir test ile çalışan Gemini modelini bulur, sonra hep onu kullanır.
+- Başlangıçta gerçekçi bir test ile en hızlı çalışan Gemini/Gemma modelini bulur.
 - Sadece Telegram'a başarıyla gönderilen makaleleri hafızaya kaydeder.
 - Google Sheets arşivleme butonunu destekler.
 """
@@ -118,7 +118,7 @@ def handle_callbacks(entries):
 
 # ─── Gemini: Çalışan Modeli Bul ────────────────────────────────────────────
 def find_working_gemini_model():
-    """Başlangıçta tek bir test ile 41 modelden çalışanı bulur ve döndürür."""
+    """Başlangıçta gerçekçi bir test ile en uygun modeli bulur."""
     if not GEMINI_API_KEY:
         logger.error("GEMINI_API_KEY tanımlanmamış!")
         return None
@@ -135,30 +135,52 @@ def find_working_gemini_model():
         logger.error("ListModels hatası: %s", e)
         return None
 
-    # generateContent destekleyenleri filtrele
-    candidates = [m["name"] for m in all_models if "generateContent" in m.get("supportedGenerationMethods", [])]
-    logger.info("generateContent destekleyen model sayısı: %d", len(candidates))
+    # 2. generateContent destekleyenleri filtrele, müzik/görsel modellerini çıkar
+    skip_keywords = ["lyria", "imagen", "embedding", "aqa", "bisimulation"]
+    candidates = []
+    for m in all_models:
+        name = m.get("name", "")
+        methods = m.get("supportedGenerationMethods", [])
+        if "generateContent" not in methods:
+            continue
+        if any(skip in name.lower() for skip in skip_keywords):
+            continue
+        candidates.append(name)
 
-    # 2. Kısa bir test mesajıyla çalışanı bul
-    test_payload = {"contents": [{"parts": [{"text": "Merhaba, 1+1 kaç?"}]}]}
-    for model_name in candidates:
+    # 3. Gemini modellerini öne al, Gemma'yı arkaya at
+    gemini_models = [c for c in candidates if "gemini" in c.lower()]
+    gemma_models = [c for c in candidates if "gemma" in c.lower()]
+    other_models = [c for c in candidates if "gemini" not in c.lower() and "gemma" not in c.lower()]
+    sorted_candidates = gemini_models + gemma_models + other_models
+
+    logger.info("Test edilecek model sayısı: %d (Gemini: %d, Gemma: %d, Diğer: %d)",
+                len(sorted_candidates), len(gemini_models), len(gemma_models), len(other_models))
+
+    # 4. Gerçekçi bir test promptu ile çalışanı bul (60 sn timeout)
+    test_prompt = "Şu makale başlığını Türkçe 2 cümleyle özetle: Quaternary glaciation patterns in Eastern Anatolia"
+    test_payload = {"contents": [{"parts": [{"text": test_prompt}]}]}
+
+    for model_name in sorted_candidates:
         url = f"https://generativelanguage.googleapis.com/v1beta/{model_name}:generateContent?key={GEMINI_API_KEY}"
         try:
-            resp = requests.post(url, json=test_payload, timeout=10)
+            resp = requests.post(url, json=test_payload, timeout=60)
             if resp.status_code == 200:
                 data = resp.json()
                 if "candidates" in data and data["candidates"]:
                     logger.info("✅ ÇALIŞAN MODEL BULUNDU: %s", model_name)
                     return model_name
-            logger.info("❌ %s çalışmadı (%s), sonraki deneniyor...", model_name, resp.status_code)
+            logger.info("❌ %s çalışmadı (%s), sonraki...", model_name, resp.status_code)
+        except requests.exceptions.Timeout:
+            logger.info("⏰ %s zaman aşımı (60sn), sonraki...", model_name)
+            continue
         except Exception:
             continue
 
-    logger.error("Hiçbir Gemini modeli çalışmadı!")
+    logger.error("Hiçbir model çalışmadı!")
     return None
 
 def summarize_with_gemini(working_model, title, abstract):
-    """Daha önce bulunan çalışan model ile Türkçe özet üretir."""
+    """Bulunan çalışan model ile Türkçe özet üretir."""
     fallback = abstract[:500] + "..." if len(abstract) > 500 else abstract
     if not working_model or not GEMINI_API_KEY:
         return fallback
@@ -170,7 +192,7 @@ def summarize_with_gemini(working_model, title, abstract):
     )
     url = f"https://generativelanguage.googleapis.com/v1beta/{working_model}:generateContent?key={GEMINI_API_KEY}"
     try:
-        resp = requests.post(url, json={"contents": [{"parts": [{"text": prompt}]}]}, timeout=20)
+        resp = requests.post(url, json={"contents": [{"parts": [{"text": prompt}]}]}, timeout=120)
         if resp.status_code == 200:
             data = resp.json()
             if "candidates" in data and data["candidates"]:
@@ -195,13 +217,13 @@ def fetch_articles(anahtar_kelimeler, seen_urls, working_model):
         }
         try:
             resp = requests.get("https://api.crossref.org/works", params=params, headers=headers, timeout=15)
-            logger.info("Crossref yanıt kodu (%s): %s", kelime, resp.status_code)
+            logger.info("Crossref yanıt (%s): %s", kelime, resp.status_code)
             if resp.status_code != 200:
                 logger.error("Crossref reddetti (%s): %s", kelime, resp.text[:300])
                 continue
 
             items = resp.json().get("message", {}).get("items", [])
-            logger.info("Crossref sonuç sayısı (%s): %d", kelime, len(items))
+            logger.info("Crossref sonuç (%s): %d makale", kelime, len(items))
 
             for paper in items:
                 link = paper.get("URL")
@@ -216,7 +238,7 @@ def fetch_articles(anahtar_kelimeler, seen_urls, working_model):
                 entries.append({"title": title, "link": link, "summary": summary})
                 logger.info("📄 Yeni makale: %s", title[:80])
         except Exception as e:
-            logger.error("Crossref istek hatası (%s): %s", kelime, e)
+            logger.error("Crossref hatası (%s): %s", kelime, e)
 
     return entries
 
@@ -263,10 +285,10 @@ def main():
     logger.info("Hafızadaki URL sayısı: %d", len(seen_urls))
 
     # Başlangıçta tek seferlik test ile çalışan modeli bul
-    logger.info("🔎 Çalışan Gemini modeli aranıyor...")
+    logger.info("🔎 Çalışan model aranıyor (Gemini öncelikli)...")
     working_model = find_working_gemini_model()
     if not working_model:
-        logger.warning("⚠️ Gemini kullanılamıyor, makaleler orijinal özetleriyle gönderilecek.")
+        logger.warning("⚠️ Model bulunamadı, makaleler orijinal özetleriyle gönderilecek.")
 
     # Makaleleri çek ve özetle
     entries = fetch_articles(anahtar_kelimeler, seen_urls, working_model)
