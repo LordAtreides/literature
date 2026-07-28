@@ -2,9 +2,9 @@
 Jeoloji Takip Botu
 ==================
 - config.json'dan kaynakları ve anahtar kelimeleri okur.
-- Semantic Scholar API ve haber kaynaklarından içerikleri çeker.
+- Semantic Scholar API üzerinden akademik makaleleri arar.
 - seen_urls.json hafıza dosyasıyla daha önce gönderilmiş URL'leri atlar.
-- Google Gemini API ile ilgili olanları filtreleyip Türkçe özetler.
+- Google Gemini API ile makale özetlerini (abstract) Türkçe 3 maddeye çevirir.
 - Telegram üzerinden kullanıcıya bildirim gönderir.
 - Google Sheets arşivleme butonunu destekler.
 """
@@ -18,7 +18,7 @@ import logging
 import logging.handlers
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
-from time import mktime, sleep
+from time import sleep
 
 import requests
 import google.generativeai as genai
@@ -49,7 +49,6 @@ GOOGLE_CREDENTIALS = os.environ.get("GOOGLE_CREDENTIALS")
 
 # ─── Google Sheets helpers ─────────────────────────────────────────────────────
 def get_gsheets_client():
-    """Service Account kimlik bilgileri ortam değişkeninden gspread client oluşturur."""
     if not GOOGLE_CREDENTIALS:
         logger.error("GOOGLE_CREDENTIALS env varı bulunamadı.")
         return None
@@ -62,7 +61,6 @@ def get_gsheets_client():
         return None
 
 def archive_to_sheet(entry: dict[str, str]):
-    """Entry'i Google Sheet'in ilk boş satırına ekler."""
     if not GOOGLE_SHEET_ID:
         logger.error("GOOGLE_SHEET_ID env varı eksik.")
         return
@@ -101,7 +99,6 @@ def save_update_offset(offset: int) -> None:
         logger.warning("Update offset kaydedilemedi: %s", exc)
 
 def handle_callbacks(entries: list[dict[str, str]]):
-    """Telegram'dan gelen callback'leri işler."""
     offset = load_update_offset()
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/getUpdates"
     params = {"offset": offset + 1, "timeout": 10}
@@ -119,7 +116,7 @@ def handle_callbacks(entries: list[dict[str, str]]):
                         if 0 <= idx < len(entries):
                             archive_to_sheet(entries[idx])
                             requests.post(f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/answerCallbackQuery", 
-                                          json={"callback_query_id": cb["id"], "text": "Arşivlendi!"})
+                                          json={"callback_query_id": cb["id"], "text": "Google Tablolara Arşivlendi! ✅"})
             save_update_offset(offset)
     except Exception as exc:
         logger.error("Callback işleme hatası: %s", exc)
@@ -161,7 +158,67 @@ def save_seen_urls(seen_urls: dict[str, str]) -> None:
         logger.error("seen_urls.json yazılamadı: %s", exc)
 
 def fetch_semantic_entries(anahtar_kelimeler: list[str], seen_urls: dict[str, str]) -> list[dict[str, str]]:
-    return []
+    """Semantic Scholar'dan makaleleri çeker ve Gemini ile özetler."""
+    if not GEMINI_API_KEY:
+        logger.error("GEMINI_API_KEY yok, özetleme atlanıyor.")
+        return []
+
+    genai.configure(api_key=GEMINI_API_KEY)
+    try:
+        model = genai.GenerativeModel('gemini-1.5-flash')
+    except Exception as e:
+        logger.error("Gemini başlatılamadı: %s", e)
+        return []
+
+    entries = []
+    for kelime in anahtar_kelimeler:
+        url = "https://api.semanticscholar.org/graph/v1/paper/search"
+        params = {
+            "query": kelime,
+            "limit": 2, # Her kelime için en fazla 2 yeni makale çeker
+            "fields": "title,url,abstract"
+        }
+        try:
+            resp = requests.get(url, params=params, timeout=15)
+            if resp.status_code != 200:
+                continue
+                
+            data = resp.json()
+            for paper in data.get("data", []):
+                link = paper.get("url")
+                
+                # Link yoksa veya daha önce gönderildiyse atla
+                if not link or link in seen_urls:
+                    continue
+                    
+                abstract = paper.get("abstract")
+                if not abstract:
+                    continue
+                    
+                title = paper.get("title", "Başlıksız")
+                
+                # Gemini ile 3 maddelik Türkçe özet çıkart
+                prompt = (
+                    f"Sen uzman bir jeologsun. Aşağıdaki makalenin özetini oku ve "
+                    f"anlaşılır bir dille Türkçe 3 maddelik kısa bir özet çıkar.\n\n"
+                    f"Başlık: {title}\nÖzet: {abstract}"
+                )
+                
+                try:
+                    response = model.generate_content(prompt)
+                    summary = response.text.strip()
+                    entries.append({
+                        "title": title,
+                        "link": link,
+                        "summary": summary
+                    })
+                except Exception as e:
+                    logger.error("Gemini API Hatası: %s", e)
+                    
+        except Exception as e:
+            logger.error("Semantic API Hatası (%s): %s", kelime, e)
+            
+    return entries
 
 def _send_single_telegram_chunk(url: str, chunk: str, chunk_index: int, total: int, reply_markup: dict | None = None) -> None:
     payload = {
@@ -190,7 +247,6 @@ def send_telegram(message: str, reply_markup: dict | None = None) -> None:
     _send_single_telegram_chunk(url, message, 1, 1, reply_markup)
 
 def main() -> None:
-    """Ana iş akışı."""
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     logger.info("═══ Jeoloji Takip Botu başlatıldı (%s) ═══", now)
 
@@ -199,8 +255,10 @@ def main() -> None:
         anahtar_kelimeler = config["anahtar_kelimeler"]
         seen_urls = load_seen_urls()
 
+        # Semantic Scholar'dan makaleleri çek (yeni olanları Gemini'a gönderip özetletir)
         entries = fetch_semantic_entries(anahtar_kelimeler, seen_urls)
 
+        # Sadece yeni içerik VARSA mesaj gönder
         if entries:
             header = (
                 f"🌍 *Jeoloji Takip Botu*\n"
@@ -214,12 +272,16 @@ def main() -> None:
             for idx, entry in enumerate(entries):
                 title = entry.get("title", "Başlıksız").replace("*", "\\*")
                 summary = entry.get("summary", "")
+                
+                # Madde imleri (Gemini zaten madde çıkartır ama formatlıyoruz)
                 lines = [ln.strip() for ln in summary.splitlines() if ln.strip()][:3]
-                bullets = "\n".join(f"- {ln}" for ln in lines)
-                msg = f"**{title}**\n{bullets}\n[Detaylı Oku]({entry.get('link')})"
-                keyboard = {"inline_keyboard": [[{"text": "Arşive Kaydet", "callback_data": f"archive_{idx}"}]]}
+                bullets = "\n".join(f"{ln}" if ln.startswith("-") or ln.startswith("*") else f"- {ln}" for ln in lines)
+                
+                msg = f"**{title}**\n{bullets}\n\n[Detaylı Oku]({entry.get('link')})"
+                keyboard = {"inline_keyboard": [[{"text": "Arşive Kaydet 📁", "callback_data": f"archive_{idx}"}]]}
                 send_telegram(msg, reply_markup=keyboard)
 
+            # Tabloya kaydetme (callback) butonlarını dinle
             handle_callbacks(entries)
         else:
             logger.info("Yeni makale/haber bulunamadı. Telegram'a mesaj gönderilmeyecek.")
@@ -231,6 +293,7 @@ def main() -> None:
             if url and url not in seen_urls:
                 seen_urls[url] = now_iso
                 new_count += 1
+                
         if new_count > 0:
             save_seen_urls(seen_urls)
             logger.info("%d yeni URL hafızaya eklendi.", new_count)
@@ -239,20 +302,8 @@ def main() -> None:
 
         logger.info("═══ İşlem tamamlandı ═══")
 
-    except KeyboardInterrupt:
-        logger.info("Bot kullanıcı tarafından durduruldu.")
-        sys.exit(0)
     except Exception as exc:
-        logger.critical("KRİTİK HATA — bot beklenmeyen şekilde sonlandı: %s", exc, exc_info=True)
-        try:
-            error_msg = (
-                f"🔴 *Jeoloji Takip Botu — KRİTİK HATA*\n"
-                f"📅 {now}\n\n"
-                f"```\n{type(exc).__name__}: {exc}\n```"
-            )
-            send_telegram(error_msg)
-        except Exception:
-            logger.error("Hata bildirimi Telegram'a da gönderilemedi.")
+        logger.critical("KRİTİK HATA: %s", exc, exc_info=True)
         sys.exit(1)
 
 if __name__ == "__main__":
