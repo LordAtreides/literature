@@ -201,7 +201,6 @@ def main() -> None:
 
         entries = fetch_semantic_entries(anahtar_kelimeler, seen_urls)
 
-        # Sadece yeni içerik VAKSA mesaj gönderir (boş mesajları engeller)
         if entries:
             header = (
                 f"🌍 *Jeoloji Takip Botu*\n"
