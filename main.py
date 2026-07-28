@@ -174,11 +174,13 @@ def fetch_semantic_entries(anahtar_kelimeler: list[str], seen_urls: dict[str, st
     for kelime in anahtar_kelimeler:
         # Crossref akademik veritabanı (GitHub Actions'da engelsiz çalışır)
         url = "https://api.crossref.org/works"
-        params = {
-            "query": kelime,
-            "select": "title,URL,abstract",
-            "rows": 2 # Her kelime için en fazla 2 makale çeker
-        }
+             params = {
+         "query": kelime,
+         "select": "title,URL,abstract",
+         "sort": "published",
+         "order": "desc",
+         "rows": 2
+     }
         try:
             resp = requests.get(url, params=params, timeout=15)
             if resp.status_code != 200:
