@@ -180,21 +180,20 @@ def fetch_semantic_entries(anahtar_kelimeler: list[str], seen_urls: dict[str, st
                 title = title_list[0] if title_list else "Başlıksız"
                 abstract = paper.get("abstract", "Özet metni sunucu tarafından sağlanmadı.")
                 
-                # Gemini Doğrudan (Kütüphanesiz) REST API İstediği
+                # Gemini Doğrudan (Kütüphanesiz) REST API İsteği
                 prompt = (
                     f"Sen uzman bir jeologsun. Aşağıdaki makale bilgilerini incele ve "
                     f"anlaşılır bir dille Türkçe 3 maddelik kısa bir özet çıkar.\n\n"
                     f"Başlık: {title}\nÖzet: {abstract}"
                 )
                 
-                gemini_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={GEMINI_API_KEY}"
+                gemini_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={GEMINI_API_KEY}"
                 gemini_payload = {"contents": [{"parts": [{"text": prompt}]}]}
                 
                 try:
                     resp_gemini = requests.post(gemini_url, json=gemini_payload, timeout=20)
                     if resp_gemini.status_code == 200:
                         data_gemini = resp_gemini.json()
-                        # Eğer bloklanırsa veya boş dönerse kontrol ediyoruz
                         if "candidates" in data_gemini and len(data_gemini["candidates"]) > 0:
                             summary = data_gemini["candidates"][0]["content"]["parts"][0]["text"].strip()
                             entries.append({"title": title, "link": link, "summary": summary})
