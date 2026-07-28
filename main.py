@@ -158,7 +158,7 @@ def fetch_semantic_entries(anahtar_kelimeler: list[str], seen_urls: dict[str, st
             items = resp.json().get("message", {}).get("items", [])
             for paper in items:
                 link = paper.get("URL")
-                if not link or link in seen_urls: continue
+                if not link: continue
                     
                 title_list = paper.get("title", [])
                 title = title_list[0] if title_list else "Başlıksız"
