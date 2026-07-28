@@ -2,9 +2,9 @@
 Jeoloji Takip Botu
 ==================
 - config.json'dan kaynakları ve anahtar kelimeleri okur.
-- Semantic Scholar API üzerinden akademik makaleleri arar.
+- Crossref Akademik API üzerinden makaleleri arar (GitHub IP engellerine takılmaz).
 - seen_urls.json hafıza dosyasıyla daha önce gönderilmiş URL'leri atlar.
-- Google Gemini API ile makale özetlerini (abstract) Türkçe 3 maddeye çevirir.
+- Google Gemini API ile makale özetlerini Türkçe 3 maddeye çevirir.
 - Telegram üzerinden kullanıcıya bildirim gönderir.
 - Google Sheets arşivleme butonunu destekler.
 """
@@ -158,7 +158,7 @@ def save_seen_urls(seen_urls: dict[str, str]) -> None:
         logger.error("seen_urls.json yazılamadı: %s", exc)
 
 def fetch_semantic_entries(anahtar_kelimeler: list[str], seen_urls: dict[str, str]) -> list[dict[str, str]]:
-    """Semantic Scholar'dan makaleleri çeker ve Gemini ile özetler."""
+    """Akademik makaleleri çeker ve Gemini ile özetler (Crossref API)."""
     if not GEMINI_API_KEY:
         logger.error("GEMINI_API_KEY yok, özetleme atlanıyor.")
         return []
@@ -172,11 +172,12 @@ def fetch_semantic_entries(anahtar_kelimeler: list[str], seen_urls: dict[str, st
 
     entries = []
     for kelime in anahtar_kelimeler:
-        url = "https://api.semanticscholar.org/graph/v1/paper/search"
+        # Crossref akademik veritabanı (GitHub Actions'da engelsiz çalışır)
+        url = "https://api.crossref.org/works"
         params = {
             "query": kelime,
-            "limit": 2, # Her kelime için en fazla 2 yeni makale çeker
-            "fields": "title,url,abstract"
+            "select": "title,URL,abstract",
+            "rows": 2 # Her kelime için en fazla 2 makale çeker
         }
         try:
             resp = requests.get(url, params=params, timeout=15)
@@ -184,22 +185,22 @@ def fetch_semantic_entries(anahtar_kelimeler: list[str], seen_urls: dict[str, st
                 continue
                 
             data = resp.json()
-            for paper in data.get("data", []):
-                link = paper.get("url")
+            items = data.get("message", {}).get("items", [])
+            
+            for paper in items:
+                link = paper.get("URL")
                 
                 # Link yoksa veya daha önce gönderildiyse atla
                 if not link or link in seen_urls:
                     continue
                     
-                abstract = paper.get("abstract")
-                if not abstract:
-                    continue
-                    
-                title = paper.get("title", "Başlıksız")
+                title_list = paper.get("title", [])
+                title = title_list[0] if title_list else "Başlıksız"
+                abstract = paper.get("abstract", "Özet metni sunucu tarafından sağlanmadı.")
                 
                 # Gemini ile 3 maddelik Türkçe özet çıkart
                 prompt = (
-                    f"Sen uzman bir jeologsun. Aşağıdaki makalenin özetini oku ve "
+                    f"Sen uzman bir jeologsun. Aşağıdaki makale bilgilerini incele ve "
                     f"anlaşılır bir dille Türkçe 3 maddelik kısa bir özet çıkar.\n\n"
                     f"Başlık: {title}\nÖzet: {abstract}"
                 )
@@ -216,7 +217,7 @@ def fetch_semantic_entries(anahtar_kelimeler: list[str], seen_urls: dict[str, st
                     logger.error("Gemini API Hatası: %s", e)
                     
         except Exception as e:
-            logger.error("Semantic API Hatası (%s): %s", kelime, e)
+            logger.error("Makale API Hatası (%s): %s", kelime, e)
             
     return entries
 
@@ -255,7 +256,7 @@ def main() -> None:
         anahtar_kelimeler = config["anahtar_kelimeler"]
         seen_urls = load_seen_urls()
 
-        # Semantic Scholar'dan makaleleri çek (yeni olanları Gemini'a gönderip özetletir)
+        # Makaleleri çek ve özetle
         entries = fetch_semantic_entries(anahtar_kelimeler, seen_urls)
 
         # Sadece yeni içerik VARSA mesaj gönder
@@ -273,7 +274,7 @@ def main() -> None:
                 title = entry.get("title", "Başlıksız").replace("*", "\\*")
                 summary = entry.get("summary", "")
                 
-                # Madde imleri (Gemini zaten madde çıkartır ama formatlıyoruz)
+                # Madde imleri formatı
                 lines = [ln.strip() for ln in summary.splitlines() if ln.strip()][:3]
                 bullets = "\n".join(f"{ln}" if ln.startswith("-") or ln.startswith("*") else f"- {ln}" for ln in lines)
                 
@@ -281,7 +282,7 @@ def main() -> None:
                 keyboard = {"inline_keyboard": [[{"text": "Arşive Kaydet 📁", "callback_data": f"archive_{idx}"}]]}
                 send_telegram(msg, reply_markup=keyboard)
 
-            # Tabloya kaydetme (callback) butonlarını dinle
+            # Tabloya kaydetme butonlarını dinle
             handle_callbacks(entries)
         else:
             logger.info("Yeni makale/haber bulunamadı. Telegram'a mesaj gönderilmeyecek.")
