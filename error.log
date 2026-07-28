@@ -250,3 +250,131 @@
   }
 }
 
+2026-07-28 16:59:36,271 [ERROR] Gemini API REST Hatası: 404 {
+  "error": {
+    "code": 404,
+    "message": "models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+2026-07-28 16:59:36,414 [ERROR] Gemini API REST Hatası: 404 {
+  "error": {
+    "code": 404,
+    "message": "models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+2026-07-28 16:59:36,709 [ERROR] Gemini API REST Hatası: 404 {
+  "error": {
+    "code": 404,
+    "message": "models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+2026-07-28 16:59:36,830 [ERROR] Gemini API REST Hatası: 404 {
+  "error": {
+    "code": 404,
+    "message": "models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+2026-07-28 16:59:37,266 [ERROR] Gemini API REST Hatası: 404 {
+  "error": {
+    "code": 404,
+    "message": "models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+2026-07-28 16:59:37,392 [ERROR] Gemini API REST Hatası: 404 {
+  "error": {
+    "code": 404,
+    "message": "models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+2026-07-28 16:59:37,759 [ERROR] Gemini API REST Hatası: 404 {
+  "error": {
+    "code": 404,
+    "message": "models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+2026-07-28 16:59:37,875 [ERROR] Gemini API REST Hatası: 404 {
+  "error": {
+    "code": 404,
+    "message": "models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+2026-07-28 16:59:38,364 [ERROR] Gemini API REST Hatası: 404 {
+  "error": {
+    "code": 404,
+    "message": "models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+2026-07-28 16:59:38,493 [ERROR] Gemini API REST Hatası: 404 {
+  "error": {
+    "code": 404,
+    "message": "models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+2026-07-28 16:59:38,844 [ERROR] Gemini API REST Hatası: 404 {
+  "error": {
+    "code": 404,
+    "message": "models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+2026-07-28 16:59:38,974 [ERROR] Gemini API REST Hatası: 404 {
+  "error": {
+    "code": 404,
+    "message": "models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+2026-07-28 16:59:39,458 [ERROR] Gemini API REST Hatası: 404 {
+  "error": {
+    "code": 404,
+    "message": "models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+2026-07-28 16:59:39,592 [ERROR] Gemini API REST Hatası: 404 {
+  "error": {
+    "code": 404,
+    "message": "models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+2026-07-28 16:59:39,811 [ERROR] Gemini API REST Hatası: 404 {
+  "error": {
+    "code": 404,
+    "message": "models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
+2026-07-28 16:59:39,946 [ERROR] Gemini API REST Hatası: 404 {
+  "error": {
+    "code": 404,
+    "message": "models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.",
+    "status": "NOT_FOUND"
+  }
+}
+
