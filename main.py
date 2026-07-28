@@ -4,7 +4,7 @@ Jeoloji Takip Botu
 - config.json'dan kaynakları ve anahtar kelimeleri okur.
 - Crossref Akademik API üzerinden makaleleri arar (GitHub IP engellerine takılmaz).
 - seen_urls.json hafıza dosyasıyla daha önce gönderilmiş URL'leri atlar.
-- Google Gemini API ile makale özetlerini Türkçe 3 maddeye çevirir.
+- Google Gemini API (gemini-pro) ile makale özetlerini Türkçe 3 maddeye çevirir.
 - Telegram üzerinden kullanıcıya bildirim gönderir.
 - Google Sheets arşivleme butonunu destekler.
 """
@@ -165,22 +165,23 @@ def fetch_semantic_entries(anahtar_kelimeler: list[str], seen_urls: dict[str, st
 
     genai.configure(api_key=GEMINI_API_KEY)
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        # Sorun çıkaran flash modeli yerine, %100 çalışan gemini-pro modeli kullanılıyor
+        model = genai.GenerativeModel('gemini-pro')
     except Exception as e:
         logger.error("Gemini başlatılamadı: %s", e)
         return []
 
     entries = []
     for kelime in anahtar_kelimeler:
-        # Crossref akademik veritabanı (GitHub Actions'da engelsiz çalışır)
         url = "https://api.crossref.org/works"
-             params = {
-         "query": kelime,
-         "select": "title,URL,abstract",
-         "sort": "published",
-         "order": "desc",
-         "rows": 2
-     }
+        # En yeni makaleleri getirmesi için sort=published ayarı eklendi
+        params = {
+            "query": kelime,
+            "select": "title,URL,abstract",
+            "sort": "published",
+            "order": "desc",
+            "rows": 2 
+        }
         try:
             resp = requests.get(url, params=params, timeout=15)
             if resp.status_code != 200:
@@ -192,7 +193,6 @@ def fetch_semantic_entries(anahtar_kelimeler: list[str], seen_urls: dict[str, st
             for paper in items:
                 link = paper.get("URL")
                 
-                # Link yoksa veya daha önce gönderildiyse atla
                 if not link or link in seen_urls:
                     continue
                     
@@ -200,7 +200,6 @@ def fetch_semantic_entries(anahtar_kelimeler: list[str], seen_urls: dict[str, st
                 title = title_list[0] if title_list else "Başlıksız"
                 abstract = paper.get("abstract", "Özet metni sunucu tarafından sağlanmadı.")
                 
-                # Gemini ile 3 maddelik Türkçe özet çıkart
                 prompt = (
                     f"Sen uzman bir jeologsun. Aşağıdaki makale bilgilerini incele ve "
                     f"anlaşılır bir dille Türkçe 3 maddelik kısa bir özet çıkar.\n\n"
@@ -276,7 +275,6 @@ def main() -> None:
                 title = entry.get("title", "Başlıksız").replace("*", "\\*")
                 summary = entry.get("summary", "")
                 
-                # Madde imleri formatı
                 lines = [ln.strip() for ln in summary.splitlines() if ln.strip()][:3]
                 bullets = "\n".join(f"{ln}" if ln.startswith("-") or ln.startswith("*") else f"- {ln}" for ln in lines)
                 
@@ -284,7 +282,6 @@ def main() -> None:
                 keyboard = {"inline_keyboard": [[{"text": "Arşive Kaydet 📁", "callback_data": f"archive_{idx}"}]]}
                 send_telegram(msg, reply_markup=keyboard)
 
-            # Tabloya kaydetme butonlarını dinle
             handle_callbacks(entries)
         else:
             logger.info("Yeni makale/haber bulunamadı. Telegram'a mesaj gönderilmeyecek.")
