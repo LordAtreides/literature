@@ -1,50 +1,39 @@
-name: Geology Tracker Bot Execution
+name: Geology Tracker Bot
 
 on:
   schedule:
-    - cron: '0 */6 * * *'
+    - cron: '0 6,18 * * *'
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   run-bot:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-          cache: 'pip'
-
-      - name: Cache Bot Memory Files
-        uses: actions/cache@v4
-        with:
-          path: |
-            seen_urls.json
-            update_offset.txt
-          key: bot-memory-${{ runner.os }}-${{ github.run_id }}
-          restore-keys: |
-            bot-memory-${{ runner.os }}-
 
       - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        run: pip install -r requirements.txt
 
       - name: Run Geology Tracker Bot
         env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
           GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
-        run: |
-          python main.py
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+        run: python main.py
 
-      - name: Commit & Push updated memory files
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "chore: update seen_urls and offset state [skip ci]"
+      - name: Commit state files
+        run: |
+          git config user.name "Geology Bot"
+          git config user.email "bot@geology-tracker.local"
+          git add seen_urls.json update_offset.txt error.log 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "Bot state update [skip ci]"
+          git push || true
