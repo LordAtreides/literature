@@ -538,3 +538,5 @@
 2026-07-29 11:43:47,734 [ERROR] Sheets arsiv hatasi: APIError: [429]: Quota exceeded for quota metric 'Read requests' and limit 'Read requests per minute per user' of service 'sheets.googleapis.com' for consumer 'project_number:341978345114'.
 2026-07-29 11:43:47,933 [ERROR] Sheets arsiv hatasi: APIError: [429]: Quota exceeded for quota metric 'Read requests' and limit 'Read requests per minute per user' of service 'sheets.googleapis.com' for consumer 'project_number:341978345114'.
 2026-07-29 12:27:46,451 [WARNING] Embedding alinamadi, filtre atlandi.
+2026-07-29 12:36:41,741 [WARNING] Embedding alinamadi, filtre atlandi.
+2026-07-29 12:36:49,713 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWMprq5eQCgffsVBzUvM'}
