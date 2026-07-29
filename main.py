@@ -356,11 +356,25 @@ def deduplicate_items(items, seen_urls):
 # KATMAN 3: EMBEDDING VEKTOREL FILTRE
 # ═══════════════════════════════════════════════════════════════════════════
 
+def find_working_embedding_model():
+    if not GEMINI_API_KEY: return "models/text-embedding-004"
+    try:
+        resp = requests.get(f"https://generativelanguage.googleapis.com/v1beta/models?key={GEMINI_API_KEY}", timeout=10)
+        if resp.status_code == 200:
+            models = [m["name"] for m in resp.json().get("models", []) if "embedContent" in m.get("supportedGenerationMethods", [])]
+            embed_models = [m for m in models if "embedding" in m]
+            if embed_models:
+                embed_models.sort(reverse=True)
+                return embed_models[0]
+    except Exception: pass
+    return "models/text-embedding-004"
+
 def get_gemini_embeddings(texts):
     """Gemini API kullanarak metinlerin vektörlerini (embeddings) alır."""
     if not GEMINI_API_KEY: return None
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:batchEmbedContents?key={GEMINI_API_KEY}"
-    requests_data = [{"model": "models/text-embedding-004", "content": {"parts": [{"text": t[:1000]}]}} for t in texts]
+    model_name = find_working_embedding_model()
+    url = f"https://generativelanguage.googleapis.com/v1beta/{model_name}:batchEmbedContents?key={GEMINI_API_KEY}"
+    requests_data = [{"model": model_name, "content": {"parts": [{"text": t[:1000]}]}} for t in texts]
     try:
         resp = requests.post(url, json={"requests": requests_data}, timeout=30)
         if resp.status_code == 200:
