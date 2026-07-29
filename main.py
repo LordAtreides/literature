@@ -356,8 +356,20 @@ def deduplicate_items(items, seen_urls):
 # KATMAN 3: CLAUDE 3.5 SONNET PUANLAMA (GEMINI KALDIRILDI)
 # ═══════════════════════════════════════════════════════════════════════════
 
+def find_working_claude_model(client):
+    try:
+        models = [m.id for m in client.models.list().data]
+        sonnets = [m for m in models if "sonnet" in m]
+        if sonnets:
+            sonnets.sort(reverse=True)
+            return sonnets[0]
+        return models[0] if models else "claude-3-5-sonnet-20240620"
+    except Exception:
+        # Hata durumunda en guvenli ve eski versiyona don
+        return "claude-3-5-sonnet-20240620"
+
 def claude_batch_score(items, config):
-    """Claude 3.5 Sonnet kullanarak makaleleri 1-10 arasi puanlar."""
+    """Claude API kullanarak makaleleri 1-10 arasi puanlar."""
     if not items or not CLAUDE_API_KEY:
         for i in items: i["score"] = 5
         return items
@@ -368,6 +380,8 @@ def claude_batch_score(items, config):
     
     if HAS_ANTHROPIC:
         client = anthropic.Anthropic(api_key=CLAUDE_API_KEY)
+        model_name = find_working_claude_model(client)
+        logger.info("Claude Puanlama Modeli: %s", model_name)
     else:
         logger.error("Anthropic kütüphanesi yüklü değil!")
         for i in items: i["score"] = 5
@@ -390,7 +404,7 @@ def claude_batch_score(items, config):
         for attempt in range(3):
             try:
                 response = client.messages.create(
-                    model="claude-3-5-sonnet-20241022",
+                    model=model_name,
                     max_tokens=1024,
                     temperature=0.0,
                     system=system_prompt,
@@ -448,8 +462,9 @@ KURALLAR:
     user_prompt = f"Başlık: {item.get('title')}\nÖzet: {strip_html_tags(item.get('abstract'))[:1000]}"
 
     try:
+        model_name = find_working_claude_model(client)
         message = client.messages.create(
-            model="claude-3-5-sonnet-20241022", # Claude Sonnet guncel
+            model=model_name,
             max_tokens=150,
             temperature=0.1,
             system=[
