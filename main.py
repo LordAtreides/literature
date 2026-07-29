@@ -135,7 +135,7 @@ def collect_from_crossref(config):
     headers = {"User-Agent": "JeolojiBot/3.0 (mailto:jeolojibot@example.com)"}
     kws = config.get("anahtar_kelimeler", {})
     limit = config.get("ayarlar", {}).get("crossref_sonuc_limiti", 2)
-    all_keywords = kws.get("crossref_en", []) + kws.get("crossref_de", []) + kws.get("crossref_fr", [])
+    all_keywords = kws.get("en_academic_and_news", []) + kws.get("de_german_research", []) + kws.get("fr_french_research", [])
 
     for kw in all_keywords:
         try:
@@ -159,7 +159,7 @@ def collect_from_crossref(config):
 
 def collect_from_arxiv(config):
     entries = []
-    queries = config.get("anahtar_kelimeler", {}).get("arxiv_queries", [])
+    queries = config.get("anahtar_kelimeler", {}).get("en_academic_and_news", [])
     limit = config.get("ayarlar", {}).get("arxiv_sonuc_limiti", 5)
 
     for query in queries:
@@ -442,9 +442,9 @@ def find_working_gemini_model():
         if resp.status_code == 200:
             models = [m["name"] for m in resp.json().get("models", []) if "generateContent" in m.get("supportedGenerationMethods", [])]
             
-            # En yuksek versiyon numarali flash ve pro modellerini bul (orn: gemini-2.0-flash > gemini-1.5-flash)
-            flash_models = [m for m in models if "flash" in m]
-            pro_models = [m for m in models if "pro" in m]
+            # En yuksek versiyon numarali flash ve pro modellerini bul (omni ve exp HARIC - Cunku bedava limitleri 0)
+            flash_models = [m for m in models if "flash" in m and "omni" not in m and "exp" not in m]
+            pro_models = [m for m in models if "pro" in m and "omni" not in m and "exp" not in m]
             
             if flash_models:
                 flash_models.sort(reverse=True)
