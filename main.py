@@ -353,171 +353,76 @@ def deduplicate_items(items, seen_urls):
     return unique
 
 # ═══════════════════════════════════════════════════════════════════════════
-# KATMAN 3: EMBEDDING VEKTOREL FILTRE
+# KATMAN 3: CLAUDE 3.5 SONNET PUANLAMA (GEMINI KALDIRILDI)
 # ═══════════════════════════════════════════════════════════════════════════
 
-def find_working_embedding_model():
-    if not GEMINI_API_KEY: return "models/text-embedding-004"
-    try:
-        resp = requests.get(f"https://generativelanguage.googleapis.com/v1beta/models?key={GEMINI_API_KEY}", timeout=10)
-        if resp.status_code == 200:
-            models = [m["name"] for m in resp.json().get("models", []) if "embedContent" in m.get("supportedGenerationMethods", [])]
-            embed_models = [m for m in models if "embedding" in m]
-            if embed_models:
-                embed_models.sort(reverse=True)
-                return embed_models[0]
-    except Exception: pass
-    return "models/text-embedding-004"
-
-def get_gemini_embeddings(texts):
-    """Gemini API kullanarak metinlerin vektörlerini (embeddings) alır."""
-    if not GEMINI_API_KEY: return None
-    model_name = find_working_embedding_model()
-    url = f"https://generativelanguage.googleapis.com/v1beta/{model_name}:batchEmbedContents?key={GEMINI_API_KEY}"
-    requests_data = [{"model": model_name, "content": {"parts": [{"text": t[:1000]}]}} for t in texts]
-    try:
-        resp = requests.post(url, json={"requests": requests_data}, timeout=30)
-        if resp.status_code == 200:
-            return [embed["values"] for embed in resp.json().get("embeddings", [])]
-        else:
-            logger.error("Embedding HTTP Hatasi [%d]: %s", resp.status_code, resp.text)
-    except Exception as e:
-        logger.error("Embedding hatasi: %s", e)
-    return None
-
-def cosine_similarity(v1, v2):
-    vec1, vec2 = np.array(v1), np.array(v2)
-    norm = np.linalg.norm(vec1) * np.linalg.norm(vec2)
-    return np.dot(vec1, vec2) / norm if norm else 0.0
-
-def embedding_filter(items, config):
-    """Kosinus benzerligi > 0.65 olanlari secer."""
-    if not items or not GEMINI_API_KEY: return items
-    
-    # Referans vektoru (Kullanici profilinden)
-    profile = config.get("kullanici_profili", {})
-    ref_text = f"Jeoloji Muhendisligi {', '.join(profile.get('uzmanlik', []))} akademik makale bilimsel arastirma"
-    
-    # API limiti geregi max 100'luk parcalarla embedding aliyoruz
-    all_embeddings = []
-    texts_to_embed = [ref_text] + [f"{i.get('title','')} {i.get('abstract','')}" for i in items]
-    
-    for i in range(0, len(texts_to_embed), 100):
-        batch_texts = texts_to_embed[i:i+100]
-        embs = get_gemini_embeddings(batch_texts)
-        if embs:
-            all_embeddings.extend(embs)
-        else:
-            # Hata durumunda kalanlari bos doldur
-            all_embeddings.extend([None]*len(batch_texts))
-            
-    if not all_embeddings or all_embeddings[0] is None:
-        logger.warning("Embedding alinamadi, filtre atlandi.")
-        return items
-
-    ref_vec = all_embeddings[0]
-    passed_items = []
-    
-    for idx, item in enumerate(items):
-        vec = all_embeddings[idx + 1]
-        if vec:
-            sim = cosine_similarity(ref_vec, vec)
-            if sim > 0.65:
-                item["cosine_sim"] = round(sim, 3)
-                passed_items.append(item)
-        else:
-            passed_items.append(item) # Vektor alinamayanlari gecir
-            
-    logger.info("Embedding Filtresi: %d -> %d gecti (>0.65)", len(items), len(passed_items))
-    return passed_items
-
-# ═══════════════════════════════════════════════════════════════════════════
-# KATMAN 4: STRUCTURED JSON LLM PUANLAMA
-# ═══════════════════════════════════════════════════════════════════════════
-
-def find_working_gemini_model():
-    if not GEMINI_API_KEY: return None
-    try:
-        resp = requests.get(f"https://generativelanguage.googleapis.com/v1beta/models?key={GEMINI_API_KEY}", timeout=10)
-        if resp.status_code == 200:
-            models = [m["name"] for m in resp.json().get("models", []) if "generateContent" in m.get("supportedGenerationMethods", [])]
-            
-            # En yuksek versiyon numarali flash ve pro modellerini bul (omni ve exp HARIC - Cunku bedava limitleri 0)
-            flash_models = [m for m in models if "flash" in m and "omni" not in m and "exp" not in m]
-            pro_models = [m for m in models if "pro" in m and "omni" not in m and "exp" not in m]
-            
-            if flash_models:
-                flash_models.sort(reverse=True)
-                return flash_models[0]
-            if pro_models:
-                pro_models.sort(reverse=True)
-                return pro_models[0]
-                
-            for c in ["models/gemini-1.5-flash", "models/gemini-pro"]:
-                if c in models: return c
-    except Exception as e:
-        logger.error("Gemini Model Bulma Hatasi: %s", e)
-    return "models/gemini-1.5-flash"
-
-def structured_batch_score(items, model_name, config):
-    if not items or not model_name:
+def claude_batch_score(items, config):
+    """Claude 3.5 Sonnet kullanarak makaleleri 1-10 arasi puanlar."""
+    if not items or not CLAUDE_API_KEY:
         for i in items: i["score"] = 5
         return items
 
     profile_text = config.get("kullanici_profili", {}).get("aciklama", "Jeoloji")
-    batch_size = 15
+    batch_size = 20
     scored = []
+    
+    if HAS_ANTHROPIC:
+        client = anthropic.Anthropic(api_key=CLAUDE_API_KEY)
+    else:
+        logger.error("Anthropic kütüphanesi yüklü değil!")
+        for i in items: i["score"] = 5
+        return items
+    
+    system_prompt = (
+        f"Sen bir jeoloji akademisyenisin. Kullanıcı Profili: {profile_text}. "
+        "Aşağıdaki makalelerin bu profile ne kadar uygun olduğunu 1-10 arası puanla. "
+        "(9-10: Çok önemli, 7-8: İlgili, 4-6: Dolaylı, 1-3: Çöp). "
+        "SADECE JSON dönmelisin. Şema: {\"results\": [{\"id\": \"string\", \"score\": integer}]} "
+        "Markdown veya başka metin ekleme."
+    )
 
     for i in range(0, len(items), batch_size):
         batch = items[i:i + batch_size]
         
-        # JSON semasina uygun input hazirla
         input_data = [{"id": str(j), "title": item["title"], "abstract": strip_html_tags(item.get("abstract",""))[:150]} for j, item in enumerate(batch)]
+        user_message = f"İçerikler:\n{json.dumps(input_data, ensure_ascii=False)}"
         
-        prompt = f"""Sen bir jeoloji akademisyenisin. Profil: {profile_text}
-Aşağıdaki makalelerin bu profile ne kadar uygun olduğunu 1-10 arası puanla.
-(9-10: Çok önemli, 7-8: İlgili, 4-6: Dolaylı, 1-3: Çöp).
-
-Format: SADECE JSON dönmelisin.
-Şema: {{"results": [{{"id": "string", "score": integer}}]}}
-
-İçerikler:
-{json.dumps(input_data, ensure_ascii=False)}"""
-
-        url = f"https://generativelanguage.googleapis.com/v1beta/{model_name}:generateContent?key={GEMINI_API_KEY}"
-        payload = {
-            "contents": [{"parts": [{"text": prompt}]}],
-            "generationConfig": {"response_mime_type": "application/json"}
-        }
-        
-        try:
-            resp = requests.post(url, json=payload, timeout=30)
-            if resp.status_code == 200:
-                result_text = resp.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
+        for attempt in range(3):
+            try:
+                response = client.messages.create(
+                    model="claude-3-5-sonnet-20241022",
+                    max_tokens=1024,
+                    temperature=0.0,
+                    system=system_prompt,
+                    messages=[{"role": "user", "content": user_message}]
+                )
+                
+                result_text = response.content[0].text.strip()
                 if result_text.startswith("```json"): result_text = result_text[7:]
                 elif result_text.startswith("```"): result_text = result_text[3:]
                 if result_text.endswith("```"): result_text = result_text[:-3]
                 
                 parsed = json.loads(result_text.strip())
                 
-                # Sonuclari eslestir
                 for res in parsed.get("results", []):
                     try:
                         idx = int(res["id"])
                         if idx < len(batch):
                             batch[idx]["score"] = res["score"]
                     except Exception: pass
-            else:
-                logger.error("Gemini Scoring HTTP Hatasi [%d]: %s", resp.status_code, resp.text)
-        except Exception as e:
-            logger.error("JSON LLM hatasi: %s", e)
-            
+                break # Basarili, donguden cik
+            except Exception as e:
+                logger.error("Claude Scoring Hatasi [%d/3]: %s", attempt+1, e)
+                sleep(5)
+                
         # Puan alamayanlara varsayilan ver
         for item in batch:
-            if "score" not in item: item["score"] = 5
+            if "score" not in item:
+                item["score"] = 5
         scored.extend(batch)
-        sleep(2) # Limit korumasi
+        sleep(2)
         
+    logger.info("Claude Puanlama: %d makale süzüldü.", len(scored))
     return scored
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -531,8 +436,9 @@ def claude_deep_analysis(item):
         
     client = anthropic.Anthropic(api_key=CLAUDE_API_KEY)
     
-    system_prompt = """Bir akademik jeoloji metnini Türkçe'ye çevirip özetleyeceksin.
+    system_prompt = """Bir akademik jeoloji metnini TÜRKÇE'ye çevirip özetleyeceksin.
 KURALLAR:
+- YANITIN KESİNLİKLE %100 TÜRKÇE OLMALIDIR. Başka bir dilde tek bir kelime dahi yazma.
 - SADECE VE SADECE 2 SATIR yazacaksın.
 - 1. Satır: Ana bulgu/keşif nedir?
 - 2. Satır: Metodoloji veya çalışmanın bilimsel önemi nedir?
@@ -543,7 +449,7 @@ KURALLAR:
 
     try:
         message = client.messages.create(
-            model="claude-3-5-sonnet-latest", # Claude Sonnet guncel
+            model="claude-3-5-sonnet-20241022", # Claude Sonnet guncel
             max_tokens=150,
             temperature=0.1,
             system=[
@@ -655,14 +561,9 @@ def main():
     logger.info("KATMAN 2: Fuzzy Deduplication")
     unique_items = deduplicate_items(raw_items, seen_urls)
 
-    # 3. EMBEDDING FILTRE
-    logger.info("KATMAN 3: Gemini Embedding Filtresi")
-    filtered_items = embedding_filter(unique_items, config)
-
-    # 4. STRUCTURED LLM PUANLAMA
-    logger.info("KATMAN 4: Structured JSON Puanlama (Gemini)")
-    gemini_model = find_working_gemini_model()
-    scored_items = structured_batch_score(filtered_items, gemini_model, config)
+    # 3. CLAUDE 3.5 SONNET PUANLAMA
+    logger.info("KATMAN 3: Claude 3.5 Sonnet Puanlama")
+    scored_items = claude_batch_score(unique_items, config)
 
     # 5. IKI ADIMLI DAGITIM (ROUTING)
     telegram_items = []  # 7-10 puan
