@@ -406,7 +406,6 @@ def claude_batch_score(items, config):
                 response = client.messages.create(
                     model=model_name,
                     max_tokens=1024,
-                    temperature=0.0,
                     system=system_prompt,
                     messages=[{"role": "user", "content": user_message}]
                 )
@@ -466,7 +465,6 @@ KURALLAR:
         message = client.messages.create(
             model=model_name,
             max_tokens=150,
-            temperature=0.1,
             system=[
                 {
                     "type": "text", 
