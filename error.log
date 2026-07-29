@@ -1441,3 +1441,4 @@
 2026-07-29 13:49:18,816 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTMTHvLZiPoNy8M4RAm'}
 2026-07-29 13:49:18,985 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTMTstreGeRQPFv77MQ'}
 2026-07-29 13:49:19,121 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTMUa4hFv2wBdQwiNRU'}
+2026-07-29 14:10:49,665 [ERROR] Claude Scoring Hatasi [1/3]: Expecting value: line 1 column 467 (char 466)
