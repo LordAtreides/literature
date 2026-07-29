@@ -365,6 +365,8 @@ def get_gemini_embeddings(texts):
         resp = requests.post(url, json={"requests": requests_data}, timeout=30)
         if resp.status_code == 200:
             return [embed["values"] for embed in resp.json().get("embeddings", [])]
+        else:
+            logger.error("Embedding HTTP Hatasi [%d]: %s", resp.status_code, resp.text)
     except Exception as e:
         logger.error("Embedding hatasi: %s", e)
     return None
@@ -491,6 +493,8 @@ Format: SADECE JSON dönmelisin.
                         if idx < len(batch):
                             batch[idx]["score"] = res["score"]
                     except Exception: pass
+            else:
+                logger.error("Gemini Scoring HTTP Hatasi [%d]: %s", resp.status_code, resp.text)
         except Exception as e:
             logger.error("JSON LLM hatasi: %s", e)
             
