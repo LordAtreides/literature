@@ -116,13 +116,13 @@ def batch_archive_to_sheet(entries):
                 entry.get("source", ""),
                 entry.get("title", ""),
                 entry.get("link", ""),
-                entry.get("summary", "N/A"),
                 str(entry.get("score", "")),
                 sheet_type
             ])
             
-        worksheet.append_rows(rows, value_input_option="RAW")
-        logger.info("%d satir Google Sheets'e (toplu) kaydedildi.", len(rows))
+        # Yeni satirlari en uste (2. satira, basliklarin hemen altina) ekle
+        worksheet.insert_rows(rows, row=2, value_input_option="RAW")
+        logger.info("%d satir Google Sheets'e (en uste) kaydedildi.", len(rows))
     except Exception as e:
         logger.error("Sheets toplu arsiv hatasi: %s", e)
 
