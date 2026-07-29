@@ -661,3 +661,124 @@
 }
 
 2026-07-29 13:01:52,250 [WARNING] Embedding alinamadi, filtre atlandi.
+2026-07-29 13:03:36,648 [ERROR] Google Search API Hatasi [403]: {
+  "error": {
+    "code": 403,
+    "message": "This project does not have the access to Custom Search JSON API.",
+    "errors": [
+      {
+        "message": "This project does not have the access to Custom Search JSON API.",
+        "domain": "global",
+        "reason": "forbidden"
+      }
+    ],
+    "status": "PERMISSION_DENIED"
+  }
+}
+
+2026-07-29 13:03:38,276 [ERROR] Google Search API Hatasi [403]: {
+  "error": {
+    "code": 403,
+    "message": "This project does not have the access to Custom Search JSON API.",
+    "errors": [
+      {
+        "message": "This project does not have the access to Custom Search JSON API.",
+        "domain": "global",
+        "reason": "forbidden"
+      }
+    ],
+    "status": "PERMISSION_DENIED"
+  }
+}
+
+2026-07-29 13:03:39,872 [ERROR] Google Search API Hatasi [403]: {
+  "error": {
+    "code": 403,
+    "message": "This project does not have the access to Custom Search JSON API.",
+    "errors": [
+      {
+        "message": "This project does not have the access to Custom Search JSON API.",
+        "domain": "global",
+        "reason": "forbidden"
+      }
+    ],
+    "status": "PERMISSION_DENIED"
+  }
+}
+
+2026-07-29 13:03:41,465 [ERROR] Google Search API Hatasi [403]: {
+  "error": {
+    "code": 403,
+    "message": "This project does not have the access to Custom Search JSON API.",
+    "errors": [
+      {
+        "message": "This project does not have the access to Custom Search JSON API.",
+        "domain": "global",
+        "reason": "forbidden"
+      }
+    ],
+    "status": "PERMISSION_DENIED"
+  }
+}
+
+2026-07-29 13:03:43,061 [ERROR] Google Search API Hatasi [403]: {
+  "error": {
+    "code": 403,
+    "message": "This project does not have the access to Custom Search JSON API.",
+    "errors": [
+      {
+        "message": "This project does not have the access to Custom Search JSON API.",
+        "domain": "global",
+        "reason": "forbidden"
+      }
+    ],
+    "status": "PERMISSION_DENIED"
+  }
+}
+
+2026-07-29 13:03:44,646 [ERROR] Google Search API Hatasi [403]: {
+  "error": {
+    "code": 403,
+    "message": "This project does not have the access to Custom Search JSON API.",
+    "errors": [
+      {
+        "message": "This project does not have the access to Custom Search JSON API.",
+        "domain": "global",
+        "reason": "forbidden"
+      }
+    ],
+    "status": "PERMISSION_DENIED"
+  }
+}
+
+2026-07-29 13:03:46,228 [ERROR] Google Search API Hatasi [403]: {
+  "error": {
+    "code": 403,
+    "message": "This project does not have the access to Custom Search JSON API.",
+    "errors": [
+      {
+        "message": "This project does not have the access to Custom Search JSON API.",
+        "domain": "global",
+        "reason": "forbidden"
+      }
+    ],
+    "status": "PERMISSION_DENIED"
+  }
+}
+
+2026-07-29 13:03:47,818 [ERROR] Google Search API Hatasi [403]: {
+  "error": {
+    "code": 403,
+    "message": "This project does not have the access to Custom Search JSON API.",
+    "errors": [
+      {
+        "message": "This project does not have the access to Custom Search JSON API.",
+        "domain": "global",
+        "reason": "forbidden"
+      }
+    ],
+    "status": "PERMISSION_DENIED"
+  }
+}
+
+2026-07-29 13:03:49,527 [WARNING] Embedding alinamadi, filtre atlandi.
