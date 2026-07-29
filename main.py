@@ -410,7 +410,7 @@ def claude_batch_score(items, config):
                     messages=[{"role": "user", "content": user_message}]
                 )
                 
-                result_text = response.content[0].text.strip()
+                result_text = "".join([getattr(b, "text", "") for b in response.content]).strip()
                 if result_text.startswith("```json"): result_text = result_text[7:]
                 elif result_text.startswith("```"): result_text = result_text[3:]
                 if result_text.endswith("```"): result_text = result_text[:-3]
@@ -475,7 +475,7 @@ KURALLAR:
             messages=[{"role": "user", "content": user_prompt}],
             extra_headers={"anthropic-beta": "prompt-caching-2024-07-31"}
         )
-        return message.content[0].text.strip()
+        return "".join([getattr(b, "text", "") for b in message.content]).strip()
     except Exception as e:
         logger.error("Claude API hatasi: %s", e)
         return strip_html_tags(item.get("abstract", ""))[:200]
