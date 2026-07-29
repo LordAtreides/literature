@@ -1278,3 +1278,166 @@
   }
 }
 
+2026-07-29 13:48:10,032 [ERROR] Embedding HTTP Hatasi [429]: {
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/embed_content_free_tier_requests, limit: 100, model: gemini-embedding-2\nPlease retry in 49.976476593s.",
+    "status": "RESOURCE_EXHAUSTED",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.Help",
+        "links": [
+          {
+            "description": "Learn more about Gemini API quotas",
+            "url": "https://ai.google.dev/gemini-api/docs/rate-limits"
+          }
+        ]
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.QuotaFailure",
+        "violations": [
+          {
+            "quotaMetric": "generativelanguage.googleapis.com/embed_content_free_tier_requests",
+            "quotaId": "EmbedContentRequestsPerMinutePerUserPerProjectPerModel-FreeTier",
+            "quotaDimensions": {
+              "location": "global",
+              "model": "gemini-embedding-2"
+            },
+            "quotaValue": "100"
+          }
+        ]
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.RetryInfo",
+        "retryDelay": "49s"
+      }
+    ]
+  }
+}
+
+2026-07-29 13:48:10,303 [ERROR] Embedding HTTP Hatasi [429]: {
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/embed_content_free_tier_requests, limit: 100, model: gemini-embedding-2\nPlease retry in 49.704851139s.",
+    "status": "RESOURCE_EXHAUSTED",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.Help",
+        "links": [
+          {
+            "description": "Learn more about Gemini API quotas",
+            "url": "https://ai.google.dev/gemini-api/docs/rate-limits"
+          }
+        ]
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.QuotaFailure",
+        "violations": [
+          {
+            "quotaMetric": "generativelanguage.googleapis.com/embed_content_free_tier_requests",
+            "quotaId": "EmbedContentRequestsPerMinutePerUserPerProjectPerModel-FreeTier",
+            "quotaDimensions": {
+              "location": "global",
+              "model": "gemini-embedding-2"
+            },
+            "quotaValue": "100"
+          }
+        ]
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.RetryInfo",
+        "retryDelay": "49s"
+      }
+    ]
+  }
+}
+
+2026-07-29 13:49:02,450 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLDa9Df8PhV8QTLCL3'}
+2026-07-29 13:49:02,584 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLFs4UeaNYEZBapitd'}
+2026-07-29 13:49:02,713 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLGTHD4WSpLaP9cfeL'}
+2026-07-29 13:49:02,877 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLH4jb6CKCh3E123YC'}
+2026-07-29 13:49:03,019 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLHhSMss5XeWavhVbM'}
+2026-07-29 13:49:03,319 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLK24k4y5UnZXqN8bg'}
+2026-07-29 13:49:03,445 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLKaJJSUN6EDM6VDbo'}
+2026-07-29 13:49:03,638 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLLCWRuUjtkq3cMy7C'}
+2026-07-29 13:49:03,775 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLLydnpix2fA5hwAen'}
+2026-07-29 13:49:03,897 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLMWP7UCwp6ru2zwYZ'}
+2026-07-29 13:49:04,026 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLN3t48UMzqeBNXUao'}
+2026-07-29 13:49:04,155 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLNb8FoiGDTsJxiTDb'}
+2026-07-29 13:49:04,576 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLPrGmBHCDGUdiCyFy'}
+2026-07-29 13:49:04,708 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLQxkJHzUft97fLhs2'}
+2026-07-29 13:49:04,924 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLRZiRxgucVCMHYcu4'}
+2026-07-29 13:49:05,060 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLSSoCHgmyMpAaQsUW'}
+2026-07-29 13:49:05,510 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLTzK7M1888X3YHqqD'}
+2026-07-29 13:49:05,645 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLUxrEx8wHBKW3UGLk'}
+2026-07-29 13:49:05,779 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLVZKTkYdSraJjQtUy'}
+2026-07-29 13:49:05,900 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLW6KbVd9VDhygBFgq'}
+2026-07-29 13:49:06,037 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLWca1Tr7iRqrNbE66'}
+2026-07-29 13:49:06,165 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLXE2joZDkrfvDdBrF'}
+2026-07-29 13:49:06,692 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLYc8W8qe9vAcye3vQ'}
+2026-07-29 13:49:06,905 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLa2hjMLbZQE3EhpWi'}
+2026-07-29 13:49:07,053 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLawmiSKNMuRwUmVZK'}
+2026-07-29 13:49:07,346 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLbhuWwUAipuC1zRcY'}
+2026-07-29 13:49:07,471 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLcodpAtzpmbE6yuy9'}
+2026-07-29 13:49:07,604 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLdMdDQCPWDGEFbWnK'}
+2026-07-29 13:49:07,864 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLeJRsEkqS6UPr1Gnp'}
+2026-07-29 13:49:07,984 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLey7bPr9fLg6Vf7UM'}
+2026-07-29 13:49:08,113 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLfXbYkhw9jzt6Mbn7'}
+2026-07-29 13:49:08,248 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLg6LMo7QkANr2QzkE'}
+2026-07-29 13:49:08,529 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLgsTrKx3wx28RxMmA'}
+2026-07-29 13:49:08,648 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLhq1gXAKQRAjyaJTx'}
+2026-07-29 13:49:08,840 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLiNW4zXTiVd2jLUay'}
+2026-07-29 13:49:08,968 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLj9svr4sCvSnRz557'}
+2026-07-29 13:49:09,118 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLjjrfueL8RTUuSUaS'}
+2026-07-29 13:49:09,274 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLkVVu4MLm9rzYG1F1'}
+2026-07-29 13:49:09,399 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLm2jpR47TkFGXZwab'}
+2026-07-29 13:49:09,763 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLnW3mDSCptyFzjK4h'}
+2026-07-29 13:49:09,921 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLoAEgLGHohrmofwM5'}
+2026-07-29 13:49:10,043 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLomwhrpZhwbBjCxcz'}
+2026-07-29 13:49:10,216 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLpQ9V1fFHFqBPP6zW'}
+2026-07-29 13:49:10,340 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLq45skxyZKNSRwxBg'}
+2026-07-29 13:49:10,438 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLqXcgcAXQUxB2ZEii'}
+2026-07-29 13:49:10,654 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLrFXJCQ61njo4XNqU'}
+2026-07-29 13:49:10,778 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLrvT5CrBFpxCudGsX'}
+2026-07-29 13:49:11,191 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLtRjdNZwaNtvuFMm2'}
+2026-07-29 13:49:11,330 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLuHaij7XT5tDLVxS5'}
+2026-07-29 13:49:11,461 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLuqZtNmGq5eLVGba4'}
+2026-07-29 13:49:11,633 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLvU2WNywH5ix3mpY1'}
+2026-07-29 13:49:11,932 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLwG9cM6YLydk1TAxZ'}
+2026-07-29 13:49:12,107 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLxbGaZjJKunBZ3QRn'}
+2026-07-29 13:49:12,685 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTLyW5hJf45MUyisWRJ'}
+2026-07-29 13:49:12,819 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTM1dpgipgMxN1TgnjX'}
+2026-07-29 13:49:12,958 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTM2EHx2cJwuF6NLNzx'}
+2026-07-29 13:49:13,090 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTM2pGH5uuJ8zFEy7G9'}
+2026-07-29 13:49:13,447 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTM3NFknKVXarKcdQks'}
+2026-07-29 13:49:13,649 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTM4xFff1g7Re1bDD6N'}
+2026-07-29 13:49:13,779 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTM5jt5b8LAHTmVuz67'}
+2026-07-29 13:49:13,903 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTM6JNJo6Hdhoj3BRa4'}
+2026-07-29 13:49:14,171 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTM75k9yRLbHjaDmDWh'}
+2026-07-29 13:49:14,403 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTM84n3rXdFxNuy8T8J'}
+2026-07-29 13:49:14,629 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTM9AG4h6UuE7gPoXW9'}
+2026-07-29 13:49:14,764 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTM9wtFoZqoUD3RgwwN'}
+2026-07-29 13:49:14,877 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTMAWcoKRWPw2RA2Y3W'}
+2026-07-29 13:49:15,014 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTMB28apBG4UDR3kzGH'}
+2026-07-29 13:49:15,276 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTMBfpfPxHV9QjpaGGi'}
+2026-07-29 13:49:15,565 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTMCgqbDpeWSmgbUrSE'}
+2026-07-29 13:49:15,697 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTMDwzSMwGcWNgqaWTS'}
+2026-07-29 13:49:15,993 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTMEZhiUWfdY3C5NeLQ'}
+2026-07-29 13:49:16,122 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTMFjQDTSW76ENeVxPh'}
+2026-07-29 13:49:16,428 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTMGWHKQZMupC9BYPxg'}
+2026-07-29 13:49:16,765 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTMJWLVAAUMPq3GVMfV'}
+2026-07-29 13:49:16,872 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTMK1M7Cu42RALbf2FG'}
+2026-07-29 13:49:17,019 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTMKZLR7dgjN9DuENdF'}
+2026-07-29 13:49:17,169 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTMLAJKvYtBheeX9uoR'}
+2026-07-29 13:49:17,320 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTMLok6E8xKDwCHxHM1'}
+2026-07-29 13:49:17,443 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTMMRCeDiA7m1JRMwv8'}
+2026-07-29 13:49:17,576 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTMMywUNzcdmSgWFpPy'}
+2026-07-29 13:49:17,705 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTMNZAW9tzfmKLpgmG7'}
+2026-07-29 13:49:17,871 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTMPDMMTTDQFnWaRpBC'}
+2026-07-29 13:49:17,996 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTMPnLRX8WTDXpAmpB8'}
+2026-07-29 13:49:18,120 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTMQKq1HucPXEdjqhYB'}
+2026-07-29 13:49:18,408 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTMRXGCoyJ8L3KmMEE1'}
+2026-07-29 13:49:18,660 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTMSAxAiziMgHzau7kb'}
+2026-07-29 13:49:18,816 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTMTHvLZiPoNy8M4RAm'}
+2026-07-29 13:49:18,985 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTMTstreGeRQPFv77MQ'}
+2026-07-29 13:49:19,121 [ERROR] Claude API hatasi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-sonnet-latest'}, 'request_id': 'req_011CdWTMUa4hFv2wBdQwiNRU'}
