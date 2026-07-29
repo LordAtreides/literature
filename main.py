@@ -411,11 +411,13 @@ def claude_batch_score(items, config):
                 )
                 
                 result_text = "".join([getattr(b, "text", "") for b in response.content]).strip()
-                if result_text.startswith("```json"): result_text = result_text[7:]
-                elif result_text.startswith("```"): result_text = result_text[3:]
-                if result_text.endswith("```"): result_text = result_text[:-3]
                 
-                parsed = json.loads(result_text.strip())
+                # Claude bazen aciklama metni ekleyebilir, aradaki JSON'i regex ile cikaralim
+                json_match = re.search(r'\{.*\}', result_text, re.DOTALL)
+                if json_match:
+                    result_text = json_match.group(0)
+                
+                parsed = json.loads(result_text)
                 
                 for res in parsed.get("results", []):
                     try:
@@ -513,10 +515,11 @@ def build_bulletin_message(items, now_str):
             lines = [ln.strip() for ln in summary.splitlines() if ln.strip()][:2]
             summary_text = "\n".join(f"   ↳ {ln}" for ln in lines) if lines else f"   ↳ {summary[:120]}"
 
+            link = safe_html(item.get("link", ""))
             parts.extend([
                 f"{counter}️⃣ <b>{title}</b>",
                 summary_text,
-                f"   🔗 <a href=\"{item.get('link', '')}\">Oku</a> | 📊 {item.get('score', '?')}/10",
+                f"   🔗 <a href=\"{link}\">Oku</a> | 📊 {item.get('score', '?')}/10",
                 ""
             ])
             counter += 1
@@ -543,8 +546,12 @@ def send_telegram(message):
                         current += "\n" + line if current else line
                 if current: requests.post(url, json={"chat_id": TELEGRAM_CHAT_ID, "text": current, "parse_mode": "HTML"}, timeout=10)
                 return True
+                
+            logger.error("Telegram Hatasi [%d]: %s", resp.status_code, resp.text)
             return False
-        except Exception: sleep(2)
+        except Exception as e:
+            logger.error("Telegram istek hatasi: %s", e)
+            sleep(2)
     return False
 
 # ═══════════════════════════════════════════════════════════════════════════
