@@ -1,0 +1,143 @@
+{
+  "kullanici_profili": {
+    "alan": "Jeoloji Mühendisliği",
+    "uzmanlik": [
+      "Kuvaterner Jeolojisi",
+      "Uzaktan Algılama",
+      "Sedimantoloji",
+      "Mars Jeolojisi",
+      "Batimetri",
+      "Jeomorfoloji"
+    ],
+    "aciklama": "Jeoloji mühendisliği öğrencisi. Kuvaterner jeolojisi, uzaktan algılama, sedimantoloji, gezegensel jeoloji ve batimetri alanlarında akademik araştırma yapıyor. TÜBİTAK bursları, yurtdışı staj ve yüksek lisans fırsatlarıyla ilgileniyor."
+  },
+  "ayarlar": {
+    "telegram_esik": 8,
+    "web_esik": 4,
+    "crossref_sonuc_limiti": 2,
+    "arxiv_sonuc_limiti": 5,
+    "eartharxiv_sonuc_limiti": 5
+  },
+  "anahtar_kelimeler": {
+    "crossref_en": [
+      "Quaternary geology", "Quaternary science", "Remote sensing geology",
+      "Earth observation", "Bathymetric mapping", "Bathymetry",
+      "Multibeam echosounder", "Sedimentology", "Planetary surface processes",
+      "Aeolian morphodynamics", "Aeolian processes", "Mars geology",
+      "Planetary geology", "LiDAR geology", "Hyperspectral imaging",
+      "SAR interferometry", "InSAR ground deformation", "Coastal geomorphology",
+      "Paleoclimate reconstruction", "Active tectonics", "Volcanology",
+      "Seafloor mapping", "Geospatial data science", "Geochronology",
+      "Fluvial sedimentology", "Marine geosciences", "Structural geology",
+      "GIS application geoscience"
+    ],
+    "crossref_de": [
+      "Quartärgeologie", "Fernerkundung", "Sedimentologie",
+      "Geomorphologie", "Planetengeologie", "Meeresgeologie"
+    ],
+    "crossref_fr": [
+      "Géologie planétaire", "Sédimentologie", "Bathymétrie",
+      "Géomorphologie", "Télédétection", "Tectonique"
+    ],
+    "arxiv_queries": [
+      "Quaternary geology OR paleoclimate",
+      "remote sensing geology OR earth observation satellite",
+      "planetary geology OR Mars surface",
+      "sedimentology OR geomorphology OR fluvial",
+      "bathymetry OR marine geology OR seafloor"
+    ],
+    "eartharxiv_queries": [
+      "quaternary", "remote sensing", "sedimentology",
+      "geomorphology", "planetary geology"
+    ]
+  },
+  "google_news_rss": [
+    {
+      "name": "Jeoloji Genel",
+      "category": "haber",
+      "url": "https://news.google.com/rss/search?q=jeoloji+OR+geology&hl=tr&gl=TR&ceid=TR:tr"
+    },
+    {
+      "name": "Uzaktan Algılama",
+      "category": "haber",
+      "url": "https://news.google.com/rss/search?q=%22uzaktan+alg%C4%B1lama%22+OR+%22remote+sensing%22&hl=tr&gl=TR&ceid=TR:tr"
+    },
+    {
+      "name": "Kuvaterner",
+      "category": "haber",
+      "url": "https://news.google.com/rss/search?q=Kuvaterner+OR+Quaternary+research&hl=tr&gl=TR&ceid=TR:tr"
+    },
+    {
+      "name": "Deprem & Sismoloji",
+      "category": "haber",
+      "url": "https://news.google.com/rss/search?q=deprem+jeoloji+OR+sismoloji&hl=tr&gl=TR&ceid=TR:tr"
+    },
+    {
+      "name": "Jeoloji Sempozyum",
+      "category": "duyuru",
+      "url": "https://news.google.com/rss/search?q=jeoloji+sempozyum+OR+geology+symposium&hl=tr&gl=TR&ceid=TR:tr"
+    },
+    {
+      "name": "CBS / GIS",
+      "category": "haber",
+      "url": "https://news.google.com/rss/search?q=CBS+co%C4%9Frafi+bilgi+sistemleri+OR+GIS+geospatial&hl=tr&gl=TR&ceid=TR:tr"
+    },
+    {
+      "name": "TÜBİTAK Burs",
+      "category": "firsat",
+      "url": "https://news.google.com/rss/search?q=T%C3%9CB%C4%B0TAK+burs+OR+T%C3%9CB%C4%B0TAK+proje&hl=tr&gl=TR&ceid=TR:tr"
+    },
+    {
+      "name": "Jeoloji Burs & Staj",
+      "category": "firsat",
+      "url": "https://news.google.com/rss/search?q=jeoloji+burs+OR+yer+bilimleri+burs+OR+jeoloji+staj&hl=tr&gl=TR&ceid=TR:tr"
+    },
+    {
+      "name": "Geology Scholarship",
+      "category": "firsat",
+      "url": "https://news.google.com/rss/search?q=geology+scholarship+2026+OR+geoscience+fellowship&hl=en"
+    },
+    {
+      "name": "Geology Internship",
+      "category": "firsat",
+      "url": "https://news.google.com/rss/search?q=geology+internship+OR+earth+science+summer+program&hl=en"
+    },
+    {
+      "name": "Mars Jeoloji",
+      "category": "haber",
+      "url": "https://news.google.com/rss/search?q=Mars+geology+OR+Mars+rover+discovery&hl=en"
+    },
+    {
+      "name": "Volkanizma",
+      "category": "haber",
+      "url": "https://news.google.com/rss/search?q=volkan+patlamas%C4%B1+OR+volcanic+eruption&hl=tr&gl=TR&ceid=TR:tr"
+    }
+  ],
+  "reddit_subreddits": [
+    "geology",
+    "geoscience",
+    "remotesensing"
+  ],
+  "referans_kaynaklar": [
+    {"name": "EarthArXiv", "url": "https://eartharxiv.org/", "type": "preprint"},
+    {"name": "TÜBİTAK DergiPark", "url": "https://dergipark.org.tr/", "type": "journal"},
+    {"name": "MTA Bulletin", "url": "https://dergi.mta.gov.tr/", "type": "journal"},
+    {"name": "FindAPhD", "url": "https://www.findaphd.com/", "type": "opportunity"},
+    {"name": "DAAD", "url": "https://www2.daad.de/", "type": "scholarship"},
+    {"name": "NASA PDS", "url": "https://pds.nasa.gov/", "type": "data"},
+    {"name": "Copernicus", "url": "https://dataspace.copernicus.eu/", "type": "data"},
+    {"name": "EGU Jobs", "url": "https://jobs.egu.eu/", "type": "career"},
+    {"name": "Earthworks-Jobs", "url": "https://www.earthworks-jobs.com/", "type": "career"},
+    {"name": "GSA Grants", "url": "https://www.geosociety.org/", "type": "grant"},
+    {"name": "IAS Grants", "url": "https://www.sedimentologists.org/resources/grants/", "type": "grant"},
+    {"name": "GSL", "url": "https://www.geolsoc.org.uk/", "type": "society"},
+    {"name": "WHOI Fellowship", "url": "https://www.whoi.edu/", "type": "fellowship"},
+    {"name": "NASA LPI Intern", "url": "https://www.lpi.usra.edu/lpiintern/", "type": "internship"},
+    {"name": "ESA YGT", "url": "https://jobs.esa.int/", "type": "career"},
+    {"name": "Fulbright", "url": "https://fulbright.org.tr/", "type": "scholarship"},
+    {"name": "MEXT", "url": "https://www.studyinjapan.go.jp/en/", "type": "scholarship"},
+    {"name": "Erasmus Mundus", "url": "https://erasmus-plus.ec.europa.eu/", "type": "scholarship"},
+    {"name": "CERN Summer", "url": "https://careers.cern/summer", "type": "internship"},
+    {"name": "EarthScope RESESS", "url": "https://www.earthscope.org/", "type": "internship"}
+  ]
+}
