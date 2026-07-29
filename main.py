@@ -425,9 +425,22 @@ def find_working_gemini_model():
         resp = requests.get(f"https://generativelanguage.googleapis.com/v1beta/models?key={GEMINI_API_KEY}", timeout=10)
         if resp.status_code == 200:
             models = [m["name"] for m in resp.json().get("models", []) if "generateContent" in m.get("supportedGenerationMethods", [])]
-            for c in ["models/gemini-1.5-flash", "models/gemini-1.5-pro", "models/gemini-pro"]:
+            
+            # En yuksek versiyon numarali flash ve pro modellerini bul (orn: gemini-2.0-flash > gemini-1.5-flash)
+            flash_models = [m for m in models if "flash" in m]
+            pro_models = [m for m in models if "pro" in m]
+            
+            if flash_models:
+                flash_models.sort(reverse=True)
+                return flash_models[0]
+            if pro_models:
+                pro_models.sort(reverse=True)
+                return pro_models[0]
+                
+            for c in ["models/gemini-1.5-flash", "models/gemini-pro"]:
                 if c in models: return c
-    except Exception: pass
+    except Exception as e:
+        logger.error("Gemini Model Bulma Hatasi: %s", e)
     return "models/gemini-1.5-flash"
 
 def structured_batch_score(items, model_name, config):
