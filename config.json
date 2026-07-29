@@ -1,0 +1,169 @@
+{
+  "kullanici_profili": {
+    "alan": "Jeoloji Mühendisliği",
+    "uzmanlik": [
+      "Kuvaterner Jeolojisi",
+      "Uzaktan Algılama",
+      "Sedimantoloji",
+      "Gezegensel Jeoloji",
+      "Mars Jeolojisi",
+      "Batimetri",
+      "Jeomorfoloji",
+      "Tektonik",
+      "Jeofizik"
+    ],
+    "aciklama": "Jeoloji mühendisliği öğrencisi. Akademik makaleler, burslar, stajlar ve yurtdisi firsatlariyla ilgileniyor."
+  },
+  "ayarlar": {
+    "crossref_sonuc_limiti": 2,
+    "arxiv_sonuc_limiti": 5,
+    "eartharxiv_sonuc_limiti": 5
+  },
+  "kapsam_genisletilmis": {
+    "disiplinler_tr": [
+      "Jeoloji Mühendisliği", "Kuvaterner Jeolojisi", "Uzaktan Algılama", "Sedimantoloji",
+      "Gezegensel Jeoloji", "Mars Jeolojisi", "Sualtı Haritalama", "Batimetri",
+      "Jeomorfoloji", "Tektonik", "Neotektonik", "Yapısal Jeoloji", "Jeofizik",
+      "Geokimya", "Hidrojeoloji", "Volkanizma", "Paleoklimatoloji", "Paleontoloji",
+      "Fiziki Coğrafya", "Gök Fizik", "Uydu Jeolojisi", "Sismoloji", "Deniz Jeolojisi",
+      "Kıyı Jeomorfolojisi", "Rüzgar Jeomorfolojisi"
+    ],
+    "disiplinler_en": [
+      "Geological Engineering", "Quaternary Geology", "Quaternary Science", "Remote Sensing",
+      "Sedimentology", "Planetary Geology", "Planetary Science", "Mars Science",
+      "Bathymetry", "Seafloor Mapping", "Geomorphology", "Structural Geology",
+      "Neotectonics", "Tectonics", "Geophysics", "Geochemistry", "Hydrogeology",
+      "Volcanology", "Paleoclimatology", "Paleontology", "Physical Geography",
+      "Earth Observation", "Aeolian Morphodynamics", "Marine Geology", "Coastal Geomorphology"
+    ]
+  },
+  "anahtar_kelimeler": {
+    "tr_akademik_ve_haber": [
+      "Kuvaterner", "jeoloji", "uzaktan algılama", "batimetri", "sedimantoloji",
+      "deprem", "CBS", "GIS", "volkanizma", "paleontoloji", "TÜBİTAK burs",
+      "jeoloji sempozyum", "jeoloji kongre", "MTA", "sondaj", "jeomorfoloji",
+      "uydu görüntüleme", "LiDAR", "gezegensel jeoloji", "Mars jeolojisi",
+      "iklim değişimi", "akarsu sedimantolojisi", "kıyı jeolojisi", "tektonik",
+      "neotektonik", "sismoloji", "jeofizik", "insar", "hafaza haritalama",
+      "karstik yapılar", "glasyal jeoloji", "paleoiklim"
+    ],
+    "en_academic_and_news": [
+      "Quaternary geology", "Quaternary science", "Remote sensing", "Earth observation",
+      "Bathymetric mapping", "Bathymetry", "Multibeam echosounder", "Sedimentology",
+      "Planetary surface processes", "Aeolian morphodynamics", "Aeolian processes",
+      "Mars geology", "Planetary geology", "LiDAR geology", "Hyperspectral imaging",
+      "SAR interferometry", "InSAR ground deformation", "Coastal geomorphology",
+      "Paleoclimate reconstruction", "Active tectonics", "Volcanology", "Seafloor mapping",
+      "Geospatial data science", "Satellite imagery analysis", "Geochronology",
+      "Fluvial sedimentology", "Marine geosciences", "Structural geology", "GIS application"
+    ],
+    "de_german_research": [
+      "Geowissenschaften", "Fernerkundung", "Quartärgeologie", "Sedimentologie",
+      "Geomorphologie", "Planetengeologie", "Meeresgeologie", "Geoinformatik",
+      "Tektonik", "Vulkanologie", "Seismologie", "Hydrogeologie"
+    ],
+    "fr_french_research": [
+      "Sciences de la Terre", "Télédétection", "Géologie planétaire",
+      "Sédimentologie", "Bathymétrie", "Géomorphologie", "Sismologie",
+      "Tectonique", "Géophysique", "Hydrogéologie"
+    ]
+  },
+  "firsat_ve_burs_kelimeleri": {
+    "en_opportunities": [
+      "fully funded MSc geosciences", "fully funded PhD Earth Science",
+      "fully funded PhD geology", "geology master scholarship",
+      "planetary geology internship", "Earth observation fellowship",
+      "geospatial research grant", "field school funding geology",
+      "fieldwork grant geosciences", "EGU travel grant", "AGU travel grant",
+      "summer school geosciences", "PhD call remote sensing",
+      "geology student competition", "postgraduate Earth science scholarship",
+      "NASA summer internship", "ESA young graduate trainee", "DAAD scholarship geosciences",
+      "graduate assistantship geology", "teaching assistantship geosciences",
+      "research assistantship earth science", "call for applications geosciences",
+      "tuition waiver geology", "travel grant earth science", "IAS research grant",
+      "GSA research grant", "postdoc call geology"
+    ],
+    "tr_firsat_ve_duyuru": [
+      "jeoloji burs", "yer bilimleri yüksek lisans bursu", "yurtdışı doktora bursu jeoloji",
+      "TÜBİTAK 2214-A", "TÜBİTAK 2219", "TÜBİTAK 2209", "TÜBİTAK bursu",
+      "Erasmus Mundus geosciences", "jeoloji yaz okulu", "saha çalışması desteği",
+      "saha araştırması bursu", "staj duyurusu uzaktan algılama", "CBS yarışması",
+      "jeoloji kongre seyahat bursu", "jeofizik burs", "coğrafya yüksek lisans bursu",
+      "tez araştırma bursu yer bilimleri"
+    ]
+  },
+  "ozel_kaynaklar": [
+    {
+      "category": "Academic Databases and Open Science Infrastructures",
+      "search_type": "academic",
+      "resources": [
+        {"name": "EarthArXiv", "url": "eartharxiv.org"},
+        {"name": "EarthChem (PetDB)", "url": "earthchem.org"},
+        {"name": "WOVOdat", "url": "wovodat.org"},
+        {"name": "Copernicus Data Space Ecosystem", "url": "dataspace.copernicus.eu"},
+        {"name": "StraboSpot", "url": "strabospot.org"},
+        {"name": "NASA Planetary Data System (PDS)", "url": "pds.nasa.gov"}
+      ]
+    },
+    {
+      "category": "National Research and Literature Programs (Turkey)",
+      "search_type": "academic",
+      "resources": [
+        {"name": "TÜBİTAK DergiPark", "url": "dergipark.org.tr"},
+        {"name": "MTA Bulletin", "url": "dergi.mta.gov.tr"},
+        {"name": "TÜBİTAK 2209-A / 2209-B / STAR", "url": "tubitak.gov.tr"}
+      ]
+    },
+    {
+      "category": "International Internships, Scholarships and Graduate Search",
+      "search_type": "opportunity",
+      "resources": [
+        {"name": "FindAPhD / FindAMasters", "url": "findaphd.com"},
+        {"name": "DAAD Scholarship Database", "url": "www2.daad.de"},
+        {"name": "DAAD RISE Germany", "url": "daad.de"},
+        {"name": "CERN Summer Student Programme", "url": "careers.cern"},
+        {"name": "WHOI Summer Student Fellowship", "url": "whoi.edu"},
+        {"name": "NASA LPI Summer Intern Program", "url": "lpi.usra.edu"},
+        {"name": "EarthScope RESESS", "url": "earthscope.org"},
+        {"name": "ESA Careers / Young Graduate Trainee (YGT)", "url": "jobs.esa.int"},
+        {"name": "Fulbright Master's Scholarship", "url": "fulbright.org.tr"},
+        {"name": "Jean Monnet Scholarship", "url": "jeanmonnet.org.tr"},
+        {"name": "MEXT Scholarship", "url": "studyinjapan.go.jp"},
+        {"name": "Erasmus Mundus Joint Masters", "url": "erasmus-plus.ec.europa.eu"}
+      ]
+    },
+    {
+      "category": "Professional Societies, Grants and Competitions",
+      "search_type": "opportunity",
+      "resources": [
+        {"name": "Geological Society of London (GSL)", "url": "geolsoc.org.uk"},
+        {"name": "IAS (International Association of Sedimentologists) Grants", "url": "sedimentologists.org"},
+        {"name": "GSA (Geological Society of America) Student Research Grants", "url": "geosociety.org"},
+        {"name": "SEG Challenge Bowl", "url": "seg.org"},
+        {"name": "Young Earth Scientists (YES) Network", "url": "networkyes.org"}
+      ]
+    },
+    {
+      "category": "Geoscience Career and Job Portals",
+      "search_type": "opportunity",
+      "resources": [
+        {"name": "Earthworks-Jobs", "url": "earthworks-jobs.com"},
+        {"name": "EGU Jobs & Opportunities", "url": "jobs.egu.eu"},
+        {"name": "AGU Career Center", "url": "finda-job.agu.org"},
+        {"name": "Nature Careers", "url": "nature.com/naturecareers"},
+        {"name": "ResearchGate Jobs", "url": "researchgate.net"}
+      ]
+    }
+  ],
+  "google_news_rss": [
+    {"name": "Jeoloji Genel", "category": "haber", "url": "https://news.google.com/rss/search?q=jeoloji+OR+geology&hl=tr&gl=TR&ceid=TR:tr"},
+    {"name": "Uzaktan Algılama", "category": "haber", "url": "https://news.google.com/rss/search?q=%22uzaktan+alg%C4%B1lama%22+OR+%22remote+sensing%22&hl=tr&gl=TR&ceid=TR:tr"},
+    {"name": "Kuvaterner", "category": "haber", "url": "https://news.google.com/rss/search?q=Kuvaterner+OR+Quaternary+research&hl=tr&gl=TR&ceid=TR:tr"},
+    {"name": "Deprem & Sismoloji", "category": "haber", "url": "https://news.google.com/rss/search?q=deprem+jeoloji+OR+sismoloji&hl=tr&gl=TR&ceid=TR:tr"}
+  ],
+  "reddit_subreddits": [
+    "geology",
+    "geoscience",
+    "remotesensing"
+  ]
+}
