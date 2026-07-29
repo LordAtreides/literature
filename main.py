@@ -53,8 +53,7 @@ TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
 GOOGLE_SHEET_ID = os.environ.get("GOOGLE_SHEET_ID")
 GOOGLE_CREDENTIALS = os.environ.get("GOOGLE_CREDENTIALS")
-GOOGLE_SEARCH_API_KEY = os.environ.get("GOOGLE_SEARCH_API_KEY")
-GOOGLE_SEARCH_CX = os.environ.get("GOOGLE_SEARCH_CX")
+TAVILY_API_KEY = os.environ.get("TAVILY_API_KEY")
 
 CONFIG_PATH = Path(__file__).parent / "config.json"
 SEEN_URLS_PATH = Path(__file__).parent / "seen_urls.json"
@@ -244,61 +243,62 @@ def collect_from_reddit(config):
     logger.info("Reddit: %d", len(entries))
     return entries
 
-def collect_from_google_custom_search(config):
-    """Ozel kaynaklari resmi Google Custom Search API kullanarak tarar."""
+def collect_from_tavily(config):
+    """Ozel kaynaklari Tavily Search API kullanarak tarar."""
     entries = []
-    if not GOOGLE_SEARCH_API_KEY or not GOOGLE_SEARCH_CX:
-        logger.warning("Google Custom Search API Key veya CX eksik, ozel kaynak aramasi atlandi.")
+    if not TAVILY_API_KEY:
+        logger.warning("TAVILY_API_KEY eksik, ozel kaynak aramasi atlandi.")
         return entries
         
     kaynaklar = config.get("ozel_kaynaklar", [])
     if not kaynaklar: return entries
         
-    academic_kws = '"Quaternary" OR "geology" OR "remote sensing" OR "sedimentology" OR "Mars"'
-    opportunity_kws = '"PhD" OR "scholarship" OR "grant" OR "internship" OR "geosciences"'
+    academic_kws = "Quaternary geology OR remote sensing OR sedimentology OR Mars"
+    opportunity_kws = "PhD scholarship OR grant OR internship OR geosciences"
     
-    url = "https://www.googleapis.com/customsearch/v1"
+    url = "https://api.tavily.com/search"
     
     for group in kaynaklar:
         search_type = group.get("search_type", "academic")
         kws = opportunity_kws if search_type == "opportunity" else academic_kws
         category = "firsat" if search_type == "opportunity" else "makale"
         
+        # Tavily include_domains parametresi alir
         urls = [res.get("url") for res in group.get("resources", []) if res.get("url")]
-        # API tek sorguda 10 URL'ye kadar OR baglaci alabilir (32 kelime limiti vardir, biz 4-5'li grupluyoruz guvenli olmak icin)
+        
+        # Tavily'ye ayni anda cok fazla domain atmak yerine 5'erli bolelim
         for i in range(0, len(urls), 5):
             batch_urls = urls[i:i+5]
-            site_query = " OR ".join([f"site:{u}" for u in batch_urls])
-            query = f"({site_query}) ({kws})"
             
-            params = {
-                "key": GOOGLE_SEARCH_API_KEY,
-                "cx": GOOGLE_SEARCH_CX,
-                "q": query,
-                "num": 5, # Her gruptan en iyi 5 sonuc
-                "dateRestrict": "d7" # Sadece son 7 gunun icerikleri (Yepyeni makale/ilanlari yakalamak icin)
+            payload = {
+                "api_key": TAVILY_API_KEY,
+                "query": kws,
+                "include_domains": batch_urls,
+                "max_results": 5,
+                "search_depth": "basic",
+                "days": 7
             }
             
             try:
-                resp = requests.get(url, params=params, timeout=15)
+                resp = requests.post(url, json=payload, timeout=20)
                 if resp.status_code == 200:
                     data = resp.json()
-                    for item in data.get("items", []):
+                    for item in data.get("results", []):
                         entries.append({
                             "title": item.get("title", ""),
-                            "link": item.get("link", ""),
-                            "abstract": item.get("snippet", ""),
-                            "source": "Google Custom Search",
+                            "link": item.get("url", ""),
+                            "abstract": item.get("content", ""),
+                            "source": "Tavily Custom",
                             "category": category
                         })
                 else:
-                    logger.error("Google Search API Hatasi [%d]: %s", resp.status_code, resp.text)
+                    logger.error("Tavily API Hatasi [%d]: %s", resp.status_code, resp.text)
             except Exception as e:
-                logger.error("Google Search API istek hatasi: %s", e)
+                logger.error("Tavily istek hatasi: %s", e)
                 
             sleep(1.5) # Limit korumasi
                 
-    logger.info("Google Custom Search: %d icerik toplandi", len(entries))
+    logger.info("Tavily Search: %d icerik toplandi", len(entries))
     return entries
 
 def run_parallel_collection(config):
@@ -310,7 +310,7 @@ def run_parallel_collection(config):
         f3 = executor.submit(collect_from_eartharxiv, config)
         f4 = executor.submit(collect_from_google_news, config)
         f5 = executor.submit(collect_from_reddit, config)
-        f6 = executor.submit(collect_from_google_custom_search, config)
+        f6 = executor.submit(collect_from_tavily, config)
         
         for future in concurrent.futures.as_completed([f1, f2, f3, f4, f5, f6]):
             try:
