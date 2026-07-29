@@ -464,8 +464,12 @@ Format: SADECE JSON dönmelisin.
         try:
             resp = requests.post(url, json=payload, timeout=30)
             if resp.status_code == 200:
-                result_text = resp.json()["candidates"][0]["content"]["parts"][0]["text"]
-                parsed = json.loads(result_text)
+                result_text = resp.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
+                if result_text.startswith("```json"): result_text = result_text[7:]
+                elif result_text.startswith("```"): result_text = result_text[3:]
+                if result_text.endswith("```"): result_text = result_text[:-3]
+                
+                parsed = json.loads(result_text.strip())
                 
                 # Sonuclari eslestir
                 for res in parsed.get("results", []):
