@@ -53,6 +53,8 @@ TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
 GOOGLE_SHEET_ID = os.environ.get("GOOGLE_SHEET_ID")
 GOOGLE_CREDENTIALS = os.environ.get("GOOGLE_CREDENTIALS")
+GOOGLE_SEARCH_API_KEY = os.environ.get("GOOGLE_SEARCH_API_KEY")
+GOOGLE_SEARCH_CX = os.environ.get("GOOGLE_SEARCH_CX")
 
 CONFIG_PATH = Path(__file__).parent / "config.json"
 SEEN_URLS_PATH = Path(__file__).parent / "seen_urls.json"
@@ -242,13 +244,11 @@ def collect_from_reddit(config):
     logger.info("Reddit: %d", len(entries))
     return entries
 
-def collect_from_duckduckgo(config):
-    """Ozel kaynaklari DDGS kullanarak tarar."""
+def collect_from_google_custom_search(config):
+    """Ozel kaynaklari resmi Google Custom Search API kullanarak tarar."""
     entries = []
-    try:
-        from duckduckgo_search import DDGS
-    except ImportError:
-        logger.error("duckduckgo-search kurulu degil!")
+    if not GOOGLE_SEARCH_API_KEY or not GOOGLE_SEARCH_CX:
+        logger.warning("Google Custom Search API Key veya CX eksik, ozel kaynak aramasi atlandi.")
         return entries
         
     kaynaklar = config.get("ozel_kaynaklar", [])
@@ -257,34 +257,48 @@ def collect_from_duckduckgo(config):
     academic_kws = '"Quaternary" OR "geology" OR "remote sensing" OR "sedimentology" OR "Mars"'
     opportunity_kws = '"PhD" OR "scholarship" OR "grant" OR "internship" OR "geosciences"'
     
-    with DDGS() as ddgs:
-        for group in kaynaklar:
-            search_type = group.get("search_type", "academic")
-            kws = opportunity_kws if search_type == "opportunity" else academic_kws
-            category = "firsat" if search_type == "opportunity" else "makale"
+    url = "https://www.googleapis.com/customsearch/v1"
+    
+    for group in kaynaklar:
+        search_type = group.get("search_type", "academic")
+        kws = opportunity_kws if search_type == "opportunity" else academic_kws
+        category = "firsat" if search_type == "opportunity" else "makale"
+        
+        urls = [res.get("url") for res in group.get("resources", []) if res.get("url")]
+        # API tek sorguda 10 URL'ye kadar OR baglaci alabilir (32 kelime limiti vardir, biz 4-5'li grupluyoruz guvenli olmak icin)
+        for i in range(0, len(urls), 5):
+            batch_urls = urls[i:i+5]
+            site_query = " OR ".join([f"site:{u}" for u in batch_urls])
+            query = f"({site_query}) ({kws})"
             
-            urls = [res.get("url") for res in group.get("resources", []) if res.get("url")]
-            for i in range(0, len(urls), 4): # DDG arama barina cok uzun query sigmayabilir, 4'erli gruplar
-                batch_urls = urls[i:i+4]
-                site_query = " OR ".join([f"site:{u}" for u in batch_urls])
-                query = f"({site_query}) ({kws})"
+            params = {
+                "key": GOOGLE_SEARCH_API_KEY,
+                "cx": GOOGLE_SEARCH_CX,
+                "q": query,
+                "num": 5, # Her gruptan en iyi 5 sonuc
+                "dateRestrict": "d7" # Sadece son 7 gunun icerikleri (Yepyeni makale/ilanlari yakalamak icin)
+            }
+            
+            try:
+                resp = requests.get(url, params=params, timeout=15)
+                if resp.status_code == 200:
+                    data = resp.json()
+                    for item in data.get("items", []):
+                        entries.append({
+                            "title": item.get("title", ""),
+                            "link": item.get("link", ""),
+                            "abstract": item.get("snippet", ""),
+                            "source": "Google Custom Search",
+                            "category": category
+                        })
+                else:
+                    logger.error("Google Search API Hatasi [%d]: %s", resp.status_code, resp.text)
+            except Exception as e:
+                logger.error("Google Search API istek hatasi: %s", e)
                 
-                try:
-                    results = ddgs.text(query, max_results=5)
-                    if results:
-                        for r in results:
-                            entries.append({
-                                "title": r.get("title", ""),
-                                "link": r.get("href", ""),
-                                "abstract": r.get("body", ""),
-                                "source": "DDG Custom",
-                                "category": category
-                            })
-                except Exception as e:
-                    logger.error("DDG arama hatasi: %s", e)
-                sleep(3) # DDG Rate limit korumasi
+            sleep(1.5) # Limit korumasi
                 
-    logger.info("DuckDuckGo: %d icerik toplandi", len(entries))
+    logger.info("Google Custom Search: %d icerik toplandi", len(entries))
     return entries
 
 def run_parallel_collection(config):
@@ -296,7 +310,7 @@ def run_parallel_collection(config):
         f3 = executor.submit(collect_from_eartharxiv, config)
         f4 = executor.submit(collect_from_google_news, config)
         f5 = executor.submit(collect_from_reddit, config)
-        f6 = executor.submit(collect_from_duckduckgo, config)
+        f6 = executor.submit(collect_from_google_custom_search, config)
         
         for future in concurrent.futures.as_completed([f1, f2, f3, f4, f5, f6]):
             try:
@@ -614,17 +628,6 @@ def main():
     logger.info("KATMAN 4: Structured JSON Puanlama (Gemini)")
     gemini_model = find_working_gemini_model()
     scored_items = structured_batch_score(filtered_items, gemini_model, config)
-
-    # --- TEST ICIN EKLENEN SAHTE MAKALE ---
-    scored_items.insert(0, {
-        "title": "[TEST] Antarktika Buzullarındaki Hızlı Erime ve Küresel Deniz Seviyesine Etkileri",
-        "link": "https://example.com/test-makale-123",
-        "abstract": "Bu çalışmada, Antarktika'daki Thwaites buzulunun erime dinamikleri incelenmiştir. Yapılan uydu ölçümleri ve radar taramaları, son 10 yılda erime hızının %40 oranında arttığını göstermektedir. Bu durumun kıyı jeomorfolojisi ve deniz seviyesi üzerinde dramatik etkileri olacağı öngörülmektedir.",
-        "source": "EarthArXiv",
-        "category": "makale",
-        "score": 10
-    })
-    # --------------------------------------
 
     # 5. IKI ADIMLI DAGITIM (ROUTING)
     telegram_items = []  # 7-10 puan
