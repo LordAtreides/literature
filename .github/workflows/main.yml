@@ -2,7 +2,7 @@ name: Geology Tracker Bot V3 (Funnel)
 
 on:
   schedule:
-    - cron: '0 3,11,19 * * *'  # Her 8 saatte bir (TR: 06:00, 14:00, 22:00)
+    - cron: '0 6 * * 3,6'  # Çarşamba ve Cumartesi sabahı (TR saati ile 09:00)
   workflow_dispatch:
 
 permissions:
