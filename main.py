@@ -96,7 +96,7 @@ def get_gsheets_client():
         return None
 
 def batch_archive_to_sheet(entries):
-    """Gelen listeyi tek bir API istegiyle Google Sheets'e kaydeder."""
+    """Gelen listeyi Google Sheets'e kaydeder, YENI vurgusu yapar ve 30 gunlukleri arsivler."""
     if not GOOGLE_SHEET_ID or not entries: return
     client = get_gsheets_client()
     if not client: return
@@ -107,22 +107,71 @@ def batch_archive_to_sheet(entries):
         except Exception:
             worksheet = sh.sheet1
             worksheet.update_title("Genel Bakış")
-        
+            
+        # 1. Eski "🆕" isaretlerini temizle
+        try:
+            all_values = worksheet.get_all_values()
+            cells_to_update = []
+            for i, row_data in enumerate(all_values):
+                for j, val in enumerate(row_data):
+                    if "🆕" in val:
+                        cells_to_update.append(gspread.Cell(i+1, j+1, val.replace("🆕 ", "").replace("🆕", "")))
+            if cells_to_update:
+                worksheet.update_cells(cells_to_update)
+        except Exception as e:
+            logger.error("Eski YENI etiketleri temizlenemedi: %s", e)
+            
+        # 2. Yeni satirlari hazirla ve ekle
         rows = []
         for entry in entries:
             sheet_type = "telegram" if entry.get("score", 0) >= 7 else "web"
+            # Yeni eklenenlere 🆕 isareti koy
+            source_marked = "🆕 " + entry.get("source", "")
             rows.append([
                 datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S"),
-                entry.get("source", ""),
+                source_marked,
                 entry.get("title", ""),
                 entry.get("link", ""),
+                "", # Ozet sutunu bos birakildi (Puanin F sutununda kalmasi icin)
                 str(entry.get("score", "")),
                 sheet_type
             ])
             
-        # Yeni satirlari en uste (2. satira, basliklarin hemen altina) ekle
         worksheet.insert_rows(rows, row=2, value_input_option="RAW")
         logger.info("%d satir Google Sheets'e (en uste) kaydedildi.", len(rows))
+        
+        # 3. Arşivleme Mantığı (30 Günü Geçenleri Taşı)
+        try:
+            try:
+                archive_sheet = sh.worksheet("Arşiv")
+            except Exception:
+                archive_sheet = sh.add_worksheet(title="Arşiv", rows="1000", cols="10")
+                
+            all_values = worksheet.get_all_values()
+            if len(all_values) > 1:
+                header = all_values[0]
+                rows_to_archive = []
+                rows_to_keep = [header]
+                now_dt = datetime.now(timezone.utc)
+                
+                for row_data in all_values[1:]:
+                    try:
+                        row_dt = datetime.strptime(row_data[0], "%Y-%m-%d %H:%M:%S").replace(tzinfo=timezone.utc)
+                        if (now_dt - row_dt).days >= 30:
+                            rows_to_archive.append(row_data)
+                        else:
+                            rows_to_keep.append(row_data)
+                    except Exception:
+                        rows_to_keep.append(row_data)
+                        
+                if rows_to_archive:
+                    archive_sheet.append_rows(rows_to_archive, value_input_option="RAW")
+                    worksheet.clear()
+                    worksheet.append_rows(rows_to_keep, value_input_option="RAW")
+                    logger.info("%d eski satir Arsiv sayfasina tasindi.", len(rows_to_archive))
+        except Exception as e:
+            logger.error("Arsivleme hatasi: %s", e)
+            
     except Exception as e:
         logger.error("Sheets toplu arsiv hatasi: %s", e)
 
@@ -205,43 +254,6 @@ def collect_from_eartharxiv(config):
     logger.info("EarthArXiv: %d", len(entries))
     return entries
 
-def collect_from_google_news(config):
-    entries = []
-    for feed_info in config.get("google_news_rss", []):
-        try:
-            resp = requests.get(feed_info.get("url", ""), timeout=10, headers={"User-Agent": "JeolojiBot/3.0"})
-            if resp.status_code == 200:
-                for entry in feedparser.parse(resp.text).entries[:10]:
-                    link, title = entry.get("link", ""), entry.get("title", "")
-                    if link and title:
-                        entries.append({
-                            "title": strip_html_tags(title), "link": link,
-                            "abstract": strip_html_tags(entry.get("summary", entry.get("description", ""))),
-                            "source": f"Google News ({feed_info.get('name', '')})", "category": feed_info.get("category", "haber")
-                        })
-        except Exception: pass
-        sleep(0.5)
-    logger.info("Google News: %d", len(entries))
-    return entries
-
-def collect_from_reddit(config):
-    entries = []
-    for sub in config.get("reddit_subreddits", []):
-        try:
-            resp = requests.get(f"https://www.reddit.com/r/{sub}/new/.rss", timeout=10, headers={"User-Agent": "JeolojiBot/3.0 (educational)"})
-            if resp.status_code == 200:
-                for entry in feedparser.parse(resp.text).entries[:10]:
-                    link, title = entry.get("link", ""), entry.get("title", "")
-                    if link and title:
-                        entries.append({
-                            "title": strip_html_tags(title), "link": link,
-                            "abstract": strip_html_tags(entry.get("summary", ""))[:300],
-                            "source": f"Reddit (r/{sub})", "category": "forum"
-                        })
-        except Exception: pass
-        sleep(1)
-    logger.info("Reddit: %d", len(entries))
-    return entries
 
 def collect_from_tavily(config):
     """Ozel kaynaklari Tavily Search API kullanarak tarar."""
@@ -302,17 +314,15 @@ def collect_from_tavily(config):
     return entries
 
 def run_parallel_collection(config):
-    """6 kaynagi ThreadPool ile ayni anda tarar."""
+    """4 kaynagi ThreadPool ile ayni anda tarar."""
     all_items = []
-    with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
         f1 = executor.submit(collect_from_crossref, config)
         f2 = executor.submit(collect_from_arxiv, config)
         f3 = executor.submit(collect_from_eartharxiv, config)
-        f4 = executor.submit(collect_from_google_news, config)
-        f5 = executor.submit(collect_from_reddit, config)
-        f6 = executor.submit(collect_from_tavily, config)
+        f4 = executor.submit(collect_from_tavily, config)
         
-        for future in concurrent.futures.as_completed([f1, f2, f3, f4, f5, f6]):
+        for future in concurrent.futures.as_completed([f1, f2, f3, f4]):
             try:
                 all_items.extend(future.result())
             except Exception as e:
