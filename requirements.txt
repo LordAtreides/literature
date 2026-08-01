@@ -7,4 +7,4 @@ thefuzz>=0.22.1
 python-Levenshtein>=0.25.0
 anthropic>=0.20.0
 tenacity>=8.2.0
-o p e n a i > = 1 . 1 4 . 0 
+openai>=1.14.0 
