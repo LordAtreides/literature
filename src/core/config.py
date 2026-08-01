@@ -29,7 +29,7 @@ TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
 GOOGLE_SHEET_ID = os.environ.get("GOOGLE_SHEET_ID")
 GOOGLE_CREDENTIALS = os.environ.get("GOOGLE_CREDENTIALS")
-TAVILY_API_KEY = os.environ.get("TAVILY_API_KEY")
+PERPLEXITY_API_KEY = os.environ.get("PERPLEXITY_API_KEY")
 
 def load_config():
     with open(CONFIG_PATH, "r", encoding="utf-8") as f:

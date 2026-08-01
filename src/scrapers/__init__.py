@@ -4,7 +4,7 @@ from .crossref import collect_from_crossref
 from .arxiv import collect_from_arxiv
 from .eartharxiv import collect_from_eartharxiv
 from .reddit import collect_from_reddit
-from .tavily import collect_from_tavily
+from .perplexity import collect_from_perplexity
 from .rss_scraper import collect_from_rss
 
 def run_parallel_collection(config):
@@ -16,7 +16,7 @@ def run_parallel_collection(config):
             executor.submit(collect_from_arxiv, config),
             executor.submit(collect_from_eartharxiv, config),
             executor.submit(collect_from_reddit, config),
-            executor.submit(collect_from_tavily, config),
+            executor.submit(collect_from_perplexity, config),
             executor.submit(collect_from_rss, config)
         ]
         
