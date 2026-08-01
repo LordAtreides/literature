@@ -13,6 +13,8 @@ def _fetch_perplexity(payload):
         "Content-Type": "application/json"
     }
     resp = requests.post(url, json=payload, headers=headers, timeout=30)
+    if resp.status_code != 200:
+        logger.error(f"Perplexity API HTTP Error {resp.status_code}: {resp.text}")
     resp.raise_for_status()
     return resp.json()
 
@@ -56,8 +58,8 @@ def collect_from_perplexity(config):
         for i in range(0, len(urls), 10):
             batch_urls = urls[i:i+10]
             
-            # Clean domains (remove http/https just in case)
-            clean_domains = [u.replace("https://", "").replace("http://", "") for u in batch_urls]
+            # Clean domains (remove http/https and trailing slash)
+            clean_domains = [u.replace("https://", "").replace("http://", "").rstrip('/') for u in batch_urls]
             
             payload = {
                 "model": "sonar-small-online",

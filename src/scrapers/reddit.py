@@ -7,7 +7,9 @@ from src.core.utils import strip_html_tags
 
 @retry(wait=wait_exponential(multiplier=1, min=4, max=10), stop=stop_after_attempt(3))
 def _fetch_reddit(url, headers):
-    resp = requests.get(url, timeout=10, headers=headers)
+    resp = requests.get(url, headers=headers, timeout=10)
+    if resp.status_code != 200:
+        logger.error(f"Reddit HTTP Error {resp.status_code}: {resp.text[:200]}")
     resp.raise_for_status()
     return resp.text
 
