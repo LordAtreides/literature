@@ -58,11 +58,16 @@ def collect_from_perplexity(config):
         for i in range(0, len(urls), 10):
             batch_urls = urls[i:i+10]
             
-            # Clean domains (remove http/https and trailing slash)
-            clean_domains = [u.replace("https://", "").replace("http://", "").rstrip('/') for u in batch_urls]
+            # Extract only the base domain to avoid API errors with URL paths
+            clean_domains = []
+            for u in batch_urls:
+                u = u.replace("https://", "").replace("http://", "")
+                base_domain = u.split("/")[0] # Sadece ana domaini al (orn: nature.com/ngeo -> nature.com)
+                if base_domain not in clean_domains:
+                    clean_domains.append(base_domain)
             
             payload = {
-                "model": "sonar-small-online",
+                "model": "sonar",
                 "messages": [
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": query}
