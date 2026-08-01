@@ -1474,3 +1474,13 @@
 2026-08-01 15:08:33,446 [ERROR] Reddit HTTP Error 429: 
 2026-08-01 15:08:37,505 [ERROR] Reddit HTTP Error 429: 
 2026-08-01 15:08:37,505 [ERROR] Reddit error for remotesensing: RetryError[<Future at 0x7f670e4995d0 state=finished raised HTTPError>]
+2026-08-01 15:26:26,608 [ERROR] Reddit HTTP Error 429: 
+2026-08-01 15:26:30,656 [ERROR] Reddit HTTP Error 429: 
+2026-08-01 15:26:34,702 [ERROR] Reddit HTTP Error 429: 
+2026-08-01 15:26:34,702 [ERROR] Reddit error for geoscience: RetryError[<Future at 0x7f17a820fc10 state=finished raised HTTPError>]
+2026-08-01 15:26:35,749 [ERROR] Reddit HTTP Error 429: 
+2026-08-01 15:26:39,802 [ERROR] Reddit HTTP Error 429: 
+2026-08-01 15:26:39,848 [ERROR] RSS error for https://earthworks-jobs.com/rss.xml: RetryError[<Future at 0x7f17a823a2d0 state=finished raised HTTPError>]
+2026-08-01 15:26:43,850 [ERROR] Reddit HTTP Error 429: 
+2026-08-01 15:26:43,851 [ERROR] Reddit error for remotesensing: RetryError[<Future at 0x7f17a820b9d0 state=finished raised HTTPError>]
+2026-08-01 15:27:51,101 [ERROR] Podcast metni olusturulamadi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-haiku-20240307'}, 'request_id': 'req_011CdcGJ1Nc8voBePGECuHWp'}
