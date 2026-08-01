@@ -449,5 +449,10 @@
         }
       ]
     }
+  ],
+  "reddit_subreddits": [
+    "geology",
+    "geoscience",
+    "remotesensing"
   ]
 }
