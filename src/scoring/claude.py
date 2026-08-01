@@ -21,6 +21,18 @@ def find_working_claude_model(client):
     except Exception:
         return "claude-3-5-sonnet-20240620"
 
+def find_haiku_model(client):
+    try:
+        models = [m.id for m in client.models.list().data]
+        haikus = [m for m in models if "haiku" in m]
+        if haikus:
+            haikus.sort(reverse=True) # claude-3-5-haiku... basa gelir
+            return haikus[0]
+        # Eger haiku yoksa sonnet'e dus
+        return find_working_claude_model(client)
+    except Exception:
+        return "claude-3-5-haiku-20241022"
+
 def claude_batch_score(items, config):
     if not items or not CLAUDE_API_KEY:
         for i in items: i["score"] = 5
@@ -32,7 +44,7 @@ def claude_batch_score(items, config):
     
     if HAS_ANTHROPIC:
         client = anthropic.Anthropic(api_key=CLAUDE_API_KEY)
-        model_name = "claude-3-haiku-20240307"
+        model_name = find_haiku_model(client)
         logger.info("Claude Puanlama Modeli: %s", model_name)
     else:
         logger.error("Anthropic kütüphanesi yüklü değil!")

@@ -18,7 +18,8 @@ def collect_from_arxiv(config):
     for query in queries:
         try:
             url = "http://export.arxiv.org/api/query"
-            params = {"search_query": f"cat:physics.geo-ph AND all:({query})", "sortBy": "submittedDate", "sortOrder": "descending", "max_results": limit}
+            # Bosluk iceren kelimeler icin tirnak icine aliyoruz: all:("{query}")
+            params = {"search_query": f'cat:physics.geo-ph AND all:("{query}")', "sortBy": "submittedDate", "sortOrder": "descending", "max_results": limit}
             text = _fetch_arxiv(url, params=params, headers={"User-Agent": "JeolojiBot/3.0"})
             for entry in feedparser.parse(text).entries:
                 link, title = entry.get("link", ""), entry.get("title", "").replace("\n", " ").strip()
