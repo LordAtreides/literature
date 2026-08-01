@@ -92,6 +92,19 @@ def main():
     # WEB DATABASE (Docs JSON)
     if web_items:
         logger.info("Web veritabani guncelleniyor...")
+        from src.scoring.openai_ops import translate_articles_to_turkish, generate_cover_image
+        
+        web_items = translate_articles_to_turkish(web_items)
+        
+        top_item = None
+        for item in web_items:
+            if item.get("score", 0) >= 8:
+                if not top_item or item.get("score", 0) > top_item.get("score", 0):
+                    top_item = item
+                    
+        if top_item:
+            generate_cover_image(top_item)
+            
         web_database.add_items(web_items)
 
     # DERIN ANALIZ VE TELEGRAM

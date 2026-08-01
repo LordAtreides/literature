@@ -40,7 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderArticles() {
-        // Filtreleme
+        const heroSection = document.getElementById('hero-section');
+        heroSection.style.display = 'none';
+        heroSection.innerHTML = '';
+        
         let filtered = allData.filter(item => {
             const matchesCat = currentFilter === 'all' || (item.category && item.category.toLowerCase() === currentFilter.toLowerCase());
             const searchLower = searchQuery.toLowerCase();
@@ -69,6 +72,34 @@ document.addEventListener('DOMContentLoaded', () => {
         if (filtered.length === 0) {
             container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-secondary);">Sonuç bulunamadı.</div>';
             return;
+        }
+
+        // Hero karti var mi (İlk öğede image_url varsa ve arama yapılmıyorsa)
+        if (filtered[0] && filtered[0].image_url && !searchQuery && currentFilter === 'all' && currentSort === 'date') {
+            const top = filtered.shift();
+            const stars = '⭐'.repeat(Math.min(5, Math.ceil((top.score || 0) / 2)));
+            
+            heroSection.style.display = 'block';
+            heroSection.innerHTML = `
+                <div class="hero-card" style="background-image: url('${top.image_url}')">
+                    <div class="hero-overlay">
+                        <span class="category-tag">Günün Manşeti: ${top.category || 'Genel'}</span>
+                        <h2 class="article-title">
+                            <a href="${top.link}" target="_blank" rel="noopener noreferrer">${top.title}</a>
+                        </h2>
+                        <p class="article-abstract">${top.abstract ? top.abstract.substring(0, 300) + '...' : ''}</p>
+                        <div class="card-footer" style="border-top: none; padding-top: 0;">
+                            <div class="source-tag">
+                                <span class="source-icon">${getSourceIcon(top.source || '')}</span>
+                                <span>${top.source || 'Bilinmeyen Kaynak'}</span>
+                            </div>
+                            <div class="date-tag">
+                                <span class="score-badge" style="background: rgba(0,0,0,0.5);">${stars} ${top.score}/10</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
         }
 
         filtered.forEach(item => {
