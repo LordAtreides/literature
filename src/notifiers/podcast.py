@@ -12,12 +12,13 @@ from src.core.config import TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
 def generate_podcast_text(items):
     # Bu metin normalde Claude tarafindan yazdirilabilir, ancak basitce burada olusturuyoruz
     # (veya Claude ile 2 dakikalik script yazdirmak daha zeki olur)
-    from src.scoring.claude import CLAUDE_API_KEY
+    from src.scoring.claude import CLAUDE_API_KEY, find_working_claude_model
     if not CLAUDE_API_KEY:
         return None
         
     import anthropic
     client = anthropic.Anthropic(api_key=CLAUDE_API_KEY)
+    model_name = find_working_claude_model(client)
     
     text_items = "\n".join([f"- {i['title']}: {i.get('summary', i.get('abstract',''))[:200]}" for i in items[:5]])
     system_prompt = (
@@ -29,7 +30,7 @@ def generate_podcast_text(items):
     
     try:
         response = client.messages.create(
-            model="claude-3-5-haiku-20241022",
+            model=model_name,
             max_tokens=500,
             system=system_prompt,
             messages=[{"role": "user", "content": text_items}]
