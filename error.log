@@ -1484,3 +1484,13 @@
 2026-08-01 15:26:43,850 [ERROR] Reddit HTTP Error 429: 
 2026-08-01 15:26:43,851 [ERROR] Reddit error for remotesensing: RetryError[<Future at 0x7f17a820b9d0 state=finished raised HTTPError>]
 2026-08-01 15:27:51,101 [ERROR] Podcast metni olusturulamadi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-haiku-20240307'}, 'request_id': 'req_011CdcGJ1Nc8voBePGECuHWp'}
+2026-08-01 15:30:25,695 [ERROR] Reddit HTTP Error 429: 
+2026-08-01 15:30:29,742 [ERROR] Reddit HTTP Error 429: 
+2026-08-01 15:30:33,794 [ERROR] Reddit HTTP Error 429: 
+2026-08-01 15:30:33,794 [ERROR] Reddit error for geoscience: RetryError[<Future at 0x7f0de32ef990 state=finished raised HTTPError>]
+2026-08-01 15:30:34,838 [ERROR] Reddit HTTP Error 429: 
+2026-08-01 15:30:37,628 [ERROR] RSS error for https://earthworks-jobs.com/rss.xml: RetryError[<Future at 0x7f0de01173d0 state=finished raised HTTPError>]
+2026-08-01 15:30:38,887 [ERROR] Reddit HTTP Error 429: 
+2026-08-01 15:30:42,930 [ERROR] Reddit HTTP Error 429: 
+2026-08-01 15:30:42,931 [ERROR] Reddit error for remotesensing: RetryError[<Future at 0x7f0de32dff90 state=finished raised HTTPError>]
+2026-08-01 15:31:36,593 [ERROR] Podcast metni olusturulamadi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-haiku-20241022'}, 'request_id': 'req_011CdcGaeFq557NGFmdxgncG'}
