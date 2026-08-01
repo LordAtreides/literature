@@ -28,12 +28,13 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: python main.py
 
       - name: Commit state files
         run: |
           git config user.name "Geology Bot"
           git config user.email "bot@geology-tracker.local"
-          git add seen_urls.json error.log 2>/dev/null || true
+          git add seen_urls.json error.log docs/ 2>/dev/null || true
           git diff --cached --quiet || git commit -m "Bot state update (V3) [skip ci]"
           git push || true
