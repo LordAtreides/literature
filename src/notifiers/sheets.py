@@ -19,11 +19,11 @@ def _get_sheets_client():
 
 @retry(wait=wait_exponential(multiplier=2, min=4, max=10), stop=stop_after_attempt(3))
 def _append_rows_with_retry(worksheet, rows):
-    worksheet.append_rows(rows, value_input_option="RAW")
+    worksheet.append_rows(rows, value_input_option="USER_ENTERED")
 
 @retry(wait=wait_exponential(multiplier=2, min=4, max=10), stop=stop_after_attempt(3))
 def _insert_rows_with_retry(worksheet, rows, row_idx):
-    worksheet.insert_rows(rows, row=row_idx, value_input_option="RAW")
+    worksheet.insert_rows(rows, row=row_idx, value_input_option="USER_ENTERED")
 
 @retry(wait=wait_exponential(multiplier=2, min=4, max=10), stop=stop_after_attempt(3))
 def _update_cells_with_retry(worksheet, cell_list):
@@ -45,7 +45,7 @@ def batch_archive_to_sheet(items):
             worksheet = sheet.worksheet("Genel Bakış")
         except gspread.exceptions.WorksheetNotFound:
             worksheet = sheet.add_worksheet(title="Genel Bakış", rows="1000", cols="20")
-            worksheet.append_row(["Tarih", "Kaynak", "Kategori", "Başlık", "Özet", "Puan", "Link"])
+            worksheet.append_row(["Tarih", "Kaynak", "Başlık", "Puan", "Link"])
 
         # Yeni isareti temizle
         all_values = worksheet.get_all_values()
@@ -65,9 +65,7 @@ def batch_archive_to_sheet(items):
             rows_to_add.append([
                 now_str,
                 f"🆕 {item.get('source', '')}",
-                item.get("category", ""),
                 item.get("title", ""),
-                "", # Ozet sutunu bos birakildi
                 item.get("score", ""),
                 item.get("link", "")
             ])
@@ -98,7 +96,7 @@ def batch_archive_to_sheet(items):
                     archive_ws = sheet.worksheet("Arşiv")
                 except gspread.exceptions.WorksheetNotFound:
                     archive_ws = sheet.add_worksheet(title="Arşiv", rows="1000", cols="20")
-                    archive_ws.append_row(["Tarih", "Kaynak", "Kategori", "Başlık", "Özet", "Puan", "Link"])
+                    archive_ws.append_row(["Tarih", "Kaynak", "Başlık", "Puan", "Link"])
                 
                 _append_rows_with_retry(archive_ws, rows_to_archive)
                 
