@@ -15,7 +15,9 @@ def collect_from_reddit(config):
     entries = []
     for sub in config.get("reddit_subreddits", []):
         try:
-            text = _fetch_reddit(f"https://www.reddit.com/r/{sub}/new/.rss", headers={"User-Agent": "JeolojiBot/3.0 (educational)"})
+            # Reddit, bulut sunucularini engellememek icin spesifik User-Agent ister: platform:app:version (by /u/username)
+            headers = {"User-Agent": "windows:jeolojibot:v4.0 (by /u/geology_bot_admin)"}
+            text = _fetch_reddit(f"https://www.reddit.com/r/{sub}/new/.rss", headers=headers)
             for entry in feedparser.parse(text).entries[:10]:
                 link, title = entry.get("link", ""), entry.get("title", "")
                 if link and title:

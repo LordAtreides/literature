@@ -102,8 +102,8 @@ def main():
         if send_telegram(build_bulletin_message(telegram_items, now_str)):
             logger.info("Bulten basariyla gonderildi!")
             
-        # HAFTASONU PODCASTI (Eger Cumartesi veya Pazar ise)
-        if now.weekday() >= 5:
+        # SESLI PODCAST (Test icin her zaman calisacak sekilde ayarlandi)
+        if True:
             create_and_send_podcast(telegram_items)
 
     # Hafizayi Guncelle

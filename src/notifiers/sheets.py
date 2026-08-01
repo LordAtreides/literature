@@ -22,6 +22,10 @@ def _append_rows_with_retry(worksheet, rows):
     worksheet.append_rows(rows, value_input_option="RAW")
 
 @retry(wait=wait_exponential(multiplier=2, min=4, max=10), stop=stop_after_attempt(3))
+def _insert_rows_with_retry(worksheet, rows, row_idx):
+    worksheet.insert_rows(rows, row=row_idx, value_input_option="RAW")
+
+@retry(wait=wait_exponential(multiplier=2, min=4, max=10), stop=stop_after_attempt(3))
 def _update_cells_with_retry(worksheet, cell_list):
     worksheet.update_cells(cell_list)
 
@@ -69,8 +73,8 @@ def batch_archive_to_sheet(items):
             ])
             
         if rows_to_add:
-            _append_rows_with_retry(worksheet, rows_to_add)
-            logger.info(f"Google Sheets: {len(rows_to_add)} satir eklendi.")
+            _insert_rows_with_retry(worksheet, rows_to_add, 2)
+            logger.info(f"Google Sheets: {len(rows_to_add)} satir en uste eklendi.")
 
         # 30 Gunluk Otomatik Arsivleme
         all_values = worksheet.get_all_values()
