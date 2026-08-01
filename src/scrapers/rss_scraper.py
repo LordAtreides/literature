@@ -7,7 +7,12 @@ from src.core.utils import strip_html_tags
 
 @retry(wait=wait_exponential(multiplier=1, min=4, max=10), stop=stop_after_attempt(3))
 def _fetch_rss(url, headers):
-    resp = requests.get(url, timeout=10, headers=headers)
+    # Bazı siteler (Earthworks vb.) botlari engelledigi icin guclu bir tarayici User-Agent'i kullaniyoruz
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8"
+    }
+    resp = requests.get(url, headers=headers, timeout=10)
     resp.raise_for_status()
     return resp.text
 

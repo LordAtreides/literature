@@ -36,8 +36,9 @@ def collect_from_perplexity(config):
         "You are an expert research assistant. "
         "Search the provided domains and return exactly 5 recent and relevant results. "
         "You MUST format your entire response as a single, valid JSON object and nothing else. "
+        "Ensure all quotes inside strings are properly escaped. "
         "Schema: {\"results\": [{\"title\": \"...\", \"link\": \"...\", \"abstract\": \"...\"}]} "
-        "Do not include markdown tags like ```json. Just output the raw JSON."
+        "Do not include markdown tags like ```json or any conversational text. Just the raw JSON object."
     )
     
     for group in kaynaklar:
@@ -97,6 +98,8 @@ def collect_from_perplexity(config):
                             "source": "Perplexity Sonar",
                             "category": category
                         })
+            except json.JSONDecodeError as e:
+                logger.error(f"Perplexity JSON Parse Error: {e}. Raw content: {content[:500]}...")
             except Exception as e:
                 logger.error(f"Perplexity error for domains {clean_domains}: {e}")
             sleep(2)
