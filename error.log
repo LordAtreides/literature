@@ -1511,3 +1511,9 @@
 2026-08-01 15:38:50,650 [ERROR] Reddit HTTP Error 429: 
 2026-08-01 15:38:50,651 [ERROR] Reddit error for remotesensing: RetryError[<Future at 0x7fbac4d41690 state=finished raised HTTPError>]
 2026-08-01 15:39:12,159 [ERROR] Perplexity JSON Parse Error: Expecting ',' delimiter: line 1 column 330 (char 329). Raw content: {"results":[{"title":"GSA Graduate Student Research Grants","link":"https://www.geosociety.org/grants-scholarships/graduate-research","abstract":"Graduate student research grants from the Geological Society of America for geoscience research; the provided results identify this as an active grants page relevant to PhD students."[9][2]},{"title":"GSA Division Research Grants","link":"https://excel.geosociety.org/GSA/grants/division.aspx","abstract":"A GSA division grants page listing multiple grad...
+2026-08-01 15:41:59,619 [ERROR] Hafiza (seen_urls) okunamadi: Expecting property name enclosed in double quotes: line 201 column 1 (char 18282)
+2026-08-01 15:42:02,915 [ERROR] Reddit HTTP Error 429: 
+2026-08-01 15:42:06,953 [ERROR] Reddit HTTP Error 429: 
+2026-08-01 15:42:11,037 [ERROR] Reddit HTTP Error 429: 
+2026-08-01 15:42:11,038 [ERROR] Reddit error for remotesensing: RetryError[<Future at 0x7fcc9f6c4810 state=finished raised HTTPError>]
+2026-08-01 15:42:43,773 [ERROR] RSS error for https://earthworks-jobs.com/rss.xml: RetryError[<Future at 0x7fcc9f6c6c90 state=finished raised HTTPError>]
