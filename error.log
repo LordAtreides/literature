@@ -1494,3 +1494,10 @@
 2026-08-01 15:30:42,930 [ERROR] Reddit HTTP Error 429: 
 2026-08-01 15:30:42,931 [ERROR] Reddit error for remotesensing: RetryError[<Future at 0x7f0de32dff90 state=finished raised HTTPError>]
 2026-08-01 15:31:36,593 [ERROR] Podcast metni olusturulamadi: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-haiku-20241022'}, 'request_id': 'req_011CdcGaeFq557NGFmdxgncG'}
+2026-08-01 15:33:57,429 [ERROR] Reddit HTTP Error 429: 
+2026-08-01 15:34:03,360 [ERROR] Reddit HTTP Error 429: 
+2026-08-01 15:34:07,455 [ERROR] Reddit HTTP Error 429: 
+2026-08-01 15:34:08,479 [ERROR] RSS error for https://earthworks-jobs.com/rss.xml: RetryError[<Future at 0x7f64522c4710 state=finished raised HTTPError>]
+2026-08-01 15:34:11,506 [ERROR] Reddit HTTP Error 429: 
+2026-08-01 15:34:11,507 [ERROR] Reddit error for remotesensing: RetryError[<Future at 0x7f6450147b90 state=finished raised HTTPError>]
+2026-08-01 15:35:31,994 [ERROR] Podcast uretim/gonderim hatasi: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
