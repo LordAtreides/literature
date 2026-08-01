@@ -16,7 +16,7 @@ import os
 import sys
 import logging
 import logging.handlers
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from time import sleep
 from html import escape as html_escape_builtin
@@ -186,10 +186,16 @@ def collect_from_crossref(config):
     limit = config.get("ayarlar", {}).get("crossref_sonuc_limiti", 2)
     all_keywords = kws.get("en_academic_and_news", []) + kws.get("de_german_research", []) + kws.get("fr_french_research", [])
 
+    # Son 30 gun icindeki yayinlari filtrele
+    date_from = (datetime.now(timezone.utc) - timedelta(days=30)).strftime("%Y-%m-%d")
+    
     for kw in all_keywords:
         try:
             resp = requests.get("https://api.crossref.org/works",
-                params={"query": kw, "select": "title,URL,abstract", "sort": "published", "order": "desc", "rows": limit},
+                params={
+                    "query": kw, "select": "title,URL,abstract,published",
+                    "sort": "published", "order": "desc", "rows": limit
+                },
                 headers=headers, timeout=10)
             if resp.status_code == 200:
                 for paper in resp.json().get("message", {}).get("items", []):
@@ -254,6 +260,25 @@ def collect_from_eartharxiv(config):
     logger.info("EarthArXiv: %d", len(entries))
     return entries
 
+def collect_from_reddit(config):
+    entries = []
+    for sub in config.get("reddit_subreddits", []):
+        try:
+            resp = requests.get(f"https://www.reddit.com/r/{sub}/new/.rss", timeout=10, headers={"User-Agent": "JeolojiBot/3.0 (educational)"})
+            if resp.status_code == 200:
+                for entry in feedparser.parse(resp.text).entries[:10]:
+                    link, title = entry.get("link", ""), entry.get("title", "")
+                    if link and title:
+                        entries.append({
+                            "title": strip_html_tags(title), "link": link,
+                            "abstract": strip_html_tags(entry.get("summary", ""))[:300],
+                            "source": f"Reddit (r/{sub})", "category": "forum"
+                        })
+        except Exception: pass
+        sleep(1)
+    logger.info("Reddit: %d", len(entries))
+    return entries
+
 
 def collect_from_tavily(config):
     """Ozel kaynaklari Tavily Search API kullanarak tarar."""
@@ -265,15 +290,23 @@ def collect_from_tavily(config):
     kaynaklar = config.get("ozel_kaynaklar", [])
     if not kaynaklar: return entries
         
-    academic_kws = "Quaternary geology OR remote sensing OR sedimentology OR Mars"
-    opportunity_kws = "PhD scholarship OR grant OR internship OR geosciences"
+    academic_kws = "Quaternary geology OR remote sensing OR sedimentology OR Mars geology"
+    opportunity_kws = "2025 2026 PhD scholarship OR grant OR internship geosciences geology"
+    haber_kws = "geology discovery OR earthquake OR volcano OR Mars OR satellite OR geoscience news"
     
     url = "https://api.tavily.com/search"
     
     for group in kaynaklar:
         search_type = group.get("search_type", "academic")
-        kws = opportunity_kws if search_type == "opportunity" else academic_kws
-        category = "firsat" if search_type == "opportunity" else "makale"
+        if search_type == "opportunity":
+            kws = opportunity_kws
+            category = "firsat"
+        elif search_type == "haber":
+            kws = haber_kws
+            category = "haber"
+        else:
+            kws = academic_kws
+            category = "makale"
         
         # Tavily include_domains parametresi alir
         urls = [res.get("url") for res in group.get("resources", []) if res.get("url")]
@@ -288,7 +321,7 @@ def collect_from_tavily(config):
                 "include_domains": batch_urls,
                 "max_results": 5,
                 "search_depth": "basic",
-                "days": 7
+                "days": 14
             }
             
             try:
@@ -314,15 +347,16 @@ def collect_from_tavily(config):
     return entries
 
 def run_parallel_collection(config):
-    """4 kaynagi ThreadPool ile ayni anda tarar."""
+    """5 kaynagi ThreadPool ile ayni anda tarar."""
     all_items = []
-    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
         f1 = executor.submit(collect_from_crossref, config)
         f2 = executor.submit(collect_from_arxiv, config)
         f3 = executor.submit(collect_from_eartharxiv, config)
-        f4 = executor.submit(collect_from_tavily, config)
+        f4 = executor.submit(collect_from_reddit, config)
+        f5 = executor.submit(collect_from_tavily, config)
         
-        for future in concurrent.futures.as_completed([f1, f2, f3, f4]):
+        for future in concurrent.futures.as_completed([f1, f2, f3, f4, f5]):
             try:
                 all_items.extend(future.result())
             except Exception as e:
@@ -390,7 +424,7 @@ def claude_batch_score(items, config):
     
     if HAS_ANTHROPIC:
         client = anthropic.Anthropic(api_key=CLAUDE_API_KEY)
-        model_name = find_working_claude_model(client)
+        model_name = "claude-3-haiku-20240307"
         logger.info("Claude Puanlama Modeli: %s", model_name)
     else:
         logger.error("Anthropic kütüphanesi yüklü değil!")
@@ -401,6 +435,8 @@ def claude_batch_score(items, config):
         f"Sen bir jeoloji akademisyenisin. Kullanıcı Profili: {profile_text}. "
         "Aşağıdaki makalelerin bu profile ne kadar uygun olduğunu 1-10 arası puanla. "
         "(9-10: Çok önemli, 7-8: İlgili, 4-6: Dolaylı, 1-3: Çöp). "
+        "ONEMLI: Son tarihli (deadline geçmiş), yılı eski (2023 ve öncesi), veya süresi dolmuş BURS/STAJ FIRSAT DUYURULARINA KESİNLİKLE 1 puan ver. "
+        "Ancak AKADEMİK MAKALELER için (makale, on_baski) 10 yıllık dahi olsalar, profilinle doğrudan ilgili ve faydalı bir temel araştırmaysa puan KIRMA, yüksek puan ver. "
         "SADECE JSON dönmelisin. Şema: {\"results\": [{\"id\": \"string\", \"score\": integer}]} "
         "Markdown veya başka metin ekleme."
     )
@@ -465,8 +501,8 @@ def claude_deep_analysis(item):
 KURALLAR:
 - YANITIN KESİNLİKLE %100 TÜRKÇE OLMALIDIR. Başka bir dilde tek bir kelime dahi yazma.
 - SADECE VE SADECE 2 SATIR yazacaksın.
-- 1. Satır: Ana bulgu/keşif nedir?
-- 2. Satır: Metodoloji veya çalışmanın bilimsel önemi nedir?
+- 1. Satır: (Bulgu): [Ana bulgu/keşif nedir?]
+- 2. Satır: (Önem): [ÇOK KISA. Sadece 3-7 kelimelik hap bilgi. Uzatma.]
 - "Özetle, sonucunda, incelenmiştir" gibi yapay zeka dili (AI cliches) kullanmak YASAK.
 - Net, objektif ve doğrudan akademik bilgi ver."""
 
@@ -591,9 +627,27 @@ def main():
     logger.info("KATMAN 2: Fuzzy Deduplication")
     unique_items = deduplicate_items(raw_items, seen_urls)
 
-    # 3. CLAUDE 3.5 SONNET PUANLAMA
-    logger.info("KATMAN 3: Claude 3.5 Sonnet Puanlama")
+    # 3. CLAUDE HAIKU PUANLAMA
+    logger.info("KATMAN 3: Claude Haiku Puanlama")
     scored_items = claude_batch_score(unique_items, config)
+
+    # 4. BAYAT ICERIK SUZGECI (Mekanik Guvenlik Agi)
+    current_year = now.year
+    stale_years = {str(y) for y in range(2010, current_year - 1)}  # 2010-2024 arasi eski yillar
+    stale_count = 0
+    for item in scored_items:
+        title_lower = item.get("title", "").lower()
+        link_lower = item.get("link", "").lower()
+        cat = item.get("category", "")
+        # Burs/firsat/duyuru kategorisindeki eski yillari yakala
+        if cat in ("firsat", "duyuru", "opportunity"):
+            for year in stale_years:
+                if year in title_lower or year in link_lower:
+                    item["score"] = 1
+                    stale_count += 1
+                    break
+    if stale_count:
+        logger.info("Bayat Suzgec: %d icerik dusuruldu.", stale_count)
 
     # 5. IKI ADIMLI DAGITIM (ROUTING)
     telegram_items = []  # 7-10 puan
