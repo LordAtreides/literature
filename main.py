@@ -1,613 +1,24 @@
 """
-Jeoloji Takip Botu V3 (Funneling Architecture)
+Jeoloji Takip Botu V4 (Moduler Yapi)
 ==============================================
-Katman 1: Coklu Is Parcacigi ile 5 Kaynaktan Paralel Tarama
-Katman 2: Fuzzy Deduplication (Baslik + URL tekillestirme)
-Katman 3: Gemini Embeddings ile Vektorel Ilgi Suzgeci (Cosine Sim > 0.65)
-Katman 4: Gemini Flash ile Structured JSON Puanlama (1-10)
-Katman 5: Claude 3.5 Sonnet ile Derin Analiz (8+ icin)
-Cikti: 8+ puanlilar Telegram'a, 4-7 puanlilar Web/Google Sheets'e, 1-3 Cöp.
 """
 
-import json
-import re
-import gspread
-import os
 import sys
-import logging
-import logging.handlers
-from datetime import datetime, timezone, timedelta
-from pathlib import Path
-from time import sleep
-from html import escape as html_escape_builtin
-import concurrent.futures
-
-import requests
-import feedparser
-import numpy as np
-from thefuzz import fuzz
-
-try:
-    import anthropic
-    HAS_ANTHROPIC = True
-except ImportError:
-    HAS_ANTHROPIC = False
-
-# ─── Logging ────────────────────────────────────────────────────────────────
-LOG_FORMAT = "%(asctime)s [%(levelname)s] %(message)s"
-logging.basicConfig(level=logging.INFO, format=LOG_FORMAT)
-logger = logging.getLogger(__name__)
-
-ERROR_LOG_PATH = Path(__file__).parent / "error.log"
-_fh = logging.handlers.RotatingFileHandler(
-    ERROR_LOG_PATH, maxBytes=1_048_576, backupCount=3, encoding="utf-8"
+from datetime import datetime, timezone
+from src.core.config import (
+    logger, load_config, load_seen_urls, save_seen_urls,
+    TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
 )
-_fh.setLevel(logging.WARNING)
-_fh.setFormatter(logging.Formatter(LOG_FORMAT))
-logger.addHandler(_fh)
-
-# ─── Ortam Degiskenleri ─────────────────────────────────────────────────────
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
-CLAUDE_API_KEY = os.environ.get("CLAUDE_API_KEY")
-TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
-TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
-GOOGLE_SHEET_ID = os.environ.get("GOOGLE_SHEET_ID")
-GOOGLE_CREDENTIALS = os.environ.get("GOOGLE_CREDENTIALS")
-TAVILY_API_KEY = os.environ.get("TAVILY_API_KEY")
-
-CONFIG_PATH = Path(__file__).parent / "config.json"
-SEEN_URLS_PATH = Path(__file__).parent / "seen_urls.json"
-UPDATE_OFFSET_PATH = Path(__file__).parent / "update_offset.txt"
-
-# ─── Yardimci Fonksiyonlar ──────────────────────────────────────────────────
-
-def safe_html(text):
-    if not text: return ""
-    return html_escape_builtin(str(text))
-
-def strip_html_tags(text):
-    if not text: return ""
-    return re.sub(r"<[^>]+>", "", str(text)).strip()
-
-def load_config():
-    with open(CONFIG_PATH, "r", encoding="utf-8") as f:
-        return json.load(f)
-
-def load_seen_urls():
-    if not SEEN_URLS_PATH.exists(): return {}
-    try:
-        with open(SEEN_URLS_PATH, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except Exception:
-        return {}
-
-def save_seen_urls(seen_urls):
-    with open(SEEN_URLS_PATH, "w", encoding="utf-8") as f:
-        json.dump(seen_urls, f, ensure_ascii=False, indent=2)
-
-# ─── Google Sheets (Web / 4-7 Puan Arastirmalari) ──────────────────────────
-
-def get_gsheets_client():
-    if not GOOGLE_CREDENTIALS: return None
-    try:
-        return gspread.service_account_from_dict(json.loads(GOOGLE_CREDENTIALS))
-    except Exception as e:
-        logger.error("Sheets oturum hatasi: %s", e)
-        return None
-
-def batch_archive_to_sheet(entries):
-    """Gelen listeyi Google Sheets'e kaydeder, YENI vurgusu yapar ve 30 gunlukleri arsivler."""
-    if not GOOGLE_SHEET_ID or not entries: return
-    client = get_gsheets_client()
-    if not client: return
-    try:
-        sh = client.open_by_key(GOOGLE_SHEET_ID)
-        try:
-            worksheet = sh.worksheet("Genel Bakış")
-        except Exception:
-            worksheet = sh.sheet1
-            worksheet.update_title("Genel Bakış")
-            
-        # 1. Eski "🆕" isaretlerini temizle
-        try:
-            all_values = worksheet.get_all_values()
-            cells_to_update = []
-            for i, row_data in enumerate(all_values):
-                for j, val in enumerate(row_data):
-                    if "🆕" in val:
-                        cells_to_update.append(gspread.Cell(i+1, j+1, val.replace("🆕 ", "").replace("🆕", "")))
-            if cells_to_update:
-                worksheet.update_cells(cells_to_update)
-        except Exception as e:
-            logger.error("Eski YENI etiketleri temizlenemedi: %s", e)
-            
-        # 2. Yeni satirlari hazirla ve ekle
-        rows = []
-        for entry in entries:
-            sheet_type = "telegram" if entry.get("score", 0) >= 7 else "web"
-            # Yeni eklenenlere 🆕 isareti koy
-            source_marked = "🆕 " + entry.get("source", "")
-            rows.append([
-                datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S"),
-                source_marked,
-                entry.get("title", ""),
-                entry.get("link", ""),
-                "", # Ozet sutunu bos birakildi (Puanin F sutununda kalmasi icin)
-                str(entry.get("score", "")),
-                sheet_type
-            ])
-            
-        worksheet.insert_rows(rows, row=2, value_input_option="RAW")
-        logger.info("%d satir Google Sheets'e (en uste) kaydedildi.", len(rows))
-        
-        # 3. Arşivleme Mantığı (30 Günü Geçenleri Taşı)
-        try:
-            try:
-                archive_sheet = sh.worksheet("Arşiv")
-            except Exception:
-                archive_sheet = sh.add_worksheet(title="Arşiv", rows="1000", cols="10")
-                
-            all_values = worksheet.get_all_values()
-            if len(all_values) > 1:
-                header = all_values[0]
-                rows_to_archive = []
-                rows_to_keep = [header]
-                now_dt = datetime.now(timezone.utc)
-                
-                for row_data in all_values[1:]:
-                    try:
-                        row_dt = datetime.strptime(row_data[0], "%Y-%m-%d %H:%M:%S").replace(tzinfo=timezone.utc)
-                        if (now_dt - row_dt).days >= 30:
-                            rows_to_archive.append(row_data)
-                        else:
-                            rows_to_keep.append(row_data)
-                    except Exception:
-                        rows_to_keep.append(row_data)
-                        
-                if rows_to_archive:
-                    archive_sheet.append_rows(rows_to_archive, value_input_option="RAW")
-                    worksheet.clear()
-                    worksheet.append_rows(rows_to_keep, value_input_option="RAW")
-                    logger.info("%d eski satir Arsiv sayfasina tasindi.", len(rows_to_archive))
-        except Exception as e:
-            logger.error("Arsivleme hatasi: %s", e)
-            
-    except Exception as e:
-        logger.error("Sheets toplu arsiv hatasi: %s", e)
-
-# ═══════════════════════════════════════════════════════════════════════════
-# KATMAN 1: PARALEL TARAMA (COLLECTORS)
-# ═══════════════════════════════════════════════════════════════════════════
-
-def collect_from_crossref(config):
-    entries = []
-    headers = {"User-Agent": "JeolojiBot/3.0 (mailto:jeolojibot@example.com)"}
-    kws = config.get("anahtar_kelimeler", {})
-    limit = config.get("ayarlar", {}).get("crossref_sonuc_limiti", 2)
-    all_keywords = kws.get("en_academic_and_news", []) + kws.get("de_german_research", []) + kws.get("fr_french_research", [])
-
-    # Son 30 gun icindeki yayinlari filtrele
-    date_from = (datetime.now(timezone.utc) - timedelta(days=30)).strftime("%Y-%m-%d")
-    
-    for kw in all_keywords:
-        try:
-            resp = requests.get("https://api.crossref.org/works",
-                params={
-                    "query": kw, "select": "title,URL,abstract,published",
-                    "sort": "published", "order": "desc", "rows": limit
-                },
-                headers=headers, timeout=10)
-            if resp.status_code == 200:
-                for paper in resp.json().get("message", {}).get("items", []):
-                    link = paper.get("URL", "")
-                    title_list = paper.get("title", [])
-                    title = title_list[0] if title_list else ""
-                    if link and title:
-                        entries.append({
-                            "title": title, "link": link, "abstract": strip_html_tags(paper.get("abstract", "")),
-                            "source": "Crossref", "category": "makale"
-                        })
-        except Exception: pass
-        sleep(0.3)
-    logger.info("Crossref: %d", len(entries))
-    return entries
-
-def collect_from_arxiv(config):
-    entries = []
-    queries = config.get("anahtar_kelimeler", {}).get("en_academic_and_news", [])
-    limit = config.get("ayarlar", {}).get("arxiv_sonuc_limiti", 5)
-
-    for query in queries:
-        try:
-            url = "http://export.arxiv.org/api/query"
-            params = {"search_query": f"cat:physics.geo-ph AND all:({query})", "sortBy": "submittedDate", "sortOrder": "descending", "max_results": limit}
-            resp = requests.get(url, params=params, timeout=10, headers={"User-Agent": "JeolojiBot/3.0"})
-            if resp.status_code == 200:
-                for entry in feedparser.parse(resp.text).entries:
-                    link, title = entry.get("link", ""), entry.get("title", "").replace("\n", " ").strip()
-                    if link and title:
-                        entries.append({
-                            "title": title, "link": link, "abstract": entry.get("summary", "").replace("\n", " ").strip(),
-                            "source": "arXiv", "category": "on_baski"
-                        })
-        except Exception: pass
-        sleep(1)
-    logger.info("arXiv: %d", len(entries))
-    return entries
-
-def collect_from_eartharxiv(config):
-    entries = []
-    limit = config.get("ayarlar", {}).get("eartharxiv_sonuc_limiti", 5)
-    try:
-        resp = requests.get("https://api.osf.io/v2/preprints/",
-            params={"filter[provider]": "eartharxiv", "sort": "-date_created", "page[size]": limit},
-            timeout=10, headers={"User-Agent": "JeolojiBot/3.0"})
-        if resp.status_code == 200:
-            for item in resp.json().get("data", []):
-                attrs = item.get("attributes", {})
-                title = attrs.get("title", "")
-                doi = attrs.get("doi", "")
-                link = f"https://doi.org/{doi}" if doi else attrs.get("preprint_doi_created", "")
-                if not link:
-                    links = item.get("links", {})
-                    link = links.get("html", links.get("preprint_doi", ""))
-                if title and link:
-                    entries.append({
-                        "title": title, "link": link, "abstract": strip_html_tags(attrs.get("description", "")),
-                        "source": "EarthArXiv", "category": "on_baski"
-                    })
-    except Exception: pass
-    logger.info("EarthArXiv: %d", len(entries))
-    return entries
-
-def collect_from_reddit(config):
-    entries = []
-    for sub in config.get("reddit_subreddits", []):
-        try:
-            resp = requests.get(f"https://www.reddit.com/r/{sub}/new/.rss", timeout=10, headers={"User-Agent": "JeolojiBot/3.0 (educational)"})
-            if resp.status_code == 200:
-                for entry in feedparser.parse(resp.text).entries[:10]:
-                    link, title = entry.get("link", ""), entry.get("title", "")
-                    if link and title:
-                        entries.append({
-                            "title": strip_html_tags(title), "link": link,
-                            "abstract": strip_html_tags(entry.get("summary", ""))[:300],
-                            "source": f"Reddit (r/{sub})", "category": "forum"
-                        })
-        except Exception: pass
-        sleep(1)
-    logger.info("Reddit: %d", len(entries))
-    return entries
-
-
-def collect_from_tavily(config):
-    """Ozel kaynaklari Tavily Search API kullanarak tarar."""
-    entries = []
-    if not TAVILY_API_KEY:
-        logger.warning("TAVILY_API_KEY eksik, ozel kaynak aramasi atlandi.")
-        return entries
-        
-    kaynaklar = config.get("ozel_kaynaklar", [])
-    if not kaynaklar: return entries
-        
-    academic_kws = "Quaternary geology OR remote sensing OR sedimentology OR Mars geology"
-    opportunity_kws = "2025 2026 PhD scholarship OR grant OR internship geosciences geology"
-    haber_kws = "geology discovery OR earthquake OR volcano OR Mars OR satellite OR geoscience news"
-    
-    url = "https://api.tavily.com/search"
-    
-    for group in kaynaklar:
-        search_type = group.get("search_type", "academic")
-        if search_type == "opportunity":
-            kws = opportunity_kws
-            category = "firsat"
-        elif search_type == "haber":
-            kws = haber_kws
-            category = "haber"
-        else:
-            kws = academic_kws
-            category = "makale"
-        
-        # Tavily include_domains parametresi alir
-        urls = [res.get("url") for res in group.get("resources", []) if res.get("url")]
-        
-        # Tavily'ye ayni anda cok fazla domain atmak yerine 5'erli bolelim
-        for i in range(0, len(urls), 5):
-            batch_urls = urls[i:i+5]
-            
-            payload = {
-                "api_key": TAVILY_API_KEY,
-                "query": kws,
-                "include_domains": batch_urls,
-                "max_results": 5,
-                "search_depth": "basic",
-                "days": 14
-            }
-            
-            try:
-                resp = requests.post(url, json=payload, timeout=20)
-                if resp.status_code == 200:
-                    data = resp.json()
-                    for item in data.get("results", []):
-                        entries.append({
-                            "title": item.get("title", ""),
-                            "link": item.get("url", ""),
-                            "abstract": item.get("content", ""),
-                            "source": "Tavily Custom",
-                            "category": category
-                        })
-                else:
-                    logger.error("Tavily API Hatasi [%d]: %s", resp.status_code, resp.text)
-            except Exception as e:
-                logger.error("Tavily istek hatasi: %s", e)
-                
-            sleep(1.5) # Limit korumasi
-                
-    logger.info("Tavily Search: %d icerik toplandi", len(entries))
-    return entries
-
-def run_parallel_collection(config):
-    """5 kaynagi ThreadPool ile ayni anda tarar."""
-    all_items = []
-    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
-        f1 = executor.submit(collect_from_crossref, config)
-        f2 = executor.submit(collect_from_arxiv, config)
-        f3 = executor.submit(collect_from_eartharxiv, config)
-        f4 = executor.submit(collect_from_reddit, config)
-        f5 = executor.submit(collect_from_tavily, config)
-        
-        for future in concurrent.futures.as_completed([f1, f2, f3, f4, f5]):
-            try:
-                all_items.extend(future.result())
-            except Exception as e:
-                logger.error("Collector hatasi: %s", e)
-    return all_items
-
-# ═══════════════════════════════════════════════════════════════════════════
-# KATMAN 2: GELISMIS TEKILLESTIRME (FUZZY + CACHE)
-# ═══════════════════════════════════════════════════════════════════════════
-
-def deduplicate_items(items, seen_urls):
-    unique = []
-    seen_links = set()
-    accepted_titles = []
-
-    for item in items:
-        link = item.get("link", "")
-        title = item.get("title", "")
-        
-        # 1. Tam link eslesmesi ve gecmis kontrolu
-        if not link or link in seen_urls or link in seen_links:
-            continue
-            
-        # 2. Fuzzy Title Matching (Ayni makale farkli platformda ise)
-        is_duplicate = False
-        for accepted in accepted_titles:
-            # Benzerlik orani %85 uzeriyse ayni makale say
-            if fuzz.ratio(title.lower(), accepted.lower()) > 85:
-                is_duplicate = True
-                break
-                
-        if not is_duplicate:
-            seen_links.add(link)
-            accepted_titles.append(title)
-            unique.append(item)
-            
-    logger.info("Deduplication: %d ham -> %d tekil", len(items), len(unique))
-    return unique
-
-# ═══════════════════════════════════════════════════════════════════════════
-# KATMAN 3: CLAUDE 3.5 SONNET PUANLAMA (GEMINI KALDIRILDI)
-# ═══════════════════════════════════════════════════════════════════════════
-
-def find_working_claude_model(client):
-    try:
-        models = [m.id for m in client.models.list().data]
-        sonnets = [m for m in models if "sonnet" in m]
-        if sonnets:
-            sonnets.sort(reverse=True)
-            return sonnets[0]
-        return models[0] if models else "claude-3-5-sonnet-20240620"
-    except Exception:
-        # Hata durumunda en guvenli ve eski versiyona don
-        return "claude-3-5-sonnet-20240620"
-
-def claude_batch_score(items, config):
-    """Claude API kullanarak makaleleri 1-10 arasi puanlar."""
-    if not items or not CLAUDE_API_KEY:
-        for i in items: i["score"] = 5
-        return items
-
-    profile_text = config.get("kullanici_profili", {}).get("aciklama", "Jeoloji")
-    batch_size = 20
-    scored = []
-    
-    if HAS_ANTHROPIC:
-        client = anthropic.Anthropic(api_key=CLAUDE_API_KEY)
-        model_name = "claude-3-haiku-20240307"
-        logger.info("Claude Puanlama Modeli: %s", model_name)
-    else:
-        logger.error("Anthropic kütüphanesi yüklü değil!")
-        for i in items: i["score"] = 5
-        return items
-    
-    system_prompt = (
-        f"Sen bir jeoloji akademisyenisin. Kullanıcı Profili: {profile_text}. "
-        "Aşağıdaki makalelerin bu profile ne kadar uygun olduğunu 1-10 arası puanla. "
-        "(9-10: Çok önemli, 7-8: İlgili, 4-6: Dolaylı, 1-3: Çöp). "
-        "ONEMLI: Son tarihli (deadline geçmiş), yılı eski (2023 ve öncesi), veya süresi dolmuş BURS/STAJ FIRSAT DUYURULARINA KESİNLİKLE 1 puan ver. "
-        "Ancak AKADEMİK MAKALELER için (makale, on_baski) 10 yıllık dahi olsalar, profilinle doğrudan ilgili ve faydalı bir temel araştırmaysa puan KIRMA, yüksek puan ver. "
-        "SADECE JSON dönmelisin. Şema: {\"results\": [{\"id\": \"string\", \"score\": integer}]} "
-        "Markdown veya başka metin ekleme."
-    )
-
-    for i in range(0, len(items), batch_size):
-        batch = items[i:i + batch_size]
-        
-        input_data = [{"id": str(j), "title": item["title"], "abstract": strip_html_tags(item.get("abstract",""))[:150]} for j, item in enumerate(batch)]
-        user_message = f"İçerikler:\n{json.dumps(input_data, ensure_ascii=False)}"
-        
-        for attempt in range(3):
-            try:
-                response = client.messages.create(
-                    model=model_name,
-                    max_tokens=1024,
-                    system=system_prompt,
-                    messages=[{"role": "user", "content": user_message}]
-                )
-                
-                result_text = "".join([getattr(b, "text", "") for b in response.content]).strip()
-                
-                # Claude bazen aciklama metni ekleyebilir, aradaki JSON'i regex ile cikaralim
-                json_match = re.search(r'\{.*\}', result_text, re.DOTALL)
-                if json_match:
-                    result_text = json_match.group(0)
-                
-                parsed = json.loads(result_text)
-                
-                for res in parsed.get("results", []):
-                    try:
-                        idx = int(res["id"])
-                        if idx < len(batch):
-                            batch[idx]["score"] = res["score"]
-                    except Exception: pass
-                break # Basarili, donguden cik
-            except Exception as e:
-                logger.error("Claude Scoring Hatasi [%d/3]: %s", attempt+1, e)
-                sleep(5)
-                
-        # Puan alamayanlara varsayilan ver
-        for item in batch:
-            if "score" not in item:
-                item["score"] = 5
-        scored.extend(batch)
-        sleep(2)
-        
-    logger.info("Claude Puanlama: %d makale süzüldü.", len(scored))
-    return scored
-
-# ═══════════════════════════════════════════════════════════════════════════
-# KATMAN 5: DERIN ANALIZ (CLAUDE 3.5 SONNET)
-# ═══════════════════════════════════════════════════════════════════════════
-
-def claude_deep_analysis(item):
-    """Claude Sonnet API kullanarak ve Prompt Caching ile özet cikarir."""
-    if not HAS_ANTHROPIC or not CLAUDE_API_KEY:
-        return item.get("abstract", "")[:200] + "..."
-        
-    client = anthropic.Anthropic(api_key=CLAUDE_API_KEY)
-    
-    system_prompt = """Bir akademik jeoloji metnini TÜRKÇE'ye çevirip özetleyeceksin.
-KURALLAR:
-- YANITIN KESİNLİKLE %100 TÜRKÇE OLMALIDIR. Başka bir dilde tek bir kelime dahi yazma.
-- SADECE VE SADECE 2 SATIR yazacaksın.
-- 1. Satır: (Bulgu): [Ana bulgu/keşif nedir?]
-- 2. Satır: (Önem): [ÇOK KISA. Sadece 3-7 kelimelik hap bilgi. Uzatma.]
-- "Özetle, sonucunda, incelenmiştir" gibi yapay zeka dili (AI cliches) kullanmak YASAK.
-- Net, objektif ve doğrudan akademik bilgi ver."""
-
-    user_prompt = f"Başlık: {item.get('title')}\nÖzet: {strip_html_tags(item.get('abstract'))[:1000]}"
-
-    try:
-        model_name = find_working_claude_model(client)
-        message = client.messages.create(
-            model=model_name,
-            max_tokens=150,
-            system=[
-                {
-                    "type": "text", 
-                    "text": system_prompt, 
-                    "cache_control": {"type": "ephemeral"} # Prompt Caching aktif (maliyeti dusurur)
-                }
-            ],
-            messages=[{"role": "user", "content": user_prompt}],
-            extra_headers={"anthropic-beta": "prompt-caching-2024-07-31"}
-        )
-        return "".join([getattr(b, "text", "") for b in message.content]).strip()
-    except Exception as e:
-        logger.error("Claude API hatasi: %s", e)
-        return strip_html_tags(item.get("abstract", ""))[:200]
-
-# ═══════════════════════════════════════════════════════════════════════════
-# TELEGRAM
-# ═══════════════════════════════════════════════════════════════════════════
-
-CATEGORY_HEADERS = {
-    "makale": "📚 AKADEMIK MAKALELER",
-    "on_baski": "📄 ON BASKILAR",
-    "haber": "📢 HABERLER",
-    "duyuru": "📣 DUYURULAR",
-    "firsat": "🎓 BURS & FIRSATLAR",
-    "forum": "💬 FORUM & TARTISMALAR",
-}
-
-def build_bulletin_message(items, now_str):
-    categorized = {}
-    for item in items:
-        cat = item.get("category", "haber")
-        if cat not in categorized: categorized[cat] = []
-        categorized[cat].append(item)
-
-    parts = [f"📰 <b>JEOLOJI V3 BULTENI</b>", f"📅 {now_str} | 🔬 {len(items)} secit", ""]
-    counter = 1
-
-    for cat in ["makale", "on_baski", "haber", "duyuru", "firsat", "forum"]:
-        if cat not in categorized: continue
-        parts.extend([f"━━━ {CATEGORY_HEADERS.get(cat, cat.upper())} ━━━", ""])
-        for item in categorized[cat]:
-            title = safe_html(item.get("title", "Basliksiz"))
-            summary = safe_html(item.get("summary", ""))
-            
-            lines = [ln.strip() for ln in summary.splitlines() if ln.strip()][:2]
-            summary_text = "\n".join(f"   ↳ {ln}" for ln in lines) if lines else f"   ↳ {summary[:120]}"
-
-            link = safe_html(item.get("link", ""))
-            parts.extend([
-                f"{counter}️⃣ <b>{title}</b>",
-                summary_text,
-                f"   🔗 <a href=\"{link}\">Oku</a> | 📊 {item.get('score', '?')}/10",
-                ""
-            ])
-            counter += 1
-    return "\n".join(parts)
-
-def send_telegram(message):
-    url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
-    payload = {"chat_id": TELEGRAM_CHAT_ID, "text": message, "parse_mode": "HTML", "disable_web_page_preview": True}
-    for _ in range(3):
-        try:
-            resp = requests.post(url, json=payload, timeout=20)
-            if resp.status_code == 200: return True
-            if resp.status_code == 429: sleep(2); continue
-            
-            # Too long ise parcala
-            if resp.status_code == 400 and "too long" in resp.text.lower():
-                max_len = 4000
-                current = ""
-                for line in message.split("\n"):
-                    if len(current) + len(line) + 1 > max_len:
-                        requests.post(url, json={"chat_id": TELEGRAM_CHAT_ID, "text": current, "parse_mode": "HTML"}, timeout=10)
-                        current = line
-                    else:
-                        current += "\n" + line if current else line
-                if current: requests.post(url, json={"chat_id": TELEGRAM_CHAT_ID, "text": current, "parse_mode": "HTML"}, timeout=10)
-                return True
-                
-            logger.error("Telegram Hatasi [%d]: %s", resp.status_code, resp.text)
-            return False
-        except Exception as e:
-            logger.error("Telegram istek hatasi: %s", e)
-            sleep(2)
-    return False
-
-# ═══════════════════════════════════════════════════════════════════════════
-# ANA PROGRAM
-# ═══════════════════════════════════════════════════════════════════════════
+from src.core.utils import deduplicate_items
+from src.core.memory import semantic_memory
+from src.scrapers import run_parallel_collection
+from src.scoring.claude import claude_batch_score, claude_deep_analysis
+from src.notifiers import send_telegram, build_bulletin_message, batch_archive_to_sheet, create_and_send_podcast
 
 def main():
     now = datetime.now(timezone.utc)
     now_str = now.strftime("%d %B %Y, %H:%M UTC")
-    logger.info("=== Jeoloji Takip Botu V3 (Funnel) baslatildi ===")
+    logger.info("=== Jeoloji Takip Botu V4 (Moduler) baslatildi ===")
 
     if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
         logger.critical("Telegram token/id eksik!")
@@ -631,15 +42,14 @@ def main():
     logger.info("KATMAN 3: Claude Haiku Puanlama")
     scored_items = claude_batch_score(unique_items, config)
 
-    # 4. BAYAT ICERIK SUZGECI (Mekanik Guvenlik Agi)
+    # 4. BAYAT ICERIK SUZGECI (Mekanik Guvenlik Agi - Sadece Firsatlar Icin)
     current_year = now.year
-    stale_years = {str(y) for y in range(2010, current_year - 1)}  # 2010-2024 arasi eski yillar
+    stale_years = {str(y) for y in range(2010, current_year - 1)}
     stale_count = 0
     for item in scored_items:
         title_lower = item.get("title", "").lower()
         link_lower = item.get("link", "").lower()
         cat = item.get("category", "")
-        # Burs/firsat/duyuru kategorisindeki eski yillari yakala
         if cat in ("firsat", "duyuru", "opportunity"):
             for year in stale_years:
                 if year in title_lower or year in link_lower:
@@ -649,24 +59,36 @@ def main():
     if stale_count:
         logger.info("Bayat Suzgec: %d icerik dusuruldu.", stale_count)
 
-    # 5. IKI ADIMLI DAGITIM (ROUTING)
-    telegram_items = []  # 7-10 puan
-    web_items = []       # 4-6 puan
-    trash_items = []     # 1-3 puan
+    # 5. IKI ADIMLI DAGITIM (ROUTING) - DINAMIK ESIKLEME ILE
+    telegram_items = []
+    web_items = []
+    trash_items = []
+    
+    # Niche (Spesifik) kelimeler - Eger bunlar varsa baraj 6'ya duser. Yoksa baraj 8'dir.
+    niche_keywords = ["mars", "quaternary", "sedimentology", "bathymetry", "neotectonic", "paleoclimatology"]
     
     for item in scored_items:
         sc = item.get("score", 0)
-        if sc >= 7: 
+        
+        # Dinamik baraj hesabi
+        threshold = 8
+        title_lower = item.get("title", "").lower()
+        abstract_lower = item.get("abstract", "").lower()
+        
+        if any(kw in title_lower or kw in abstract_lower for kw in niche_keywords):
+            threshold = 6
+            
+        if sc >= threshold: 
             telegram_items.append(item)
-            web_items.append(item) # 7+ olanlar web'e de kaydedilecek
+            web_items.append(item)
         elif sc >= 4: 
             web_items.append(item)
         else: 
             trash_items.append(item)
         
-    logger.info("ROUTING: %d Telegram (7+), %d Web (4-10), %d Cöp (1-3)", len(telegram_items), len(web_items), len(trash_items))
+    logger.info("ROUTING: %d Telegram (Dinamik Baraj), %d Web (4-10), %d Cöp (1-3)", len(telegram_items), len(web_items), len(trash_items))
 
-    # WEB (4-10 Puanlari Google Sheets'e kaydet)
+    # WEB (Google Sheets)
     if web_items:
         batch_archive_to_sheet(web_items)
 
@@ -679,11 +101,17 @@ def main():
         logger.info("Bulten Gonderiliyor...")
         if send_telegram(build_bulletin_message(telegram_items, now_str)):
             logger.info("Bulten basariyla gonderildi!")
+            
+        # HAFTASONU PODCASTI (Eger Cumartesi veya Pazar ise)
+        if now.weekday() >= 5:
+            create_and_send_podcast(telegram_items)
 
-    # Hafizayi Guncelle (Tum islenen unique_items linklerini kaydet)
+    # Hafizayi Guncelle
     now_iso = now.isoformat()
     for item in unique_items:
-        seen_urls[item.get("link", "")] = now_iso
+        link = item.get("link", "")
+        seen_urls[link] = now_iso
+        semantic_memory.add_to_memory(link, item.get("title", ""), item.get("abstract", ""))
     save_seen_urls(seen_urls)
     logger.info("Islem tamamlandi. %d yeni URL hafizaya alindi.", len(unique_items))
 

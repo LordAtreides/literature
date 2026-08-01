@@ -454,5 +454,27 @@
     "geology",
     "geoscience",
     "remotesensing"
+  ],
+  "rss_feeds": [
+    {
+      "url": "https://www.nature.com/ngeo.rss",
+      "source": "Nature Geoscience",
+      "category": "makale"
+    },
+    {
+      "url": "https://www.nature.com/commsenv.rss",
+      "source": "Nature Comms Earth",
+      "category": "makale"
+    },
+    {
+      "url": "https://phys.org/rss-feed/earth-news/earth-sciences/",
+      "source": "Phys.org Earth",
+      "category": "haber"
+    },
+    {
+      "url": "https://earthworks-jobs.com/rss.xml",
+      "source": "Earthworks Jobs",
+      "category": "firsat"
+    }
   ]
 }
