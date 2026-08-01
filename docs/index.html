@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoAgenda | Jeoloji Gündemi</title>
+    <meta name="description" content="Akademik Jeoloji Takip Sistemi">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar / Header Area -->
+        <header class="glass-header">
+            <div class="logo-area">
+                <div class="logo-icon">🌍</div>
+                <h1>GeoAgenda</h1>
+            </div>
+            <p class="subtitle">Akademik Makale ve Fırsat Gündemi</p>
+            
+            <div class="filters">
+                <h3>Kategoriler</h3>
+                <div class="filter-group" id="category-filters">
+                    <button class="filter-btn active" data-filter="all">Tümü</button>
+                    <!-- Kategoriler JS ile buraya gelecek -->
+                </div>
+                
+                <h3 class="mt-4">Sıralama</h3>
+                <div class="filter-group">
+                    <button class="sort-btn active" data-sort="date">En Yeni</button>
+                    <button class="sort-btn" data-sort="score">En Yüksek Puan</button>
+                </div>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-box">
+                    <span class="stat-value" id="total-articles">0</span>
+                    <span class="stat-label">Toplam İçerik</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            <div class="top-bar">
+                <h2 id="current-view-title">Son Gelişmeler</h2>
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Makale veya kaynak ara...">
+                </div>
+            </div>
+            
+            <div class="loading" id="loading-spinner">
+                <div class="spinner"></div>
+                <p>Veriler yükleniyor...</p>
+            </div>
+            
+            <div class="articles-grid" id="articles-container">
+                <!-- Articles will be injected here via JS -->
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -13,7 +13,8 @@ from src.core.utils import deduplicate_items
 from src.core.memory import semantic_memory
 from src.scrapers import run_parallel_collection
 from src.scoring.claude import claude_batch_score, claude_deep_analysis
-from src.notifiers import send_telegram, build_bulletin_message, batch_archive_to_sheet, create_and_send_podcast
+from src.notifiers import send_telegram, build_bulletin_message
+from src.core.database import web_database
 
 def main():
     now = datetime.now(timezone.utc)
@@ -88,9 +89,10 @@ def main():
         
     logger.info("ROUTING: %d Telegram (Dinamik Baraj), %d Web (4-10), %d Cöp (1-3)", len(telegram_items), len(web_items), len(trash_items))
 
-    # WEB (Google Sheets)
+    # WEB DATABASE (Docs JSON)
     if web_items:
-        batch_archive_to_sheet(web_items)
+        logger.info("Web veritabani guncelleniyor...")
+        web_database.add_items(web_items)
 
     # DERIN ANALIZ VE TELEGRAM
     if telegram_items:
@@ -101,10 +103,6 @@ def main():
         logger.info("Bulten Gonderiliyor...")
         if send_telegram(build_bulletin_message(telegram_items, now_str)):
             logger.info("Bulten basariyla gonderildi!")
-            
-        # SESLI PODCAST (Test icin her zaman calisacak sekilde ayarlandi)
-        if True:
-            create_and_send_podcast(telegram_items)
 
     # Hafizayi Guncelle
     now_iso = now.isoformat()
