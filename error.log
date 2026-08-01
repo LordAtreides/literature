@@ -1501,3 +1501,13 @@
 2026-08-01 15:34:11,506 [ERROR] Reddit HTTP Error 429: 
 2026-08-01 15:34:11,507 [ERROR] Reddit error for remotesensing: RetryError[<Future at 0x7f6450147b90 state=finished raised HTTPError>]
 2026-08-01 15:35:31,994 [ERROR] Podcast uretim/gonderim hatasi: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+2026-08-01 15:38:33,402 [ERROR] Reddit HTTP Error 429: 
+2026-08-01 15:38:37,447 [ERROR] Reddit HTTP Error 429: 
+2026-08-01 15:38:41,496 [ERROR] Reddit HTTP Error 429: 
+2026-08-01 15:38:41,496 [ERROR] Reddit error for geoscience: RetryError[<Future at 0x7fbac4d4c690 state=finished raised HTTPError>]
+2026-08-01 15:38:42,544 [ERROR] Reddit HTTP Error 429: 
+2026-08-01 15:38:44,514 [ERROR] RSS error for https://earthworks-jobs.com/rss.xml: RetryError[<Future at 0x7fbac4d350d0 state=finished raised HTTPError>]
+2026-08-01 15:38:46,606 [ERROR] Reddit HTTP Error 429: 
+2026-08-01 15:38:50,650 [ERROR] Reddit HTTP Error 429: 
+2026-08-01 15:38:50,651 [ERROR] Reddit error for remotesensing: RetryError[<Future at 0x7fbac4d41690 state=finished raised HTTPError>]
+2026-08-01 15:39:12,159 [ERROR] Perplexity JSON Parse Error: Expecting ',' delimiter: line 1 column 330 (char 329). Raw content: {"results":[{"title":"GSA Graduate Student Research Grants","link":"https://www.geosociety.org/grants-scholarships/graduate-research","abstract":"Graduate student research grants from the Geological Society of America for geoscience research; the provided results identify this as an active grants page relevant to PhD students."[9][2]},{"title":"GSA Division Research Grants","link":"https://excel.geosociety.org/GSA/grants/division.aspx","abstract":"A GSA division grants page listing multiple grad...
