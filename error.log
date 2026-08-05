@@ -1536,3 +1536,23 @@
 2026-08-01 16:18:18,822 [ERROR] arXiv error for Structural geology: RetryError[<Future at 0x7f05acb1c690 state=finished raised HTTPError>]
 2026-08-01 16:18:28,226 [ERROR] arXiv error for GIS application: RetryError[<Future at 0x7f05afcc4610 state=finished raised HTTPError>]
 2026-08-01 16:22:23,767 [ERROR] DALL-E 3 Gorsel Uretim Hatasi: Error code: 400 - {'error': {'message': "The model 'dall-e-3' does not exist.", 'type': 'image_generation_user_error', 'param': 'model', 'code': 'invalid_value'}}
+2026-08-05 12:27:21,315 [ERROR] Reddit HTTP Error 429: 
+2026-08-05 12:27:25,378 [ERROR] Reddit HTTP Error 429: 
+2026-08-05 12:27:29,438 [ERROR] Reddit HTTP Error 429: 
+2026-08-05 12:27:29,438 [ERROR] Reddit error for geoscience: RetryError[<Future at 0x7f4ce8005c50 state=finished raised HTTPError>]
+2026-08-05 12:27:30,496 [ERROR] Reddit HTTP Error 429: 
+2026-08-05 12:27:32,705 [ERROR] RSS error for https://earthworks-jobs.com/rss.xml: RetryError[<Future at 0x7f4ce7ff1890 state=finished raised HTTPError>]
+2026-08-05 12:27:34,555 [ERROR] Reddit HTTP Error 429: 
+2026-08-05 12:27:38,616 [ERROR] Reddit HTTP Error 429: 
+2026-08-05 12:27:38,616 [ERROR] Reddit error for remotesensing: RetryError[<Future at 0x7f4ce4e757d0 state=finished raised HTTPError>]
+2026-08-05 12:27:52,906 [ERROR] arXiv error for Volcanology: RetryError[<Future at 0x7f4ce4e76490 state=finished raised HTTPError>]
+2026-08-05 12:28:02,191 [ERROR] arXiv error for Seafloor mapping: RetryError[<Future at 0x7f4ce4e76490 state=finished raised HTTPError>]
+2026-08-05 12:28:02,450 [ERROR] Perplexity JSON Parse Error: Expecting ',' delimiter: line 1 column 341 (char 340). Raw content: {"results":[{"title":"GSA Graduate Student Research Grants","link":"https://www.geosociety.org/grants-scholarships/graduate-research","abstract":"Geological Society of America graduate student research grants for Earth science students; the page lists the program and contact details and is part of GSA’s grants and scholarships offerings."[2]},{"title":"Carmichael Student Research Grants","link":"https://community.geosociety.org/mgpvdivision/awards/studentcarmichaelresearchgrants","abstract":"202...
+2026-08-05 12:28:11,504 [ERROR] arXiv error for Geospatial data science: RetryError[<Future at 0x7f4ce8006c50 state=finished raised HTTPError>]
+2026-08-05 12:28:20,799 [ERROR] arXiv error for Satellite imagery analysis: RetryError[<Future at 0x7f4ce4e76c90 state=finished raised HTTPError>]
+2026-08-05 12:28:30,090 [ERROR] arXiv error for Geochronology: RetryError[<Future at 0x7f4ce7ff2c50 state=finished raised HTTPError>]
+2026-08-05 12:28:39,406 [ERROR] arXiv error for Fluvial sedimentology: RetryError[<Future at 0x7f4ce4e4b610 state=finished raised HTTPError>]
+2026-08-05 12:28:48,681 [ERROR] arXiv error for Marine geosciences: RetryError[<Future at 0x7f4ce8011510 state=finished raised HTTPError>]
+2026-08-05 12:28:57,965 [ERROR] arXiv error for Structural geology: RetryError[<Future at 0x7f4ce4e6ba90 state=finished raised HTTPError>]
+2026-08-05 12:29:07,232 [ERROR] arXiv error for GIS application: RetryError[<Future at 0x7f4ce8010bd0 state=finished raised HTTPError>]
+2026-08-05 12:30:25,850 [ERROR] DALL-E 3 Gorsel Uretim Hatasi: Error code: 400 - {'error': {'message': "The model 'dall-e-3' does not exist.", 'type': 'image_generation_user_error', 'param': 'model', 'code': 'invalid_value'}}
