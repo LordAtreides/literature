@@ -1701,3 +1701,13 @@
 2026-08-29 12:16:41,364 [ERROR] Reddit HTTP Error 429: 
 2026-08-29 12:16:41,364 [ERROR] Reddit error for remotesensing: RetryError[<Future at 0x7f09745b2510 state=finished raised HTTPError>]
 2026-08-29 12:20:56,157 [ERROR] DALL-E 3 Gorsel Uretim Hatasi: Error code: 400 - {'error': {'message': "The model 'dall-e-3' does not exist.", 'type': 'image_generation_user_error', 'param': 'model', 'code': 'invalid_value'}}
+2026-09-02 10:37:29,530 [ERROR] Reddit HTTP Error 429: 
+2026-09-02 10:37:33,590 [ERROR] Reddit HTTP Error 429: 
+2026-09-02 10:37:37,651 [ERROR] Reddit HTTP Error 429: 
+2026-09-02 10:37:37,651 [ERROR] Reddit error for geoscience: RetryError[<Future at 0x7fc8b516a950 state=finished raised HTTPError>]
+2026-09-02 10:37:38,707 [ERROR] Reddit HTTP Error 429: 
+2026-09-02 10:37:41,195 [ERROR] RSS error for https://earthworks-jobs.com/rss.xml: RetryError[<Future at 0x7fc8b5169090 state=finished raised HTTPError>]
+2026-09-02 10:37:42,765 [ERROR] Reddit HTTP Error 429: 
+2026-09-02 10:37:46,823 [ERROR] Reddit HTTP Error 429: 
+2026-09-02 10:37:46,823 [ERROR] Reddit error for remotesensing: RetryError[<Future at 0x7fc8b51b0690 state=finished raised HTTPError>]
+2026-09-02 10:40:12,898 [ERROR] DALL-E 3 Gorsel Uretim Hatasi: Error code: 400 - {'error': {'message': "The model 'dall-e-3' does not exist.", 'type': 'image_generation_user_error', 'param': 'model', 'code': 'invalid_value'}}
