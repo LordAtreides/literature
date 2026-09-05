@@ -1711,3 +1711,17 @@
 2026-09-02 10:37:46,823 [ERROR] Reddit HTTP Error 429: 
 2026-09-02 10:37:46,823 [ERROR] Reddit error for remotesensing: RetryError[<Future at 0x7fc8b51b0690 state=finished raised HTTPError>]
 2026-09-02 10:40:12,898 [ERROR] DALL-E 3 Gorsel Uretim Hatasi: Error code: 400 - {'error': {'message': "The model 'dall-e-3' does not exist.", 'type': 'image_generation_user_error', 'param': 'model', 'code': 'invalid_value'}}
+2026-09-05 09:56:48,681 [ERROR] Reddit HTTP Error 429: 
+2026-09-05 09:56:52,721 [ERROR] Reddit HTTP Error 429: 
+2026-09-05 09:56:56,764 [ERROR] Reddit HTTP Error 429: 
+2026-09-05 09:56:56,764 [ERROR] Reddit error for geoscience: RetryError[<Future at 0x7fd4cdbde610 state=finished raised HTTPError>]
+2026-09-05 09:56:57,822 [ERROR] Reddit HTTP Error 429: 
+2026-09-05 09:58:13,171 [ERROR] arXiv error for Seafloor mapping: RetryError[<Future at 0x7fd4cdb92c90 state=finished raised HTTPError>]
+2026-09-05 09:58:22,350 [ERROR] arXiv error for Geospatial data science: RetryError[<Future at 0x7fd4cdc19b90 state=finished raised HTTPError>]
+2026-09-05 09:58:31,573 [ERROR] arXiv error for Satellite imagery analysis: RetryError[<Future at 0x7fd4cdb85b10 state=finished raised HTTPError>]
+2026-09-05 09:58:40,772 [ERROR] arXiv error for Geochronology: RetryError[<Future at 0x7fd4cdc55a90 state=finished raised HTTPError>]
+2026-09-05 09:58:49,969 [ERROR] arXiv error for Fluvial sedimentology: RetryError[<Future at 0x7fd4cdc1b7d0 state=finished raised HTTPError>]
+2026-09-05 09:58:59,176 [ERROR] arXiv error for Marine geosciences: RetryError[<Future at 0x7fd4cdbbd950 state=finished raised HTTPError>]
+2026-09-05 09:59:08,362 [ERROR] arXiv error for Structural geology: RetryError[<Future at 0x7fd4cdba9150 state=finished raised HTTPError>]
+2026-09-05 09:59:17,582 [ERROR] arXiv error for GIS application: RetryError[<Future at 0x7fd4cdb86d50 state=finished raised HTTPError>]
+2026-09-05 10:00:22,861 [ERROR] DALL-E 3 Gorsel Uretim Hatasi: Error code: 400 - {'error': {'message': "The model 'dall-e-3' does not exist.", 'type': 'image_generation_user_error', 'param': 'model', 'code': 'invalid_value'}}
