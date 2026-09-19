@@ -1,5 +1,329 @@
 [
   {
+    "title": "Mars çekirdek-manto sınırında uzun ömürlü bir magma katmanına dair deneysel kısıtlamalar",
+    "link": "https://www.nature.com/articles/s41561-026-02104-z",
+    "abstract": "Mars çekirdek-manto sınırında oluşan eriyiklerin demir açısından zengin olacağı ve InSight sismik verilerinden daha önce önerilen erimiş silikat katmanının oluşumunu destekleyen yüksek yoğunluklara sahip olacağı gösterilmektedir.",
+    "source": "Nature Geoscience",
+    "category": "makale",
+    "score": 8,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Mesoproterozoik Grand Canyon tabakalarında Dünya-Ay ve Güneş Sistemi tarihi",
+    "link": "https://www.nature.com/articles/s41561-026-02100-3",
+    "abstract": "Grand Canyon'daki yaklaşık 1.2 milyar yıllık ritmik tabakalı tortul taş oluşumunun siklostratigrafik analizi, Milanković döngülerinin frekansı ve genliğinin günümüzden belirgin şekilde farklı olduğunu göstermektedir.",
+    "source": "Nature Geoscience",
+    "category": "makale",
+    "score": 7,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Güney Afrika regolitinde Paleozoik'ten Kuaterner'e sera iklimlerine dair bir hafıza",
+    "link": "https://www.nature.com/articles/s43247-026-04066-x",
+    "abstract": "Devoniyen, Geç Kretase ve Kuaterner dönemlerinde demir oksit ve oksihidratların kristalleşmesinin üç ana dönemi, iklimin sıcak ve nemli olduğu bazı önemli dönemleri ortaya koymaktadır.",
+    "source": "Nature Comms Earth",
+    "category": "makale",
+    "score": 8,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Yanıt: Heyelan kaya bloğu tehlike değerlendirmeleri için sismik gürültü çalışmalarının kullanımı üzerine",
+    "link": "https://www.nature.com/articles/s43247-026-04028-3",
+    "abstract": "Heyelan kaya bloğu tehlike değerlendirmeleri için sismik gürültü çalışmalarının kullanımı üzerine yanıt.",
+    "source": "Nature Comms Earth",
+    "category": "makale",
+    "score": 6,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Yerli Bilgiler ve gözlemler, Arctic Okyanusu model becerisini ve geçerliliğini artırıyor",
+    "link": "https://www.nature.com/articles/s43247-026-03899-w",
+    "abstract": "Yerli Bilgilerin Arctic Okyanusu modellemesi ile birleştirilmesi, iklim bilimini güçlendirirken topluluk ihtiyaçlarını destekleyerek sürekli, iki yönlü ortaklıklar oluşturabilir.",
+    "source": "Nature Comms Earth",
+    "category": "makale",
+    "score": 4,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Kuzey Çin'in kıyı kapısında su baskını riski: arazi çökmesi, deniz seviyesi yükselmesi ve kıyı savunma girişimleri",
+    "link": "https://www.nature.com/articles/s43247-026-04068-9",
+    "abstract": "2100 yılına kadar, IPCC (Hükümetler Arası İklim Değişikliği Paneli) tarafından bildirilen göreli deniz seviyesi yükselmesi, Bohai Ekonomik Çemberi'nde 373 ila 458 kilometrekarelik alanı ortadan kaldırabilir ve yerel arazi çökmesi artmaktadır.",
+    "source": "Nature Comms Earth",
+    "category": "makale",
+    "score": 5,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Derin mağara çöküşünün yüzeydeki zayıf ifadesi",
+    "link": "https://www.nature.com/articles/s43247-026-04016-7",
+    "abstract": "Avustralya'nın Nullarbor Ovası'ndaki kilometre ölçeğindeki lineer çöküntüler, derin mağara kanallarının üzerindeki çökme ve sarkmayı kaydederek, aksi takdirde zayıf olan mağara çöküş sistemlerini tanımak için kriterler sağlamaktadır.",
+    "source": "Nature Comms Earth",
+    "category": "makale",
+    "score": 7,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Son 800 bin yılda Pasifik Walker Dolaşımı üzerindeki birleşik yörünge ve deniz seviyesi etkileri",
+    "link": "https://www.nature.com/articles/s43247-026-04062-1",
+    "abstract": "Bölünmüş Pasifik Walker Dolaşımı, jeolojik geçmiş boyunca periyodik değişim göstermektedir; bu süreçte buzul dönemlerinde El Niño Modoki desenleri, La Niña Modoki desenleri ise diğer dönemlerde tercih edilmektedir.",
+    "source": "Nature Comms Earth",
+    "category": "makale",
+    "score": 4,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Kuzey Kore'nin nükleer testleri, birkaç yıl boyunca yüzlerce depreme neden olmuş olabilir",
+    "link": "https://phys.org/news/2026-09-north-korea-nuclear-triggered-hundreds.html",
+    "abstract": "2006 ile 2017 yılları arasında Kuzey Kore, Kuzey Hamgyong eyaletindeki geniş test alanında altı yer altı nükleer testi gerçekleştirmiştir. Genellikle, yer altı patlamaları, testler durduğunda sona eren yoğun bir küçük depremler patlaması tetikler. Ancak jeologlar, çok daha fazla sismik aktivite tespit etmiştir.",
+    "source": "Phys.org Earth",
+    "category": "haber",
+    "score": 6,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Grönland'ın Qaanaaq Buzul Kapağı, yaklaşık 8 metre derinliğinde bir su tabakası oluşturacak kadar buz kaybetti",
+    "link": "https://phys.org/news/2026-09-greenland-qaanaaq-ice-cap-lost.html",
+    "abstract": "Her yaz, Hokkaido Üniversitesi'nden araştırmacılar, buzun içine delinen alüminyum direkler kullanarak Qaanaaq Buzul Kapağı'ndaki buz yüzeyindeki değişiklikleri ölçmek için kuzeybatı Grönland'a geri dönmektedir. 13 yıllık kayıtları, 2012'den 2025'e kadar buzul kapağındaki değişiklikleri göstermektedir.",
+    "source": "Phys.org Earth",
+    "category": "haber",
+    "score": 5,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Bir sıcak kaya plütonunun Avustralya kıyısında iki volkan zinciri oluşturması",
+    "link": "https://phys.org/news/2026-09-plume-hot-built-volcano-chains.html",
+    "abstract": "Lord Howe Adası, Yeni Güney Galler kıyısının yaklaşık 600 kilometre (370 mil) açıklarında, plajları ve kuş yaşamıyla ziyaretçileri çeken bir yağmur ormanı ve deniz kayalıkları hilali olarak yer almaktadır. Çok az insan, üzerinde durdukları yerin bir volkanın aşınmış kalıntıları olduğunu fark eder.",
+    "source": "Phys.org Earth",
+    "category": "haber",
+    "score": 8,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Mega kuraklıkla yüzleşmek: Araştırmacılar Amerikan Batısı'ndaki yer altı buz rezervlerini inceliyor",
+    "link": "https://phys.org/news/2026-09-megadrought-underground-ice-reservoirs-american.html",
+    "abstract": "Utah Vadisi'nin 2,100 metre (7,000 feet) üzerinde yükselen Timpanogos Dağı, ikonik bir manzara ve sevilen bir yürüyüş destinasyonundan daha fazlasıdır. Bu tür dağlardan eriyen kar, Utah'ın su kaynağının yaklaşık %95'ini sağlar. Daha sıcak ve kuru koşullar, hem dini hem de diğer topluluklardan su tasarrufu çağrılarına yol açmıştır.",
+    "source": "Phys.org Earth",
+    "category": "haber",
+    "score": 6,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Avrupa'nın yıllar içindeki en erken buzulu kaybetme günü, Alpler için bir hesaplaşmayı işaret ediyor",
+    "link": "https://phys.org/news/2026-09-europe-earliest-glacier-loss-day.html",
+    "abstract": "29 Haziran 2026'da, İsviçre'nin buzullarının önceki kış boyunca biriktirdiği kar erimiştir. Buz Kaybı Günü olarak bilinen bu tarih, daha fazla erimenin buzulların kütlesini aşındırmaya başladığı ve kar birikiminin sonbaharda yeniden başladığı noktayı işaret eder. Matthias Huss, ağın...",
+    "source": "Phys.org Earth",
+    "category": "haber",
+    "score": 4,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Fosil plankton kabukları, 3 milyon yıl önce daha sıcak okyanuslarda azalmış azot fikse edilmesini ortaya koyuyor",
+    "link": "https://phys.org/news/2026-09-fossil-plankton-shells-reveal-nitrogen.html",
+    "abstract": "Azot, planktonun büyümesini destekleyen temel bir besin maddesidir ve bu da deniz besin ağının temelini oluşturur. Küresel azot döngüsünü belirleyen iki karşıt süreç vardır: azot fikse edilmesi ve denitrifikasyon.",
+    "source": "Phys.org Earth",
+    "category": "haber",
+    "score": 5,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "İklim değişikliği, permafrostun çözülmesine ve buzul incelmesine katkıda bulunuyor",
+    "link": "https://phys.org/news/2026-09-climate-contributing-permafrost-glacial-thinning.html",
+    "abstract": "Newcastle Üniversitesi'nden profesör Bethan Davies'in de aralarında bulunduğu uluslararası bir glasyologlar ve iklim bilimciler ekibi, hızlı bir bilimsel analiz gerçekleştirmiş ve iklim değişikliğinin yüksek irtifa manzarası üzerindeki etkilerini belirlemiştir.",
+    "source": "Phys.org Earth",
+    "category": "haber",
+    "score": 4,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Demantoid garnet",
+    "link": "https://www.reddit.com/r/geology/comments/1wkcmah/demantoid_garnet/",
+    "abstract": "&#32; gönderildi &#32;  /u/Latif-Creations   [bağlantı] &#32; [yorumlar]",
+    "source": "Reddit (r/geology)",
+    "category": "forum",
+    "score": 5,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Meteorlarla ilgili uzmanlaşan var mı?",
+    "link": "https://www.reddit.com/r/geology/comments/1wkba60/does_anyone_specialize_with_meteorites/",
+    "abstract": "Şikayet/Tavsiye İhtiyacı, Kısa Özet aşağıda: Babam son 5-6 yıldır her bir kayanın bir şekilde meteor olduğunu düşünmekte takıntılı. \"parmak izi dokusu\" veya \"olivin kristal çıkıntısı\" veya \"demir topu\" gibi bir veya iki özelliğe takılıp kalıyor.",
+    "source": "Reddit (r/geology)",
+    "category": "forum",
+    "score": 4,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Oregon'daki Cape Kiwanda'daki kumtaşında ilginç katman desenleri",
+    "link": "https://www.reddit.com/r/geology/comments/1wk9gy0/interesting_layer_patterns_in_the_sandstone_at/",
+    "abstract": "&#32; gönderildi &#32;  /u/DustWorlds   [bağlantı] &#32; [yorumlar]",
+    "source": "Reddit (r/geology)",
+    "category": "forum",
+    "score": 6,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Garip İstek: Satılık bir mikro fay gösteren el örneği olan var mı?",
+    "link": "https://www.reddit.com/r/geology/comments/1wk6c88/odd_request_does_anyone_have_an_available_hand/",
+    "abstract": "Mikro fayları gösteren örneklerin fotoğraflarını paylaşan birçok gönderi gördüm. Yerel satıcılarla, çevrimiçi olarak ve yerel ile üniversite müzeleriyle iletişime geçmeme rağmen, satın alabileceğim veya mevcut olan bir tane bulamadım. Ne yazık ki...",
+    "source": "Reddit (r/geology)",
+    "category": "forum",
+    "score": 5,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Windows Masaüstü için RockD eşdeğeri var mı?",
+    "link": "https://www.reddit.com/r/geology/comments/1wk4q6o/rockdequivalent_for_windows_desktop/",
+    "abstract": "Jeoloji konusunda çok eski kafalıyım ve yeni görselleştirme uygulamaları ve programlarıyla yeni yeni ilgilenmeye başladım. Jeolojik haritaları bir küre arayüzünde görüntüleme yeteneğini ve RockD'deki bazı özelliklerin çevrimdışı olarak mevcut olmasını seviyorum, bu nedenle Win için benzer derecede kullanışlı bir uygulama/program olup olmadığını merak ediyordum.",
+    "source": "Reddit (r/geology)",
+    "category": "forum",
+    "score": 4,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Burada hiç bilimsel bir gözlemeviyle çalışmış olan var mı? Deneyim nasıldı?",
+    "link": "https://www.reddit.com/r/geology/comments/1wjzds7/has_anyone_here_ever_worked_at_a_scientific/",
+    "abstract": "Merhaba. Lütfen sadece EVET ise cevaplayın. Deneyiminiz nasıldı? Günlük işiniz tam olarak neyi kapsıyordu ve çalışma saatleri dışında yaşam nasıldı? Konaklama, sosyal yaşam, izolasyon, boş zaman gibi genel yaşam tarzı hakkında da bilgi almak isterim. Geriye dönüp baktığımda,",
+    "source": "Reddit (r/geology)",
+    "category": "forum",
+    "score": 7,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Neden Avrupa'da pek çok yıkıcı deprem yok?",
+    "link": "https://www.reddit.com/r/geology/comments/1wjxm54/why_doesnt_europe_have_many_devastating/",
+    "abstract": "Afrika kıtası Avrupa ile çarpışıyorsa ve dalıyorsa, neden Avrupa, Nepal yakınlarındaki Himalayalar gibi yıkıcı depremler yaşamıyor? Ya da Cascades gibi? Özellikle İtalya çevresinde, dalma ile ilişkili volkanlarıyla birlikte.",
+    "source": "Reddit (r/geology)",
+    "category": "forum",
+    "score": 7,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Afrika'nın Turkana Rift'i kıtasal parçalanma kritik aşamasına girdi",
+    "link": "https://www.reddit.com/r/geology/comments/1wjuxt7/africas_turkana_rift_has_entered_a_critical_stage/",
+    "abstract": "Kuzey Kenya'nın altında bulunan 13 kilometre kalınlığındaki kabuk, bir kıtanın parçalanma sürecine girdiği en belirgin yerlerden birini işaret edebilir. Turkana Rift'in altındaki kabuk, bilim insanlarının tanıdığından daha ince olduğu yönündeki araştırmalar, Nature Communications dergisinde yayımlandı. Çalışma, id",
+    "source": "Reddit (r/geology)",
+    "category": "forum",
+    "score": 8,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Bunun kömür mü yoksa Whitby jet mi olduğunu nasıl anlayabilirim?",
+    "link": "https://www.reddit.com/r/geology/comments/1wju6lk/how_can_i_tell_if_this_is_coal_or_whitby_jet/",
+    "abstract": "Çevrimiçi araştırma yaptım ve temel leke testleri yaptım ama hala emin değilim.",
+    "source": "Reddit (r/geology)",
+    "category": "forum",
+    "score": 5,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Tayvan'daki Kraliçe Başı kayası, yıl yıl aşınmasını gösteriyor. Son yıllarda boyun kırılması riskiyle karşı karşıya kaldı",
+    "link": "https://www.reddit.com/r/geology/comments/1wjral6/the_queens_head_rock_in_taiwan_showing_its/",
+    "abstract": "&#32; submitted by &#32;  /u/Impossible-Bee-5343   [link] &#32; [comments]",
+    "source": "Reddit (r/geology)",
+    "category": "forum",
+    "score": 6,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Renk gradyanı aşınma ürünleri alüvyon fanı",
+    "link": "https://www.reddit.com/r/geoscience/comments/1vpwt3g/color_gradient_weathering_products_alluviale_fan/",
+    "abstract": "Norveç'teki bir dağ sırasındaki alüvyon fanları hakkında merak ediyordum. Öncelikle, manzara nefes kesiciydi, ancak gri, kahverengi ve kırmızımsı tonlarda bir renk aralığına sahip gibi görünen birkaç alüvyon fanı gördüm, elbette çok soluk.",
+    "source": "Reddit (r/geoscience)",
+    "category": "forum",
+    "score": 7,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Kayıp Şehir Hidrotermal Alanı: Hayatın Başlamış Olabileceği Yer [OC]",
+    "link": "https://www.reddit.com/r/geoscience/comments/1tsqk8m/lost_city_hydrothermal_field_where_life_may_have/",
+    "abstract": "&#32; submitted by &#32;  /u/Geoscopy   [link] &#32; [comments]",
+    "source": "Reddit (r/geoscience)",
+    "category": "forum",
+    "score": 8,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Sahara'nın Gözü: Richat Yapısı Açıklaması [OC]",
+    "link": "https://www.reddit.com/r/geoscience/comments/1trqs1t/eye_of_the_sahara_the_richat_structure_explained/",
+    "abstract": "&#32; submitted by &#32;  /u/Geoscopy   [link] &#32; [comments]",
+    "source": "Reddit (r/geoscience)",
+    "category": "forum",
+    "score": 8,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Bermuda Anomalis: 20 km'lik bir sal üzerinde yüzen bir ada [OC]",
+    "link": "https://www.reddit.com/r/geoscience/comments/1tpxhrb/the_bermuda_anomaly_an_island_floating_on_a_20km/",
+    "abstract": "&#32; submitted by &#32;  /u/Geoscopy   [link] &#32; [comments]",
+    "source": "Reddit (r/geoscience)",
+    "category": "forum",
+    "score": 7,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "İlk Kez Bir Fay Yırtılması Kameraya Yakalandı [OC]",
+    "link": "https://www.reddit.com/r/geoscience/comments/1to1f2a/firstever_fault_rupture_caught_on_camera_oc/",
+    "abstract": "&#32; submitted by &#32;  /u/Geoscopy   [link] &#32; [comments]",
+    "source": "Reddit (r/geoscience)",
+    "category": "forum",
+    "score": 8,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Açık Kaynaklı, Veri Tabanlı Etkileşimli Web Çerçevesi ile Jeomiras Alanlarının 3D Görselleştirilmesi: Amerika Birleşik Devletleri'ndeki Büyük Kanyon Örneği",
+    "link": "https://eartharxiv.org/repository/list/32/",
+    "abstract": "2026 yılında yayımlanan EarthArXiv ön baskısı; jeomorfoloji, uzaktan algılama/3D görselleştirme ve Kuaterner peyzaj yorumlaması ile ilgili. Verilen EarthArXiv alanında listelenen en güncel jeoloji ile ilgili maddeler arasında yer almaktadır.",
+    "source": "Perplexity Sonar",
+    "category": "makale",
+    "score": 9,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Prudhoe Dome'un Holosen Dondan Çözülmesi, Kuzeybatı Grönland",
+    "link": "https://eartharxiv.org/repository/object/9205/download/17189/",
+    "abstract": "Kuaterner jeoloji ve geç buzul/Holosen çözülme süreçleri ile ilgili EarthArXiv ön baskısı; sağlanan sonuçlar arasında doğrudan Kuaterner odaklı maddelerden biridir.",
+    "source": "Perplexity Sonar",
+    "category": "makale",
+    "score": 9,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Doğu Anadolu, Türkiye'deki Van Gölü (Edremit Koyu) Kuaterner Tortul Tabakalarında Tektonik Deformasyonlar",
+    "link": "https://dergi.mta.gov.tr/files/articles/670/eng/20161218081629_670_125e3ef6.pdf",
+    "abstract": "Kuaterner jeoloji ve aktif tektonik ile ilgili, Van Gölü çevresindeki kuaterner tortul tabakalarda tektonik deformasyonu inceleyen Maden Araştırma ve Sondaj Dergisi makalesi.",
+    "source": "Perplexity Sonar",
+    "category": "makale",
+    "score": 9,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Hiperspektral ve LiDAR Veri Sınıflandırması için Bulanık Mantık Geliştirilmiş Üyelik Mamba",
+    "link": "https://doi.org/10.1016/j.patcog.2026.114851",
+    "abstract": "",
+    "source": "Crossref",
+    "category": "makale",
+    "score": 7,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Bangladeş'in Satkhira Bölgesinde Kıyı Selinden Kaynaklanan Tuzluluk İstila Riski Değerlendirmesi için Mekansal Çok Kriterli Yaklaşım",
+    "link": "https://doi.org/10.1016/j.epm.2026.09.001",
+    "abstract": "",
+    "source": "Crossref",
+    "category": "makale",
+    "score": 6,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
+    "title": "Mount Marapi'deki Ultra Uzun Periyotlu Sismik Sinyallerin Denetimsiz Sınıflandırılması ve Yer Değiştirme Tahmini",
+    "link": "https://doi.org/10.1016/j.jvolgeores.2026.108746",
+    "abstract": "",
+    "source": "Crossref",
+    "category": "makale",
+    "score": 8,
+    "added_at": "2026-09-19T10:20:21.654062+00:00"
+  },
+  {
     "title": "Karpat polen kayıtlarından Orta-Doğu Avrupa'daki Holosen yaz ve kış sıcaklık eğilimleri ve sapmaları",
     "link": "https://www.nature.com/articles/s43247-026-04041-6",
     "abstract": "İletişimler Yer ve Çevre, Çevrimiçi yayın tarihi: 14 Eylül 2026; doi:10.1038/s43247-026-04041-6 Karpat polen kayıtlarından Orta-Doğu Avrupa'daki Holosen yaz ve kış sıcaklık eğilimleri ve sapmaları.",
@@ -2995,410 +3319,5 @@
     "category": "firsat",
     "score": 9,
     "added_at": "2026-08-22T07:48:23.087073+00:00"
-  },
-  {
-    "title": "Ağaçlandırmanın 1986'dan 2019'a kadar Çin'in orman karbon yutaklarını domine etmesi",
-    "link": "https://www.nature.com/articles/s41561-026-02074-2",
-    "abstract": "Doğa Jeobilimleri, Çevrimiçi yayımlandı: 17 Ağustos 2026; doi:10.1038/s41561-026-02074-2 Daha önce ormanlık alanlarda meydana gelen bozulmalardan sonra yapılan ağaçlandırma, daha önce ormansız olan arazilere yapılan ağaçlandırmadan daha yüksek bir bozulma sonrası karbon tutma kapasitesine sahiptir ve bu durum, Çin'in orman karbon yutaklarını etkilemiştir.",
-    "source": "Nature Geoscience",
-    "category": "makale",
-    "score": 7,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Labrador Denizi konveksiyonunun derin Kuzey Atlantik Okyanusu'na oksijen taşımadaki merkezi rolü",
-    "link": "https://www.nature.com/articles/s41561-026-02057-3",
-    "abstract": "Doğa Jeobilimleri, Çevrimiçi yayımlandı: 17 Ağustos 2026; doi:10.1038/s41561-026-02057-3 Labrador Denizi, sınırlı yoğunluk dönüşüm katkısına rağmen, Atlantik Meridyonal Dönüşüm Dolaşımı'nın derin koluna oksijen taşımada kritik bir rol oynamaktadır.",
-    "source": "Nature Geoscience",
-    "category": "makale",
-    "score": 5,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Cevap: Antarktik yeşermenin biyoloji tarafından kısıtlandığı ve saha doğrulaması gerektirdiği",
-    "link": "https://www.nature.com/articles/s41561-026-02080-4",
-    "abstract": "Doğa Jeobilimleri, Çevrimiçi yayımlandı: 14 Ağustos 2026; doi:10.1038/s41561-026-02080-4 Cevap: Antarktik yeşermenin biyoloji tarafından kısıtlandığı ve saha doğrulaması gerektirdiği.",
-    "source": "Nature Geoscience",
-    "category": "makale",
-    "score": 5,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "FAMOUS MORB olivinlerinin okyanus sırtı borulama sistemlerindeki volkanik hamur süreçlerinin günlükleri olarak kullanılması",
-    "link": "https://www.nature.com/articles/s43247-026-03908-y",
-    "abstract": "İletişimler Dünya ve Çevre, Çevrimiçi yayımlandı: 18 Ağustos 2026; doi:10.1038/s43247-026-03908-y Karmaşık derin magmatik geçmişlere sahip olivin kristalleri, hamur bölgesi ve daha geniş borulama sistemi hakkında bilgi saklamakta ve patlayan orta okyanus sırtı bazaltlarında kolayca tanımlanabilmektedir.",
-    "source": "Nature Comms Earth",
-    "category": "makale",
-    "score": 8,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Çin'deki tuzlu bataklıkların yeniden kazanımından elde edilen toprak karbon kazançları",
-    "link": "https://www.nature.com/articles/s43247-026-03944-8",
-    "abstract": "İletişimler Dünya ve Çevre, Çevrimiçi yayımlandı: 18 Ağustos 2026; doi:10.1038/s43247-026-03944-8 Tuzlu bataklıkların net genişlemesi, akvakültür havuzları, tarım arazileri ve deniz suyu alanlarının dönüşümü yoluyla yüzey toprak organik karbonunu artırmıştır; bu durum, mekansal ve zamansal değişkenliklere rağmen gerçekleşmiştir.",
-    "source": "Nature Comms Earth",
-    "category": "makale",
-    "score": 7,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Sahra Altı Afrika için bölgeye özgü bir toprak sağlığı değerlendirme protokolü ve değerlendirmesi",
-    "link": "https://www.nature.com/articles/s43247-026-03727-1",
-    "abstract": "İletişimler Dünya ve Çevre, Çevrimiçi yayımlandı: 18 Ağustos 2026; doi:10.1038/s43247-026-03727-1 Sahra Altı Afrika için bir toprak sağlığı değerlendirme protokolü ve değerlendirme çerçevesi geliştirilmiştir; bu çerçeve, uygulamasını göstermek için toprak organik karbonunu kullanarak, bağlam odaklı, yüzdelik tabanlı hedefler belirlemektedir.",
-    "source": "Nature Comms Earth",
-    "category": "makale",
-    "score": 8,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Kıyı hava-deniz gaz değişim oranlarının deniz karbon dioksit giderme potansiyeline koyduğu sınırlamalar",
-    "link": "https://www.nature.com/articles/s43247-026-03931-z",
-    "abstract": "İletişimler Dünya ve Çevre, Çevrimiçi yayımlandı: 17 Ağustos 2026; doi:10.1038/s43247-026-03931-z Yerel kıyı gaz değişimi, açık okyanus gaz değişiminden önemli ölçüde daha düşüktür; bu durum, kıyı sularının uzun kalma sürelerine veya dışa aktarımına sahip olduğu yerlerde deniz karbon dioksit giderme tahminlerini etkileyebilir.",
-    "source": "Nature Comms Earth",
-    "category": "makale",
-    "score": 6,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Korunan alanların ötesinde mangrovların çok yıllı peyzaj evrimi ve doğal iyileşmesi",
-    "link": "https://www.nature.com/articles/s43247-026-03921-1",
-    "abstract": "İletişimler Dünya ve Çevre, Çevrimiçi yayımlandı: 17 Ağustos 2026; doi:10.1038/s43247-026-03921-1 Korunan alanların dışındaki doğal olarak yenilenen mangrov ormanları, altı on yıl boyunca uzaktan algılama verileriyle ortaya konan doğal alanlarla karşılaştırılabilir biyolojik çeşitlilik ve yapısal karmaşıklık sergilemiştir.",
-    "source": "Nature Comms Earth",
-    "category": "makale",
-    "score": 6,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Buzul beslemeli havzalardaki hidroiklim arşivlerinin kaybı",
-    "link": "https://www.nature.com/articles/s43247-026-03825-0",
-    "abstract": "İletişimler Dünya ve Çevre, Çevrimiçi yayımlandı: 17 Ağustos 2026; doi:10.1038/s43247-026-03825-0 Buzul hidroiklim arşivleri, buzul erimesi tarafından yönlendirilen bilgi kaybını göstermekte ve yerel olarak yağış değişikliklerinden etkilenmektedir; bu durum, eriyik su içindeki δ18O ve δ2H izotoplarını analiz eden bir çalışma ile ortaya konmuştur.",
-    "source": "Nature Comms Earth",
-    "category": "makale",
-    "score": 8,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Topografya, dağların büyük depremlere nasıl tepki verdiğini kontrol eder",
-    "link": "https://phys.org/news/2026-08-topography-mountains-large-earthquakes.html",
-    "abstract": "Büyük depremler, binlerce heyelanı tetikleyerek ve erozyonu hızla artırarak dağ manzaralarını dramatik bir şekilde yeniden şekillendirebilir. Ancak, bazı dağ bölgelerinin büyük depremlerden sonra yoğun, uzun süreli erozyon yaşarken, diğerlerinin sınırlı tepkiler göstermesinin nedenleri henüz tam olarak anlaşılmamıştır.",
-    "source": "Phys.org Earth",
-    "category": "haber",
-    "score": 9,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Antik ABD'de kaybolan 'mega-eşarp' Büyük Kanyon'un kayıp bir milyar yılını açıklayabilir",
-    "link": "https://phys.org/news/2026-08-lost-mega-escarpment-ancient-usa.html",
-    "abstract": "Bilim insanları, antik Kuzey Amerika boyunca binlerce kilometre uzanan devasa bir kayalığın, Colorado Nehri tarafından oyulmadan neredeyse bir milyar yıl önce Büyük Kanyon'un kalbini açığa çıkarmış olabileceğine dair kanıtlar buldu.",
-    "source": "Phys.org Earth",
-    "category": "haber",
-    "score": 9,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Bin yılda bir gerçekleşen hava olaylarını daha iyi tahmin etmenin yolları",
-    "link": "https://phys.org/news/2026-08-millennium-weather-events.html",
-    "abstract": "Günlük hava tahminlerinin gelişmesine rağmen, 1.000 yılda bir gerçekleşebilecek olayları tahmin etmek, en ölümcül sıcak hava dalgaları gibi, hala bir zorluk olmaya devam ediyor.",
-    "source": "Phys.org Earth",
-    "category": "haber",
-    "score": 4,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Nadir uydu verileri, sel modellerindeki büyük sınırlamaları ortaya koyuyor",
-    "link": "https://phys.org/news/2026-08-rare-satellite-reveal-major-limits.html",
-    "abstract": "Güney Ukrayna'daki Kakhovka Barajı 6 Haziran 2023'te yıkıldı. Bu olay, su seviyelerinin normalin 10 feet (3 metre) üzerine çıkmasıyla birlikte binlerce sakinin topluluklarını terk etmeye zorlayan felaket bir seli serbest bıraktı.",
-    "source": "Phys.org Earth",
-    "category": "haber",
-    "score": 7,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Bitkiler, bilim insanlarının gelgit bataklıklarının iklim yararlarını ölçme biçimini dönüştürebilir",
-    "link": "https://phys.org/news/2026-08-scientists-climate-benefits-tidal-marshes.html",
-    "abstract": "New Jersey'de büyüyen Emily Wilson, gelgit bataklıklarından sıkça geçmesine rağmen onlara fazla düşünmeden bakıyordu. Bunlar kıyı manzarasının bir parçasıydı; yoldan gördüğü yeşil ve mavi uzantılardı.",
-    "source": "Phys.org Earth",
-    "category": "haber",
-    "score": 5,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Yellowstone'un geçmişteki kuraklıkları, daha az gayzer aktivitesi ve daha fazla orman yangını sinyali verebilir",
-    "link": "https://phys.org/news/2026-08-yellowstone-droughts-geyser-wildfires.html",
-    "abstract": "Montana Eyalet Üniversitesi'nden bir araştırma profesörü tarafından yürütülen bir çalışma, iklim ve hidrotermal aktivitenin son 15.000 yıl boyunca Yellowstone Platosu'nun bitki örtüsü, orman yangınları ve sucul ekosistem tarihlerini nasıl şekillendirdiğini ortaya koyuyor. Projenin sonuçları Proceedings dergisinde yayımlandı.",
-    "source": "Phys.org Earth",
-    "category": "haber",
-    "score": 6,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Hindistan'daki katmanlı kayaçlar, 3.5 milyar yıl öncesine tarihlenen mikrobiyal yaşam belirtileri gösteriyor",
-    "link": "https://phys.org/news/2026-08-layered-india-potential-microbial-life.html",
-    "abstract": "Bir araştırmacılar ekibi, Dünya'daki en eski mikrobiyal yaşam formlarını içeren bir kaya bulmuş olabileceklerini bildiriyor. Çalışmaları, Proceedings of the National Academy of Sciences dergisinde yayımlanmış olup, bu 3.5 milyar yıl yaşındaki, karbon açısından zengin, katmanlı kayada bulunan biyosinyallerin tanımını yapmaktadır.",
-    "source": "Phys.org Earth",
-    "category": "haber",
-    "score": 8,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Lif optik kablo, buzul kaymalarını istikrarsızlaştırabilecek gizli yarıkları ortaya koyuyor",
-    "link": "https://phys.org/news/2026-08-fiber-optic-cable-reveals-hidden.html",
-    "abstract": "Son yıllarda Alpler, yıkıcı buzul çöküşleri yaşadı: Eylül 2023'te, Dolomitler'deki Marmolada buzulunun bir bölümü çöktü ve yedi dağcı hayatını kaybetti. Bir buçuk yıl sonra, Mayıs 2025'te, Blatten üzerindeki Birch Buzulu çöktü.",
-    "source": "Phys.org Earth",
-    "category": "haber",
-    "score": 8,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Yapay zeka, yüzey ipuçlarından Dünya'nın manto akışının gizli tarihini yeniden yapılandırıyor",
-    "link": "https://phys.org/news/2026-08-ai-reconstructs-hidden-history-earth.html",
-    "abstract": "Manto, Dünya'nın hacminin %80'inden fazlasını oluşturan kayalık bir katmandır ve yılda yalnızca birkaç santimetre hızla döner. Bu döngü, levha tektoniğini yönlendirir ve depremler ile volkanik aktivite gibi büyük jeolojik olayları etkiler. Temel önemi olmasına rağmen, tarihi...",
-    "source": "Phys.org Earth",
-    "category": "haber",
-    "score": 9,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Daha kuru topraklar, geç yazı uzatılmış aşırı sıcaklığa dönüştürebilir",
-    "link": "https://phys.org/news/2026-08-drier-soils-late-summer-prolonged.html",
-    "abstract": "Son yıllardaki yazlar sıcak oldu, ancak meteorolojik açıdan alışılmadık değil. Leipzig Üniversitesi'ndeki araştırmacılara göre, bir sonraki aşırı yaz, şimdiye kadar deneyimlediğimiz her şeyi çok aşacak.",
-    "source": "Phys.org Earth",
-    "category": "haber",
-    "score": 4,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Bu tür bir kaya oluşumu nerede ve hangi yöntemle meydana gelir?",
-    "link": "https://www.reddit.com/r/geology/comments/1vseewe/where_and_by_what_method_would_this_type_of_rock/",
-    "abstract": "&#32; /u/KindHive tarafından gönderildi &#32; [bağlantı] &#32; [yorumlar]",
-    "source": "Reddit (r/geology)",
-    "category": "forum",
-    "score": 9,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Chicago'daki 49. Cadde Plajında Bulduğum Fosiller",
-    "link": "https://www.reddit.com/r/geology/comments/1vs7qdc/fossils_i_found_at_49th_street_beach_in_chicago/",
-    "abstract": "/u/Dramatic-Income-7967 tarafından gönderildi [bağlantı] [yorumlar]",
-    "source": "Reddit (r/geology)",
-    "category": "forum",
-    "score": 4,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Yapısal Jeologlar neden stereonetlerin alt yarısını kullanıyor?",
-    "link": "https://www.reddit.com/r/geology/comments/1vs5164/why_do_structural_geologists_use_the_lower/",
-    "abstract": "Temelde başlıktaki soru. Şu anda iş amaçları için Dips ile oynuyorum ve kristalografların üst yarıyı kullanırken yapısal jeologların alt yarıyı nasıl kullandığını yeni öğrendim. Ama neden? Yarım küreler arasında gerçekten bir fark var mı?",
-    "source": "Reddit (r/geology)",
-    "category": "forum",
-    "score": 6,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Norveç'teki Lofoten'de Jeolojik İlgi Alanları Nerelerdir?",
-    "link": "https://www.reddit.com/r/geology/comments/1vs4d7c/places_of_geological_interest_in_lofoten_norway/",
-    "abstract": "Norveç'teki Lofoten'i ilk kez ziyaret eden birkaç jeolog. Genellikle sıkıcı granit ile alışkın olan biri için ilginç olabilecek görünür jeolojik özellikler veya mineralojisi olan özel yerler var mı? /u/LittlestShitShow tarafından gönderildi [bağlantı] [yorumlar]",
-    "source": "Reddit (r/geology)",
-    "category": "forum",
-    "score": 4,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Dünyanın tarihinde karasal alanın denize oranı en yüksek olduğu nokta neresi ve tersine?",
-    "link": "https://www.reddit.com/r/geology/comments/1vs3yp6/at_what_point_in_earths_history_was_the_ratio_of/",
-    "abstract": "/u/Khwarezm tarafından gönderildi [bağlantı] [yorumlar]",
-    "source": "Reddit (r/geology)",
-    "category": "forum",
-    "score": 5,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "İlk 3000+ m Zirveme Tırmanış. (Spielmann, 3027 m)...",
-    "link": "https://www.reddit.com/r/geology/comments/1vrzkc3/hiking_my_first_3000_m_peak_spielmann_3027_m/",
-    "abstract": "... ve güney yüzünün güzel katmanlanma gösterdiğini fark etmek. Genel olarak orada yoğun bir şekilde katmanlanmış birçok kaya var. Salzburg ve Carinthia sınırındaki Hohen Tauern'de, Großglockner yakınlarında yer alıyor. Spielmann Dağı çoğunlukla Kireçli Mika Şistlerinden, Kalsiyum-silikatlardan oluşmaktadır.",
-    "source": "Reddit (r/geology)",
-    "category": "forum",
-    "score": 5,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Erken Jura tektonik-sedimantolojik evrimi, Kuzey Qiangtang alt havzasındaki büyük ölçekli tuz oluşumlarına yanıtlar: Sedimantoloji, jeokimya ve detrital zirkon jeokronolojisi kanıtları",
-    "link": "https://doi.org/10.1016/j.gloplacha.2026.105659",
-    "abstract": "",
-    "source": "Crossref",
-    "category": "makale",
-    "score": 9,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Tam ölçekli osilasyon akışlarındaki kum-silt karışımları için dalga morfodinami gözlemleri",
-    "link": "https://doi.org/10.1016/j.coastaleng.2026.105136",
-    "abstract": "",
-    "source": "Crossref",
-    "category": "makale",
-    "score": 7,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Gorontalo, Endonezya'daki ASGM-etkili akarsu-kentsel sistemde cıva ve birlikte bulunan metallerin tıbbi jeolojisi",
-    "link": "https://doi.org/10.1016/j.rineng.2026.112407",
-    "abstract": "",
-    "source": "Crossref",
-    "category": "makale",
-    "score": 8,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Mars'taki Arsinoes ve Pyrrhae Chaos'un tektono-magmatik, sedimantolojik ve hidrotermal tarihi",
-    "link": "https://eartharxiv.org/repository/list/112/?page=2",
-    "abstract": "Mars'taki gezegen jeolojisi ön baskısı, Mars'taki kaotik arazinin tektono-magmatik, sedimantolojik ve hidrotermal evrimini ele alıyor. EarthArXiv'in Gezegen Jeolojisi deposunda listelenmiştir.",
-    "source": "Perplexity Sonar",
-    "category": "makale",
-    "score": 6,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Jeologlar Doğu Pasifik Yükselmesi'nin altında gizemli bir dalma bölgesi keşfetti",
-    "link": "https://phys.org/news/2024-09-geologists-mysterious-subduction-zone-beneath.html",
-    "abstract": "Maryland Üniversitesi bilim insanları, dinozorlar çağında derinlere gömülen antik bir deniz tabanı kanıtı buldular ve bu, Dünya'nın iç yapısı ve yüzey evrimi hakkında yeni ipuçları sunuyor. 27 Eylül 2024'te Science Advances'da yayımlandı.",
-    "source": "Perplexity Sonar",
-    "category": "haber",
-    "score": 8,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Kuzeybatı Kanada'da Yeni Fosil Keşfi, Erken Karmaşık Hayat Görüşünü Değiştiriyor",
-    "link": "https://phys.org/news/2026-05-discovery-fossils-northwest-canada-view.html",
-    "abstract": "Araştırmacılar, Kanada'nın Kuzeybatı Toprakları'nda dikkate değer bir fosil alanı ortaya çıkardı ve bu, Dünya'daki karmaşık hayvan yaşamının en erken evrimine dair yeni bilgiler sağladı.",
-    "source": "Perplexity Sonar",
-    "category": "haber",
-    "score": 7,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Erken Dünya'nın İlk Kabuğu Bileşimi Keşfi Yeniden Yazıyor ...",
-    "link": "https://phys.org/news/2025-04-early-earth-crust-composition-discovery.html",
-    "abstract": "Nature dergisinde yayımlanan bir çalışma, yaklaşık 4.5 milyar yıl önce oluşan Dünya'nın ilk kabuğunun, günümüz kıtasal kabuğuna oldukça benzer kimyasal özelliklere sahip olabileceğini öne sürüyor.",
-    "source": "Perplexity Sonar",
-    "category": "haber",
-    "score": 9,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Vezirler Mélange, Kula (Batı Türkiye) İçin Listvenit Hidrotermal Değişimlerinin Uzaktan Algılanması",
-    "link": "https://dergipark.org.tr/tr/pub/tjb",
-    "abstract": "22 Şubat 2026 tarihinde Türkiye Jeoloji Bülteni'nde yayımlanan araştırma makalesi. Landsat-7 ETM+, Crosta-PCA ve bant oranı haritalama uygulamaları ile hidrotermal değişimlerin uzaktan algılanmasına yönelik, sağlanan alanlarda en güncel ve doğrudan ilgili uzaktan algılama makalelerinden biri olma özelliğini taşımaktadır.",
-    "source": "Perplexity Sonar",
-    "category": "makale",
-    "score": 9,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "İnSAR Zaman Serileri ile Düşey Yüzey Deformasyonlarının Belirlenmesi: Bolluk ve Tersakan Gölleri Çevresi (Konya Kapalı Havzası)",
-    "link": "https://dergipark.org.tr/tr/pub/jader",
-    "abstract": "Jeomorfolojik Araştırmalar Dergisi'nden yakın zamanda yayımlanan bir jeobilim makalesi, düşey yüzey deformasyonlarının İnSAR zaman serisi analizi üzerine odaklanmaktadır. Uzaktan algılama ve Kuaterner peyzaj süreçleri ile ilgilidir.",
-    "source": "Perplexity Sonar",
-    "category": "makale",
-    "score": 9,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Dünya ve Türkiye'de Kuaterner Jeolojik Haritalama ve Karşılaşılan Problemler",
-    "link": "https://dergipark.org.tr/tr/download/article-cite-file/370637/type/6",
-    "abstract": "Türkiye ve küresel bağlamda kuaterner jeolojik haritalama üzerine doğrudan ilgili bir makale. Kuaterner jeolojisi metodolojisi ve haritalama zorlukları açısından önemlidir, ancak arama sonucu net bir yayın tarihi sağlamamaktadır.",
-    "source": "Perplexity Sonar",
-    "category": "makale",
-    "score": 8,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "DAAD Burs Veritabanı",
-    "link": "https://www.daad.de/stipdb-redirect/",
-    "abstract": "DAAD’nin uluslararası öğrenciler ve araştırmacılar için burs veritabanı, 2025/2026 finansman programları ve seçilmiş dış finansman fırsatlarını içermektedir.",
-    "source": "Perplexity Sonar",
-    "category": "firsat",
-    "score": 7,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "DAAD: PhDGermany",
-    "link": "https://www.daad.de/en/studying-in-germany/phd-studies-research/phd-germany/",
-    "abstract": "DAAD’nin Almanya'daki mevcut doktora pozisyonlarını vurgulayan PhDGermany sayfası, Max Planck Sürdürülebilir Malzemeler Enstitüsü ve Uluslararası Max Planck Sürdürülebilir Metalurji Araştırma Okulu'ndaki pozisyonları içermektedir.",
-    "source": "Perplexity Sonar",
-    "category": "firsat",
-    "score": 7,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "e3 programı kapsamında Doktora programına kayıtlı kendi kendini destekleyen uluslararası öğrenciler için burs, Hokkaido Üniversitesi",
-    "link": "https://www.studyinjapan.go.jp/en/search-for-scholarships/detail.php?lang=en&mid=1010033388",
-    "abstract": "Hokkaido Üniversitesi’nin e3 programında kendi kendini destekleyen uluslararası öğrenciler için Study in Japan'da listelenen doktora düzeyinde bir burs; 100,000 JPY tutarında bir defaya mahsus özel not içermektedir.",
-    "source": "Perplexity Sonar",
-    "category": "firsat",
-    "score": 6,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Kendi Kendini Destekleyen Uluslararası Öğrenciler İçin Hokkaido Üniversitesi Özel Burs Programı ...",
-    "link": "https://www.studyinjapan.go.jp/en/search-for-scholarships/detail.php?lang=en&mid=1010033463",
-    "abstract": "Kendi kendini destekleyen uluslararası öğrenciler için Study in Japan'da yer alan üniversiteye özgü bir burs/giriş; doktora öğrencileri ve yakın tarihli finansman fırsatları ile ilgilidir.",
-    "source": "Perplexity Sonar",
-    "category": "firsat",
-    "score": 6,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Finansman Fırsatları - Erasmus+ - Avrupa Birliği",
-    "link": "https://erasmus-plus.ec.europa.eu/funding-calls",
-    "abstract": "Mevcut ve önceki finansman çağrılarını listeleyen resmi Erasmus+ finansman fırsatları sayfası, 2025/2026 döneminde doktora bursları, hibeler ve araştırma hareketliliği fırsatları için geçerlidir.",
-    "source": "Perplexity Sonar",
-    "category": "firsat",
-    "score": 7,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Lipman Öğrenci Araştırma Bursları",
-    "link": "https://community.geosociety.org/mgpvdivision/awards/studentlipmanresearchgrants",
-    "abstract": "Bu sayfa, 2025 yılı bursiyerlerini listelemekte ve volkanoloji, paleoklimat, karbon mineralizasyonu ve lav jeokimyası gibi jeosans konularında lisansüstü öğrencilere araştırma bursları sağlamaktadır. Bu burslar, doktora öğrencileri için geçerlidir.",
-    "source": "Perplexity Sonar",
-    "category": "firsat",
-    "score": 8,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Araştırma Bursları | Londra Jeoloji Derneği",
-    "link": "https://www.geolsoc.org.uk/careers-and-training/funding-opportunities/research-grants/",
-    "abstract": "Londra Jeoloji Derneği'nin araştırma bursları sayfası, jeosans araştırmacıları için güncel bir finansman portalıdır; burs sorguları ve başvuruları grants@geolsoc.org.uk adresine yönlendirilmektedir. Bu durum, lisansüstü eğitim ve araştırma ile ilgili aktif bir fırsatı göstermektedir.",
-    "source": "Perplexity Sonar",
-    "category": "firsat",
-    "score": 8,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Yeraltı Suyu Jeokimyası Üzerine Doktora Bursu",
-    "link": "https://www.earthworks-jobs.com/water/jcu24121",
-    "abstract": "Yeraltı suyu jeokimyası alanında, yıllık 33,500 AUD burs ile 3.5 yıl sürecek bir doktora bursu. 2025/2026 yılı için jeosans ve su araştırmaları başvuru sahipleri için geçerlidir.",
-    "source": "Perplexity Sonar",
-    "category": "firsat",
-    "score": 9,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Metamorfik Jeoloji, Jeokronoloji ve Tektonik Alanında Dört Tam Burslu Doktora Programı",
-    "link": "https://www.earthworks-jobs.com/geoscience/curtin23061",
-    "abstract": "Perth, Avustralya'da metamorfik jeoloji, jeokronoloji ve tektonik alanında dört tam burslu 3 yıllık doktora projesi. 2025/2026 yılı adayları için güçlü bir jeosans doktora bursu seçeneği sunmaktadır.",
-    "source": "Perplexity Sonar",
-    "category": "firsat",
-    "score": 9,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
-  },
-  {
-    "title": "Alevli Petrografi ve Jeokimyası Üzerine Burslu Doktora Programı",
-    "link": "https://www.earthworks-jobs.com/geoscience/curtin25061",
-    "abstract": "Curtin Üniversitesi'nde alevli petrografi ve jeokimyası alanında, derin karbon döngüleri ve kritik mineral yataklarına odaklanan tam burslu 3.5 yıllık bir doktora projesi. 2025/2026 yılı jeosans doktora başvuru sahipleri için geçerlidir.",
-    "source": "Perplexity Sonar",
-    "category": "firsat",
-    "score": 9,
-    "added_at": "2026-08-19T08:01:18.257737+00:00"
   }
 ]
