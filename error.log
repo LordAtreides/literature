@@ -1797,3 +1797,19 @@
 2026-09-19 10:19:32,074 [ERROR] arXiv error for Structural geology: RetryError[<Future at 0x7f2b1c0dbc10 state=finished raised HTTPError>]
 2026-09-19 10:19:41,260 [ERROR] arXiv error for GIS application: RetryError[<Future at 0x7f2b1c10cb10 state=finished raised HTTPError>]
 2026-09-19 10:20:21,653 [ERROR] DALL-E 3 Gorsel Uretim Hatasi: Error code: 400 - {'error': {'message': "The model 'dall-e-3' does not exist.", 'type': 'image_generation_user_error', 'param': 'model', 'code': 'invalid_value'}}
+2026-09-23 10:45:58,697 [ERROR] Reddit HTTP Error 429: 
+2026-09-23 10:46:04,494 [ERROR] Reddit HTTP Error 429: 
+2026-09-23 10:46:08,555 [ERROR] Reddit HTTP Error 429: 
+2026-09-23 10:46:09,884 [ERROR] RSS error for https://earthworks-jobs.com/rss.xml: RetryError[<Future at 0x7f4a3dd3bc10 state=finished raised HTTPError>]
+2026-09-23 10:46:12,615 [ERROR] Reddit HTTP Error 429: 
+2026-09-23 10:46:12,615 [ERROR] Reddit error for remotesensing: RetryError[<Future at 0x7f4a3dd8ae50 state=finished raised HTTPError>]
+2026-09-23 10:46:29,752 [ERROR] arXiv error for Volcanology: RetryError[<Future at 0x7f4a3ddcfd10 state=finished raised HTTPError>]
+2026-09-23 10:46:39,009 [ERROR] arXiv error for Seafloor mapping: RetryError[<Future at 0x7f4a3de87850 state=finished raised HTTPError>]
+2026-09-23 10:46:48,262 [ERROR] arXiv error for Geospatial data science: RetryError[<Future at 0x7f4a3de78450 state=finished raised HTTPError>]
+2026-09-23 10:46:57,501 [ERROR] arXiv error for Satellite imagery analysis: RetryError[<Future at 0x7f4a3ddb6bd0 state=finished raised HTTPError>]
+2026-09-23 10:47:06,737 [ERROR] arXiv error for Geochronology: RetryError[<Future at 0x7f4a3de855d0 state=finished raised HTTPError>]
+2026-09-23 10:47:15,991 [ERROR] arXiv error for Fluvial sedimentology: RetryError[<Future at 0x7f4a3de066d0 state=finished raised HTTPError>]
+2026-09-23 10:47:25,253 [ERROR] arXiv error for Marine geosciences: RetryError[<Future at 0x7f4a3de8da50 state=finished raised HTTPError>]
+2026-09-23 10:47:34,493 [ERROR] arXiv error for Structural geology: RetryError[<Future at 0x7f4a3ddedc10 state=finished raised HTTPError>]
+2026-09-23 10:47:43,736 [ERROR] arXiv error for GIS application: RetryError[<Future at 0x7f4a3dd3ba90 state=finished raised HTTPError>]
+2026-09-23 10:48:39,198 [ERROR] DALL-E 3 Gorsel Uretim Hatasi: Error code: 400 - {'error': {'message': "The model 'dall-e-3' does not exist.", 'type': 'image_generation_user_error', 'param': 'model', 'code': 'invalid_value'}}
