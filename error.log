@@ -2524,3 +2524,82 @@
 2026-10-31 11:43:01,357 [ERROR] Claude Scoring Hatasi [1/3]: Expecting ',' delimiter: line 1 column 496 (char 495)
 2026-10-31 11:43:10,697 [ERROR] Claude Scoring Hatasi [2/3]: Expecting ',' delimiter: line 1 column 470 (char 469)
 2026-10-31 11:43:48,981 [ERROR] DALL-E 3 Gorsel Uretim Hatasi: Error code: 400 - The model 'dall-e-3' does not exist.
+2026-11-04 13:46:17,602 [ERROR] Perplexity API HTTP Error 401: {"error":{"message":"You exceeded your current quota, add credits at https://console.perplexity.ai/project/billing.","type":"insufficient_quota","code":401}}
+
+2026-11-04 13:46:19,161 [ERROR] Reddit HTTP Error 429: 
+2026-11-04 13:46:21,675 [ERROR] Perplexity API HTTP Error 401: {"error":{"message":"You exceeded your current quota, add credits at https://console.perplexity.ai/project/billing.","type":"insufficient_quota","code":401}}
+
+2026-11-04 13:46:23,208 [ERROR] Reddit HTTP Error 429: 
+2026-11-04 13:46:25,737 [ERROR] Perplexity API HTTP Error 401: {"error":{"message":"You exceeded your current quota, add credits at https://console.perplexity.ai/project/billing.","type":"insufficient_quota","code":401}}
+
+2026-11-04 13:46:25,737 [ERROR] Perplexity error for domains ['eartharxiv.org', 'earthchem.org', 'wovodat.org', 'dataspace.copernicus.eu', 'strabospot.org', 'pds.nasa.gov']: RetryError[<Future at 0x7fc538e23290 state=finished raised HTTPError>]
+2026-11-04 13:46:27,250 [ERROR] Reddit HTTP Error 429: 
+2026-11-04 13:46:27,251 [ERROR] Reddit error for geoscience: RetryError[<Future at 0x7fc538e4a910 state=finished raised HTTPError>]
+2026-11-04 13:46:27,791 [ERROR] Perplexity API HTTP Error 401: {"error":{"message":"You exceeded your current quota, add credits at https://console.perplexity.ai/project/billing.","type":"insufficient_quota","code":401}}
+
+2026-11-04 13:46:28,294 [ERROR] Reddit HTTP Error 429: 
+2026-11-04 13:46:29,827 [ERROR] RSS error for https://earthworks-jobs.com/rss.xml: RetryError[<Future at 0x7fc538e0d1d0 state=finished raised ConnectionError>]
+2026-11-04 13:46:31,863 [ERROR] Perplexity API HTTP Error 401: {"error":{"message":"You exceeded your current quota, add credits at https://console.perplexity.ai/project/billing.","type":"insufficient_quota","code":401}}
+
+2026-11-04 13:46:32,335 [ERROR] Reddit HTTP Error 429: 
+2026-11-04 13:46:35,940 [ERROR] Perplexity API HTTP Error 401: {"error":{"message":"You exceeded your current quota, add credits at https://console.perplexity.ai/project/billing.","type":"insufficient_quota","code":401}}
+
+2026-11-04 13:46:35,940 [ERROR] Perplexity error for domains ['nature.com', 'science.org', 'pubs.geoscienceworld.org', 'sciencedirect.com', 'agupubs.onlinelibrary.wiley.com']: RetryError[<Future at 0x7fc538e2a7d0 state=finished raised HTTPError>]
+2026-11-04 13:46:36,378 [ERROR] Reddit HTTP Error 429: 
+2026-11-04 13:46:36,378 [ERROR] Reddit error for remotesensing: RetryError[<Future at 0x7fc53bfa9390 state=finished raised HTTPError>]
+2026-11-04 13:46:37,996 [ERROR] Perplexity API HTTP Error 401: {"error":{"message":"You exceeded your current quota, add credits at https://console.perplexity.ai/project/billing.","type":"insufficient_quota","code":401}}
+
+2026-11-04 13:46:42,056 [ERROR] Perplexity API HTTP Error 401: {"error":{"message":"You exceeded your current quota, add credits at https://console.perplexity.ai/project/billing.","type":"insufficient_quota","code":401}}
+
+2026-11-04 13:46:46,108 [ERROR] Perplexity API HTTP Error 401: {"error":{"message":"You exceeded your current quota, add credits at https://console.perplexity.ai/project/billing.","type":"insufficient_quota","code":401}}
+
+2026-11-04 13:46:46,108 [ERROR] Perplexity error for domains ['eos.org', 'phys.org', 'earthobservatory.nasa.gov', 'geoscientist.online', 'theconversation.com', 'esa.int', 'space.com']: RetryError[<Future at 0x7fc53bfc7210 state=finished raised HTTPError>]
+2026-11-04 13:46:48,169 [ERROR] Perplexity API HTTP Error 401: {"error":{"message":"You exceeded your current quota, add credits at https://console.perplexity.ai/project/billing.","type":"insufficient_quota","code":401}}
+
+2026-11-04 13:46:50,107 [ERROR] arXiv error for Volcanology: RetryError[<Future at 0x7fc538e48810 state=finished raised HTTPError>]
+2026-11-04 13:46:52,227 [ERROR] Perplexity API HTTP Error 401: {"error":{"message":"You exceeded your current quota, add credits at https://console.perplexity.ai/project/billing.","type":"insufficient_quota","code":401}}
+
+2026-11-04 13:46:56,285 [ERROR] Perplexity API HTTP Error 401: {"error":{"message":"You exceeded your current quota, add credits at https://console.perplexity.ai/project/billing.","type":"insufficient_quota","code":401}}
+
+2026-11-04 13:46:56,285 [ERROR] Perplexity error for domains ['dergipark.org.tr', 'dergi.mta.gov.tr', 'tubitak.gov.tr']: RetryError[<Future at 0x7fc538e34f10 state=finished raised HTTPError>]
+2026-11-04 13:46:58,341 [ERROR] Perplexity API HTTP Error 401: {"error":{"message":"You exceeded your current quota, add credits at https://console.perplexity.ai/project/billing.","type":"insufficient_quota","code":401}}
+
+2026-11-04 13:46:59,285 [ERROR] arXiv error for Seafloor mapping: RetryError[<Future at 0x7fc538e5b7d0 state=finished raised HTTPError>]
+2026-11-04 13:47:02,408 [ERROR] Perplexity API HTTP Error 401: {"error":{"message":"You exceeded your current quota, add credits at https://console.perplexity.ai/project/billing.","type":"insufficient_quota","code":401}}
+
+2026-11-04 13:47:06,486 [ERROR] Perplexity API HTTP Error 401: {"error":{"message":"You exceeded your current quota, add credits at https://console.perplexity.ai/project/billing.","type":"insufficient_quota","code":401}}
+
+2026-11-04 13:47:06,486 [ERROR] Perplexity error for domains ['findaphd.com', 'www2.daad.de', 'daad.de', 'careers.cern', 'whoi.edu', 'lpi.usra.edu', 'earthscope.org', 'jobs.esa.int', 'fulbright.org.tr', 'jeanmonnet.org.tr']: RetryError[<Future at 0x7fc53bfa9f90 state=finished raised HTTPError>]
+2026-11-04 13:47:08,453 [ERROR] arXiv error for Geospatial data science: RetryError[<Future at 0x7fc538e4a090 state=finished raised HTTPError>]
+2026-11-04 13:47:08,552 [ERROR] Perplexity API HTTP Error 401: {"error":{"message":"You exceeded your current quota, add credits at https://console.perplexity.ai/project/billing.","type":"insufficient_quota","code":401}}
+
+2026-11-04 13:47:12,643 [ERROR] Perplexity API HTTP Error 401: {"error":{"message":"You exceeded your current quota, add credits at https://console.perplexity.ai/project/billing.","type":"insufficient_quota","code":401}}
+
+2026-11-04 13:47:16,714 [ERROR] Perplexity API HTTP Error 401: {"error":{"message":"You exceeded your current quota, add credits at https://console.perplexity.ai/project/billing.","type":"insufficient_quota","code":401}}
+
+2026-11-04 13:47:16,715 [ERROR] Perplexity error for domains ['studyinjapan.go.jp', 'erasmus-plus.ec.europa.eu']: RetryError[<Future at 0x7fc53bfb5890 state=finished raised HTTPError>]
+2026-11-04 13:47:17,669 [ERROR] arXiv error for Satellite imagery analysis: RetryError[<Future at 0x7fc538e7d150 state=finished raised HTTPError>]
+2026-11-04 13:47:18,799 [ERROR] Perplexity API HTTP Error 401: {"error":{"message":"You exceeded your current quota, add credits at https://console.perplexity.ai/project/billing.","type":"insufficient_quota","code":401}}
+
+2026-11-04 13:47:22,852 [ERROR] Perplexity API HTTP Error 401: {"error":{"message":"You exceeded your current quota, add credits at https://console.perplexity.ai/project/billing.","type":"insufficient_quota","code":401}}
+
+2026-11-04 13:47:26,862 [ERROR] arXiv error for Geochronology: RetryError[<Future at 0x7fc53bfb7910 state=finished raised HTTPError>]
+2026-11-04 13:47:26,903 [ERROR] Perplexity API HTTP Error 401: {"error":{"message":"You exceeded your current quota, add credits at https://console.perplexity.ai/project/billing.","type":"insufficient_quota","code":401}}
+
+2026-11-04 13:47:26,903 [ERROR] Perplexity error for domains ['geolsoc.org.uk', 'sedimentologists.org', 'geosociety.org', 'seg.org', 'networkyes.org']: RetryError[<Future at 0x7fc538e57110 state=finished raised HTTPError>]
+2026-11-04 13:47:28,955 [ERROR] Perplexity API HTTP Error 401: {"error":{"message":"You exceeded your current quota, add credits at https://console.perplexity.ai/project/billing.","type":"insufficient_quota","code":401}}
+
+2026-11-04 13:47:33,032 [ERROR] Perplexity API HTTP Error 401: {"error":{"message":"You exceeded your current quota, add credits at https://console.perplexity.ai/project/billing.","type":"insufficient_quota","code":401}}
+
+2026-11-04 13:47:36,048 [ERROR] arXiv error for Fluvial sedimentology: RetryError[<Future at 0x7fc538e93550 state=finished raised HTTPError>]
+2026-11-04 13:47:37,090 [ERROR] Perplexity API HTTP Error 401: {"error":{"message":"You exceeded your current quota, add credits at https://console.perplexity.ai/project/billing.","type":"insufficient_quota","code":401}}
+
+2026-11-04 13:47:37,090 [ERROR] Perplexity error for domains ['earthworks-jobs.com', 'jobs.egu.eu', 'finda-job.agu.org', 'nature.com', 'researchgate.net']: RetryError[<Future at 0x7fc538e33ed0 state=finished raised HTTPError>]
+2026-11-04 13:47:45,272 [ERROR] arXiv error for Marine geosciences: RetryError[<Future at 0x7fc538e0c690 state=finished raised HTTPError>]
+2026-11-04 13:47:54,509 [ERROR] arXiv error for Structural geology: RetryError[<Future at 0x7fc538e3f010 state=finished raised HTTPError>]
+2026-11-04 13:48:03,696 [ERROR] arXiv error for GIS application: RetryError[<Future at 0x7fc53bfabd10 state=finished raised HTTPError>]
+2026-11-04 13:48:10,075 [ERROR] Claude Scoring Hatasi [1/3]: Expecting ',' delimiter: line 1 column 496 (char 495)
+2026-11-04 13:48:27,525 [ERROR] Claude Scoring Hatasi [1/3]: Expecting value: line 1 column 1 (char 0)
+2026-11-04 13:48:37,154 [ERROR] Claude Scoring Hatasi [2/3]: Expecting ',' delimiter: line 1 column 366 (char 365)
+2026-11-04 13:48:46,792 [ERROR] Claude Scoring Hatasi [3/3]: Expecting ',' delimiter: line 1 column 392 (char 391)
+2026-11-04 13:49:50,040 [ERROR] DALL-E 3 Gorsel Uretim Hatasi: Error code: 400 - The model 'dall-e-3' does not exist.
