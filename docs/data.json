@@ -1,5 +1,221 @@
 [
   {
+    "title": "İlaçların altı kaynağının sınırlanması, nehirlerdeki karışım toksisite riskini azaltabilir",
+    "link": "https://www.nature.com/articles/s41561-026-02101-2",
+    "abstract": "Nature Geoscience, Çevrimiçi yayımlandı: 12 Kasım 2026; doi:10.1038/s41561-026-02101-2 Bir makine öğrenimi modeli, dünya genelindeki nehirlerdeki ilaç karışımlarının toksisitesine dair yüksek çözünürlüklü haritalar oluşturmak için üç türde 1.017 toksisite deneyi ve 24 coğrafi belirleyici kullanmaktadır. Analizler, t.",
+    "source": "Nature Geoscience",
+    "category": "makale",
+    "score": 5,
+    "added_at": "2026-11-14T13:00:06.701943+00:00"
+  },
+  {
+    "title": "Altı ana kaynağın kontrolü, küresel nehirlerdeki ilaç karışımı aşımını yarıya indirebilir",
+    "link": "https://www.nature.com/articles/s41561-026-02096-w",
+    "abstract": "Nature Geoscience, Çevrimiçi yayımlandı: 12 Kasım 2026; doi:10.1038/s41561-026-02096-w İlaç karışımı toksisitesi, küresel nehirlerin %13'ünde ekolojik eşikleri aşmaktadır ve ana kirlilik kaynaklarının hedefli kontrolü, bu riskleri önemli ölçüde azaltabilir; bu, farmasötiklerin değerlendirilmesine dayanmaktadır.",
+    "source": "Nature Geoscience",
+    "category": "makale",
+    "score": 5,
+    "added_at": "2026-11-14T13:00:06.701943+00:00"
+  },
+  {
+    "title": "Küresel gündüz fotosentezinin tamamlayıcı boyutları üzerindeki farklı biyofiziksel kontrol mekanizmaları",
+    "link": "https://www.nature.com/articles/s43247-026-04214-3",
+    "abstract": "Communications Earth & Environment, Çevrimiçi yayımlandı: 14 Kasım 2026; doi:10.1038/s43247-026-04214-3 Küresel bitki örtüsü fotosentezi, mevsimsel olarak değişen biyofiziksel kontrol mekanizmaları tarafından yönetilen belirgin gündüz asimetrisi, büyüklük ve öğle depresyonu sergilemektedir; bu kontrol mekanizmaları, Dünya sistem modelleri tarafından yalnızca kısmen yakalanmaktadır.",
+    "source": "Nature Comms Earth",
+    "category": "makale",
+    "score": 4,
+    "added_at": "2026-11-14T13:00:06.701943+00:00"
+  },
+  {
+    "title": "Küresel rüzgar çiftlikleri, arazi kullanımına bağlı asimetrik ısınma ve ekolojik değişikliklerle ilişkilidir",
+    "link": "https://www.nature.com/articles/s43247-026-04195-3",
+    "abstract": "Communications Earth & Environment, Çevrimiçi yayımlandı: 13 Kasım 2026; doi:10.1038/s43247-026-04195-3 Rüzgar çiftlikleri, gece sıcaklıklarını artırmakta ve arazi kullanımına bağlı bir şekilde bitki örtüsü verimliliğini azaltmaktadır; bu, on yıllık verilerin açıklanabilir makine öğrenimi ve yapısal denklem modellemesi ile açıklanmıştır.",
+    "source": "Nature Comms Earth",
+    "category": "makale",
+    "score": 4,
+    "added_at": "2026-11-14T13:00:06.701943+00:00"
+  },
+  {
+    "title": "Lifli optik algılama kullanarak derin deniz tabanında Dünya'nın gelgit yanıtının büyük ölçekli izlenmesi",
+    "link": "https://www.nature.com/articles/s43247-026-04189-1",
+    "abstract": "Communications Earth & Environment, Çevrimiçi yayımlandı: 13 Kasım 2026; doi:10.1038/s43247-026-04189-1 Dağıtılmış Akustik Algılama, derin denizde Dünya gelgitlerinin hassas ve sürekli izlenmesini sağlar; bu, üst kısımların elastik ve mekanik özelliklerini sınırlama potansiyeline sahiptir.",
+    "source": "Nature Comms Earth",
+    "category": "makale",
+    "score": 8,
+    "added_at": "2026-11-14T13:00:06.701943+00:00"
+  },
+  {
+    "title": "Atmosferik çözünmüş organik karbon birikimi, küresel karasal karbon döngüsündeki eksik bir bağlantıyı kapatıyor",
+    "link": "https://www.nature.com/articles/s43247-026-04209-0",
+    "abstract": "Communications Earth & Environment, Çevrimiçi yayımlandı: 12 Kasım 2026; doi:10.1038/s43247-026-04209-0 Canopy kesintisi, çözünmüş organik karbonun atmosferik birikiminde baskın bir rol oynamaktadır; bu, karbon izotop verileri ve makro veriler kullanılarak gerçekleştirilen süreç açıklayıcı bir yeniden yapılandırma ile ortaya konmuştur.",
+    "source": "Nature Comms Earth",
+    "category": "makale",
+    "score": 5,
+    "added_at": "2026-11-14T13:00:06.701943+00:00"
+  },
+  {
+    "title": "Buzulların erimesiyle değişen Batı Antarktika Yarımadası fiyortlarındaki ekolojik desenlerin farklılıkları, yumuşak tortul bentik topluluklar tarafından ortaya konmuştur",
+    "link": "https://www.nature.com/articles/s43247-026-04216-1",
+    "abstract": "Communications Earth & Environment, Çevrimiçi yayımlandı: 12 Kasım 2026; doi:10.1038/s43247-026-04216-1 Yumuşak tortul bentik topluluklar, fiyortlar arasında ve buzul yakınlığında farklılık göstermekte; çeşitlilik, fiyort ağızlarına doğru artarken, biyokütle ve yoğunluk, buzul spesifik desenler sergilemektedir.",
+    "source": "Nature Comms Earth",
+    "category": "makale",
+    "score": 6,
+    "added_at": "2026-11-14T13:00:06.701943+00:00"
+  },
+  {
+    "title": "Deniz seviyesi yükselmesi ve çökme, yüzyıllık Hazine Adası'ndaki sel risklerini artırıyor",
+    "link": "https://www.nature.com/articles/s43247-026-04158-8",
+    "abstract": "Communications Earth & Environment, Çevrimiçi yayımlandı: 12 Kasım 2026; doi:10.1038/s43247-026-04158-8 Hazine Adası, yılda 5-11 milimetre çökme ve yılda 6 milimetreye kadar kayma göstermektedir; deniz seviyesi yükselmesinin 2030 yılına kadar sel riskinin ana nedeni olması beklenmektedir.",
+    "source": "Nature Comms Earth",
+    "category": "makale",
+    "score": 8,
+    "added_at": "2026-11-14T13:00:06.701943+00:00"
+  },
+  {
+    "title": "Eski kayalar, Dünya'nın derinliklerinden dramatik bir yolculuğu ortaya koyuyor",
+    "link": "https://phys.org/news/2026-11-ancient-reveal-journey-deep-earth.html",
+    "abstract": "Yüzey kayaları, milyonlarca yıl önce bulundukları bölgelerin kayıtlarını açığa çıkarabilir; bu alanlar yerin kilometrelerce altında olsa bile. Türkiye'nin Marmara Denizi'nin güney kıyıları ve adalarında, şu anda ortaya çıkan granit kayalar, Dünya'nın kabuğunun derinliklerinde erimiş malzeme olarak oluşmuştur.",
+    "source": "Phys.org Earth",
+    "category": "haber",
+    "score": 9,
+    "added_at": "2026-11-14T13:00:06.701943+00:00"
+  },
+  {
+    "title": "Dağların büyüme patlamaları, Dünya'da karmaşık yaşamı tetiklemiş olabilir",
+    "link": "https://phys.org/news/2026-11-mountain-growth-spurts-complex-life.html",
+    "abstract": "Dağ sıraları, Dünya tarihinin boyunca iki belirgin \"patlama\" ile yükselmiş ve bu, gezegenimizdeki biyolojik çeşitliliğin gelişimi ile ilişkilendirilmiştir; bu, Science Advances dergisinde yayımlanan yeni bir araştırmaya göre, dağların karmaşık yaşamı tetiklemekte önemli bir rol oynamış olabileceğini önermektedir.",
+    "source": "Phys.org Earth",
+    "category": "haber",
+    "score": 8,
+    "added_at": "2026-11-14T13:00:06.701943+00:00"
+  },
+  {
+    "title": "Küresel Buzullardaki Azalma, İnsan Toplumunun Koşullarını Tehdit Ediyor",
+    "link": "https://phys.org/news/2026-11-cryosphere-decline-safe-planetary-limits.html",
+    "abstract": "COP31'de yayımlanan yeni araştırma, gezegenin donmuş kısımlarının—buz tabakaları, dağ buzulları, deniz buzu, permafrost ve kar örtüsü—sağlığı hakkında çarpıcı bir uyarı yapıyor. Science dergisinde yayımlanan çalışma, insan kaynaklı iklim değişikliğinin bu manzaraları bozduğunu bulmuştur.",
+    "source": "Phys.org Earth",
+    "category": "haber",
+    "score": 6,
+    "added_at": "2026-11-14T13:00:06.701943+00:00"
+  },
+  {
+    "title": "Bir Denizaltı Heyelanının Doğrudan Gözlemi, Deniz Tabanı Süreçlerini Ortaya Çıkarıyor",
+    "link": "https://phys.org/news/2026-11-submarine-landslide-reveals-seafloor.html",
+    "abstract": "Denizaltı heyelanları, deniz ekolojisi ve altyapı üzerinde önemli etkilere sahiptir, ancak bu öngörülemeyen olaylar üzerinde çalışmak zorluğunu korumaktadır. Newcastle Üniversitesi'nden Dr. Sanem Acikalin'in ortak liderliğindeki ve 10 kurumdan uluslararası bir işbirliği ekibinin yer aldığı yeni araştırma...",
+    "source": "Phys.org Earth",
+    "category": "haber",
+    "score": 9,
+    "added_at": "2026-11-14T13:00:06.701943+00:00"
+  },
+  {
+    "title": "Oʻahu Altyapısı, Deniz Seviyesi Yükselmesi Etkilerindeki Dönüm Noktasından Tehdit Altında",
+    "link": "https://phys.org/news/2026-11-oahu-infrastructure-threatened-sea-impacts.html",
+    "abstract": "Hawaiʻi Üniversitesi (UH) Mānoa İklim Dayanıklılığı İşbirliği tarafından gerçekleştirilen yeni kapsamlı bir çalışma, yalnızca okyanus sularının yükselmesini dikkate alan geleneksel deniz seviyesi yükselmesi modellerinin, Oʻahu, Hawai'i'deki kıyı altyapısına yönelik gerçek tehdidi büyük ölçüde küçümsediğini ortaya koymaktadır.",
+    "source": "Phys.org Earth",
+    "category": "haber",
+    "score": 6,
+    "added_at": "2026-11-14T13:00:06.701943+00:00"
+  },
+  {
+    "title": "Beton ve Çelik mi, Yoksa Mangrov ve Ormanlar mı? İklim Adaptasyonu Söz Konusu Olduğunda Doğa Çok Daha Uygun Fiyatlıdır",
+    "link": "https://phys.org/news/2026-11-concrete-steel-mangroves-forests-climate.html",
+    "abstract": "Kendimizi iklim değişikliğinden korumanın en iyi yolu nedir? Varsayılan olarak, deniz duvarları, setler, barajlar ve drenaj sistemleri inşa etmek için betona ve çeliğe yöneliyoruz. Bunlar işe yarayabilir. Ancak pahalı ve esnek değildirler. Çok daha ucuz ve çok daha az dikkat çeken bir başka seçenek var: Mangrov.",
+    "source": "Phys.org Earth",
+    "category": "haber",
+    "score": 5,
+    "added_at": "2026-11-14T13:00:06.701943+00:00"
+  },
+  {
+    "title": "Dünyanın Yörüngesel Asimetrileri, El Niño ile Tekrarlayan Ritmler Paylaşıyor, Araştırma Buluyor",
+    "link": "https://phys.org/news/2026-11-earth-orbital-asymmetries-recurring-rhythms.html",
+    "abstract": "Her birkaç yılda bir, merkezi ve doğu tropikal Pasifik'te yüzey sularının alışılmadık şekilde ısınması—El Niño olarak bilinir—atmosferik sirkülasyonu dünya çapında yeniden düzenleyerek bazı kıtalara şiddetli kuraklık, diğerlerine ise şiddetli yağışlar getirir. On yıllardır, okyanus bilimcileri ve meteorologlar haritalar...",
+    "source": "Phys.org Earth",
+    "category": "haber",
+    "score": 6,
+    "added_at": "2026-11-14T13:00:06.701943+00:00"
+  },
+  {
+    "title": "Eski İklim Kayıtları, Doğu Asya Musonunun Ani Bir Şekilde Soğuk ve Kuraklığa Nasıl Dönüştüğünü Ortaya Çıkardı",
+    "link": "https://phys.org/news/2026-11-ancient-climate-reveal-east-asian.html",
+    "abstract": "İklim değişikliği, Doğu Asya musonunu nasıl etkiliyor? Utrecht Üniversitesi Jeobilim Fakültesi'nden araştırmacılar, Çin ve Belçika'daki araştırma enstitülerinden meslektaşlarıyla birlikte bu soruyu 250,000 yıl geriye bakarak araştırıyorlar. Uzun zaman dilimlerinde, muson...",
+    "source": "Phys.org Earth",
+    "category": "haber",
+    "score": 7,
+    "added_at": "2026-11-14T13:00:06.701943+00:00"
+  },
+  {
+    "title": "Kıbrıs'taki Amiantos (Asbest) Madeni Üstündeki Yol",
+    "link": "https://www.reddit.com/r/geology/comments/1xvyc89/road_above_the_amiantos_asbestos_mine_cyprus/",
+    "abstract": "Maden 1984 yılında kapandı.",
+    "source": "Reddit (r/geology)",
+    "category": "forum",
+    "score": 4,
+    "added_at": "2026-11-14T13:00:06.701943+00:00"
+  },
+  {
+    "title": "Lena Pillars, Yakutistan, Sibirya'daki İnce Katmanlı Erken Kambriyen Kireçtaşı ve Dolomit Tabakalarının Yakın Planı (ölçü için altta bir kişi) [OC]",
+    "link": "https://www.reddit.com/r/geology/comments/1xvxh67/closeup_of_the_finely_layered_early_cambrian/",
+    "abstract": "&#32; submitted by &#32;  /u/Rude_Cod5472   [link] &#32; [comments]",
+    "source": "Reddit (r/geology)",
+    "category": "forum",
+    "score": 5,
+    "added_at": "2026-11-14T13:00:06.701943+00:00"
+  },
+  {
+    "title": "Bilim İnsanları Lord Howe Adası'nın Olağanüstü Volkanik Kökenlerini Ortaya Çıkardı",
+    "link": "https://www.reddit.com/r/geology/comments/1xvxg8s/scientists_unearth_remarkable_volcanic_origins_of/",
+    "abstract": "&#32; submitted by &#32;  /u/SchoonerMeridian   [link] &#32; [comments]",
+    "source": "Reddit (r/geology)",
+    "category": "forum",
+    "score": 6,
+    "added_at": "2026-11-14T13:00:06.701943+00:00"
+  },
+  {
+    "title": "Mac'te Jeoloji Yazılımları",
+    "link": "https://www.reddit.com/r/geology/comments/1xv9r6c/geology_softwares_on_mac/",
+    "abstract": "Sonunda bir Macbook (m5, 15 inç) aldım ve jeokimya alanında doktora yapıyorum. Aynı alanda tezimi yaptım ve CorelDRAW, ImageJ, OriginPro kullanmak zorunda kaldım. Kıdemlim bana Windows/Mac alabilirsin, bir şeyler hallederiz dedi, ama şimdi anladım ki...",
+    "source": "Reddit (r/geology)",
+    "category": "forum",
+    "score": 5,
+    "added_at": "2026-11-14T13:00:06.701943+00:00"
+  },
+  {
+    "title": "Bir turist bunu Fas'ta buldu",
+    "link": "https://www.reddit.com/r/geology/comments/1xv5dj6/a_tourist_found_this_in_morocco/",
+    "abstract": "\"Burada ne olduğunu bana açıklayabilir mi? Fas'taki yüksek Atlas dağlarında, bu mavi renkte olan toprakların bulunduğu birkaç yer gördüm, genellikle mor bir bölümün üzerinde de oluyor.\"  /u/hreftwelve tarafından gönderildi [bağlantı] [yorumlar]",
+    "source": "Reddit (r/geology)",
+    "category": "forum",
+    "score": 4,
+    "added_at": "2026-11-14T13:00:06.701943+00:00"
+  },
+  {
+    "title": "BathyBoard: Sörf Tahtası Tabanlı Sörf Bölgesi Batimetrisini Ölçme Platformu",
+    "link": "https://doi.org/10.1061/jsued2.sueng-1758",
+    "abstract": "Özet\n                  Sörf bölgesi ortamlarındaki batimetrik veriler, kıyı izleme ve tehlike değerlendirmesi için hayati öneme sahiptir, ancak bu bölgelerin sığ su ve kırılan dalgalar nedeniyle araştırılması zordur. Jet ski tabanlı anket yöntemleri, geniş kıyı şeritlerini hızlı bir şekilde haritalamak için son derece etkilidir, ancak maliyetleri, taşıma zorlukları, izin gereksinimleri ve güvenlik sınırlamaları, özellikle yüzücüler ve sörfçülerin bulunduğu sığ su alanlarında kullanımı kısıtlayabilir. Bu çalışma",
+    "source": "Crossref",
+    "category": "makale",
+    "score": 7,
+    "added_at": "2026-11-14T13:00:06.701943+00:00"
+  },
+  {
+    "title": "Bojano İntermontane Havzasında (Güney Apenninler, İtalya) Fay Kontrolündeki Sıvı Dolaşımı: Entegre Toprak-Gaz ve Yeraltı Suyu Jeokimyası Üzerine İçgörüler",
+    "link": "https://doi.org/10.1016/j.gexplo.2026.108285",
+    "abstract": "",
+    "source": "Crossref",
+    "category": "makale",
+    "score": 8,
+    "added_at": "2026-11-14T13:00:06.701943+00:00"
+  },
+  {
+    "title": "Antroposen'in Politik Jeolojisi: Francine McCarthy ile Röportaj",
+    "link": "https://doi.org/10.3917/tqr.008.0083",
+    "abstract": "Francine McCarthy, jeolog, Antroposen üzerine küresel bir jeolojik işaret bulmakla görevli Antroposen Çalışma Grubu'nun bilimsel sorumlusuydu. Bu yeni Dünya çağının, sanayi ve üretim toplumlarının insan faaliyetlerinin gezegen dengeleri üzerindeki etkileriyle belirginleştiği bir döneme girişi bilimsel olarak tarihlendirmek için bir işaret arayışındaydı. Bu röportajda, Antroposen'in tanımının bilimsel, felsefi ve politik boyutlarına değiniyor.",
+    "source": "Crossref",
+    "category": "makale",
+    "score": 7,
+    "added_at": "2026-11-14T13:00:06.701943+00:00"
+  },
+  {
     "title": "Bölgesel kara karbon kaymaları, atmosferik karbondioksit-kara karbon akışı bağlantısını güçlendiriyor",
     "link": "https://www.nature.com/articles/s41561-026-02136-5",
     "abstract": "Nature Geoscience, Çevrimiçi yayımlandı: 10 Kasım 2026; doi:10.1038/s41561-026-02136-5 1959'dan 2022'ye kadar kara kaynaklı karbon akışının bölgesel katkısındaki değişiklikler, yıllar arası atmosferik karbondioksit dalgalanmaları ile daha fazla bağlantılı hale gelmiştir, bu da kara karbon yutaklarındaki değişkenliğin daha belirgin hale gelmesini sağlamaktadır.",
@@ -2041,239 +2257,5 @@
     "category": "on_baski",
     "score": 6,
     "added_at": "2026-10-17T10:11:14.862483+00:00"
-  },
-  {
-    "title": "Evrensel oksidatif hava koşulları, Arkaik Dünya'da alt-ark manto fugasitesini artırdı",
-    "link": "https://www.nature.com/articles/s41561-026-02119-6",
-    "abstract": "Doğa Jeobilimleri, Çevrimiçi yayımlandı: 14 Ekim 2026; doi:10.1038/s41561-026-02119-6 Arkaik dönemdeki ilerleyici oksidatif hava koşulları, subdüksiyon sırasında geri dönüştürülen oksitlenmiş kükürt oranını artırmış olabilir. Bu durum, yüzey ile giderek daha fazla oksitlenmiş ark magmatizması arasında bir geri bildirim olduğunu önermektedir.",
-    "source": "Nature Geoscience",
-    "category": "makale",
-    "score": 9,
-    "added_at": "2026-10-14T11:13:00.026531+00:00"
-  },
-  {
-    "title": "Kuru çakıl yağmuru, demir oksidin hidrojenle azaltılması yoluyla Dünya'ya su taşıyabilir",
-    "link": "https://www.nature.com/articles/s41561-026-02138-3",
-    "abstract": "Doğa Jeobilimleri, Çevrimiçi yayımlandı: 12 Ekim 2026; doi:10.1038/s41561-026-02138-3 Dünya üzerindeki suyun büyük bir kısmı, gezegenin oluşumu sırasında sıcak, hidrojen açısından zengin ilkel atmosferden düşen kuru silikat çakıllarından üretilmiş olabilir. Saf hidrojen akışları üzerinde yapılan yüksek sıcaklık deneyleri...",
-    "source": "Nature Geoscience",
-    "category": "makale",
-    "score": 8,
-    "added_at": "2026-10-14T11:13:00.026531+00:00"
-  },
-  {
-    "title": "Batı Avrasya Stepleri'nde daha sıcak ve daha kuru bir iklim rejimine ani geçiş",
-    "link": "https://www.nature.com/articles/s41561-026-02125-8",
-    "abstract": "Doğa Jeobilimleri, Çevrimiçi yayımlandı: 12 Ekim 2026; doi:10.1038/s41561-026-02125-8 Batı Avrasya Stepleri, dış iklim zorlamaları tarafından yönlendirilen ve içsel geri beslemelerle güçlendirilen, doğal değişkenlik aralığını aşan daha sıcak ve daha kuru bir yaz iklimine ani ve kalıcı bir geçiş yaşamıştır.",
-    "source": "Nature Geoscience",
-    "category": "makale",
-    "score": 6,
-    "added_at": "2026-10-14T11:13:00.026531+00:00"
-  },
-  {
-    "title": "Hava koşullarından kaynaklanan kalsiyum, meralar topraklarında karbon depolamasını destekliyor",
-    "link": "https://www.nature.com/articles/s43247-026-04142-2",
-    "abstract": "İletişimler Yer & Çevre, Çevrimiçi yayımlandı: 13 Ekim 2026; doi:10.1038/s43247-026-04142-2 Mineral hava koşullarından kaynaklanan kalsiyum, ABD Mollisol'lerinde toprak organik karbon depolamasını teşvik etmekte ve tarım, kalsiyum girdilerini dört ila beş kat artırarak, jeokimyasal koşulları değiştirmektedir.",
-    "source": "Nature Comms Earth",
-    "category": "makale",
-    "score": 7,
-    "added_at": "2026-10-14T11:13:00.026531+00:00"
-  },
-  {
-    "title": "Hagibis (2019) sırasında Japonya'da uzunlamasına tayfun yolu perturbasyonları ve set yüksekliği değişimleri altında etki bazlı sel hasar değerlendirmesi",
-    "link": "https://www.nature.com/articles/s43247-026-04077-8",
-    "abstract": "İletişimler Yer & Çevre, Çevrimiçi yayımlandı: 13 Ekim 2026; doi:10.1038/s43247-026-04077-8 Tayfun Hagibis (2019) sel hasarı, tayfun yolu değişimleri ve set yüksekliği tarafından büyük ölçüde etkilenmiş olup, en yüksek kayıplar Tokyo, Osaka ve Nagoya çevresinde farklı koşullar altında yoğunlaşmıştır.",
-    "source": "Nature Comms Earth",
-    "category": "makale",
-    "score": 5,
-    "added_at": "2026-10-14T11:13:00.026531+00:00"
-  },
-  {
-    "title": "Okyanus termal ataletinin, net sıfır altında tropikal Pasifik ortalama durum kaymasını sürdürmesi",
-    "link": "https://www.nature.com/articles/s43247-026-04082-x",
-    "abstract": "İletişimler Yer & Çevre, Çevrimiçi yayımlandı: 13 Ekim 2026; doi:10.1038/s43247-026-04082-x Tropikal Pasifik, devam eden ısınma altında El Niño benzeri koşullara kaymakta ve emisyonlar durduktan sonra yüzyıllar boyunca geri dönmemektedir; bu durum, yüzyıllar boyunca süren iklim modeli simülasyonlarına dayanmaktadır.",
-    "source": "Nature Comms Earth",
-    "category": "makale",
-    "score": 4,
-    "added_at": "2026-10-14T11:13:00.026531+00:00"
-  },
-  {
-    "title": "ABD petrol ve gaz metan emisyon yoğunluğu 2019-2024 döneminde azaldı, federal politika etkisi konusunda pek bir belirti yok",
-    "link": "https://www.nature.com/articles/s43247-026-04039-0",
-    "abstract": "İletişimler Yer & Çevre, Çevrimiçi yayımlandı: 13 Ekim 2026; doi:10.1038/s43247-026-04039-0 ABD'deki petrol ve gaz emisyonları 2019'dan 2024'e kadar azalmış olup, bu durum muhtemelen kademeli teknolojik ve operasyonel gelişmeler ile mevcut federal düzenlemelerin bir sonucu olarak ortaya çıkmıştır.",
-    "source": "Nature Comms Earth",
-    "category": "makale",
-    "score": 4,
-    "added_at": "2026-10-14T11:13:00.026531+00:00"
-  },
-  {
-    "title": "Fizik bilgisiyle desteklenen derin öğrenme, jeodezik verileri ve fay sürtünmesini ilişkilendiriyor",
-    "link": "https://www.nature.com/articles/s43247-026-04138-y",
-    "abstract": "İletişimler Yer & Çevre, Çevrimiçi yayımlandı: 12 Ekim 2026; doi:10.1038/s43247-026-04138-y Bir fay boyunca mekansal olarak değişken sürtünme özellikleri, fiziksel tutarlılıkta kayma modellemesi sağlayan fizik bilgisiyle desteklenen bir sinir ağı yaklaşımı kullanılarak tahmin edilebilir; bu yaklaşım, 2010 Bung...",
-    "source": "Nature Comms Earth",
-    "category": "makale",
-    "score": 8,
-    "added_at": "2026-10-14T11:13:00.026531+00:00"
-  },
-  {
-    "title": "Belirgin sürücüler, Atlantik Okyanusu'ndaki iz metal dağılımlarını kontrol ediyor",
-    "link": "https://www.nature.com/articles/s43247-026-04145-z",
-    "abstract": "İletişimler Yer & Çevre, Çevrimiçi yayımlandı: 11 Ekim 2026; doi:10.1038/s43247-026-04145-z Yüksek enlemlerde oluşan su kütleleri aracılığıyla taşınma, çözünmüş iz metal dağılımlarının %60-90'ını ve Atlantik Okyanusu'nun iç kısmındaki iz metal envanterlerinin %75'ten fazlasını açıklayabilir.",
-    "source": "Nature Comms Earth",
-    "category": "makale",
-    "score": 5,
-    "added_at": "2026-10-14T11:13:00.026531+00:00"
-  },
-  {
-    "title": "Thwaites Buzulu, daha önce tahmin edilenin iki katı kadar deniz seviyesi yükselmesine katkıda bulunabilir",
-    "link": "https://phys.org/news/2026-10-thwaites-glacier-contribute-sea-previously.html",
-    "abstract": "Kaliforniya Üniversitesi, Irvine ve NASA'nın Jet Propulsion Laboratuvarı'ndaki buzullar uzmanları tarafından geliştirilen yeni bir buz tabakası modeli, Batı Antarktika'daki Thwaites Buzulu'nun 2100 yılına kadar deniz seviyesini 30 milimetre (1.2 inç) kadar yükselteceğini öngörüyor; bu, önceki tahminlerin iki katıdır...",
-    "source": "Phys.org Earth",
-    "category": "haber",
-    "score": 6,
-    "added_at": "2026-10-14T11:13:00.026531+00:00"
-  },
-  {
-    "title": "Ana AMOC bileşeninin arızalanmasından sonra bile devam eden okyanus akıntısı",
-    "link": "https://phys.org/news/2026-10-ocean-circulation-persists-key-amoc.html",
-    "abstract": "Atlantik meridyen ters akıntısı (AMOC), iklim değişikliği nedeniyle potansiyel olarak varoluşsal bir tehdit ile karşı karşıya olduğu düşünülmektedir. Ancak okyanusların ısınmasıyla AMOC'un başına gelenleri modellemeye yönelik girişimler farklı sonuçlar göstermekte ve bu durumun kaderini belirsiz bırakmaktadır. AGU Advances dergisinde yayımlanan bir çalışmada, Shantong Sun ve Andr...",
-    "source": "Phys.org Earth",
-    "category": "haber",
-    "score": 4,
-    "added_at": "2026-10-14T11:13:00.026531+00:00"
-  },
-  {
-    "title": "Uydu modeli, Alp turbalıklarının resmi haritalardan daha küçük olabileceğini buldu",
-    "link": "https://phys.org/news/2026-10-satellite-alpine-peatlands-smaller.html",
-    "abstract": "Alplerdeki turbalıklar genellikle küçük, dağınık ve erişilmesi zor alanlardır. Bu nedenle, bunların kapsamı ve durumu hakkında güncel bilgiler genellikle eksiktir. Göttingen Üniversitesi'nden araştırmacıların da dahil olduğu uluslararası bir araştırma ekibi, bu alanları belirlemek için sınır ötesi bir yaklaşım geliştirmiştir.",
-    "source": "Phys.org Earth",
-    "category": "haber",
-    "score": 5,
-    "added_at": "2026-10-14T11:13:00.026531+00:00"
-  },
-  {
-    "title": "'Atmosferik nehirler', Antarktika'nın kış deniz buzunda Portekiz büyüklüğünde bir delik açılmasına yardımcı oldu",
-    "link": "https://phys.org/news/2026-10-atmospheric-rivers-portugal-sized-hole.html",
-    "abstract": "Polinya, deniz buzu ile çevrili açık su alanlarıdır; burada ısı ve nem okyanus ile atmosfer arasında serbestçe geçiş yapabilir. Ağustos 2024'te, Doğu Antarktika kıyısında, kışın derinliklerinde Breid Koyu'nda büyük bir polinya açıldı. Bu bölge, yılın bu zamanında buzla kaplı kalmıştı.",
-    "source": "Phys.org Earth",
-    "category": "haber",
-    "score": 4,
-    "added_at": "2026-10-14T11:13:00.026531+00:00"
-  },
-  {
-    "title": "Colorado Nehri kuraklığı, benzersiz bir yer altı suyu kaybı modeline yol açıyor",
-    "link": "https://phys.org/news/2026-10-colorado-river-drought-unprecedented-pattern.html",
-    "abstract": "Colorado Nehri akışlarının azalması ve Lake Powell ile Lake Mead'deki su seviyelerinin düşmesi, Güneybatı'daki mega kuraklığın oldukça görünür işaretleridir.",
-    "source": "Phys.org Earth",
-    "category": "haber",
-    "score": 6,
-    "added_at": "2026-10-14T11:13:00.026531+00:00"
-  },
-  {
-    "title": "Net sıfıra daha erken ulaşmak, Pasifik'teki uzun süreli El Niño benzeri değişiklikleri sınırlayabilir",
-    "link": "https://phys.org/news/2026-10-net-sooner-limit-el-nio.html",
-    "abstract": "Net sıfıra daha erken ulaşmak, El Niño ve tropikal Pasifik'teki uzun süreli değişiklikleri sınırlayabilir; yeni iklim modellemeleri bunu önermektedir. Ancak okyanusun derinliklerinde depolanan ısı, tropikal Pasifik'teki değişikliklerin yüzyıllar boyunca devam edebileceği anlamına gelmektedir.",
-    "source": "Phys.org Earth",
-    "category": "haber",
-    "score": 4,
-    "added_at": "2026-10-14T11:13:00.026531+00:00"
-  },
-  {
-    "title": "20. yüzyılın ortalarından bu yana Amerikan Batısı'ndan 300 buzul kayboldu",
-    "link": "https://phys.org/news/2026-10-glaciers-american-west-mid20th-century.html",
-    "abstract": "Bir uçaktan bakıldığında, Rocky Dağları'nın batısındaki çoğu buzul, engebeli arazinin katlandığı yerlerde küçük beyaz lekeler gibi görünmektedir. Beyaz, kar örtüsüdür ve daha aşağıda gri-mavi çıplak buzu görebilirsiniz.",
-    "source": "Phys.org Earth",
-    "category": "haber",
-    "score": 5,
-    "added_at": "2026-10-14T11:13:00.026531+00:00"
-  },
-  {
-    "title": "Dünya genelindeki büyük şehirler batıyor, uydu verileri ortaya koyuyor",
-    "link": "https://phys.org/news/2026-10-major-cities-worldwide-satellite-reveal.html",
-    "abstract": "Arazi çökmesi, yerin yavaş yavaş alçalmasıdır; bu durum binalara, temellere ve drenaj ile kanalizasyon sistemlerine zarar verebilir ve sel risklerini artırabilir. Ancak arazi çökmesi dinamikleri hakkında bilgi sınırlıdır; bu da politika yapıcıların risklerin nerelerde yoğunlaştığını belirlemesini zorlaştırmaktadır.",
-    "source": "Phys.org Earth",
-    "category": "haber",
-    "score": 8,
-    "added_at": "2026-10-14T11:13:00.026531+00:00"
-  },
-  {
-    "title": "Deniz karı ne kadar yapışkan olursa, karbon taşıma kapasitesi o kadar iyi oluyor, yeni çalışma buluyor",
-    "link": "https://phys.org/news/2026-10-gooier-marine-carbon.html",
-    "abstract": "Derin denizde, kar yağışı asla durmaz. Okyanusta düşen kar türü, deniz karı olarak bilinir ve karada düşen pul pul geometrik harikalarla oldukça farklıdır. Deniz karı, organik ve inorganik kalıntılardan oluşan küçük topları tanımlar; bu, mukus, dışkı, tortu, ölü plankton vb. gibi şeyleri içerir.",
-    "source": "Phys.org Earth",
-    "category": "haber",
-    "score": 6,
-    "added_at": "2026-10-14T11:13:00.026531+00:00"
-  },
-  {
-    "title": "Çığ → toprak kayması barajı → patlama: Nepal'in Budhi Gandaki selinin 3D rekonstrüksiyonu (11 Ekim), nehir ölçüm verileri ve 04:22'deki sismik sinyal",
-    "link": "https://www.reddit.com/r/geology/comments/1x55hds/avalanche_landslide_dam_outburst_a_3d/",
-    "abstract": "Nepal'in Gorkha bölgesindeki Budhi Gandaki'de meydana gelen pazar günkü selin 12 dakikalık bir rekonstrüksiyonunu bir araya getirdim. ICIMOD'un sayımına göre, bu yedi hafta içinde gerçekleşen ikinci büyük Himalaya selidir. Kapsadığı konular: - Ölçüm kaydı: Arughat'ta (DHM istasyonu 3572) nehir 30 dakikada yaklaşık 5 m yükseldi, yağış olmadan.",
-    "source": "Reddit (r/geology)",
-    "category": "forum",
-    "score": 7,
-    "added_at": "2026-10-14T11:13:00.026531+00:00"
-  },
-  {
-    "title": "Bir uçurum yüzeyinde sızan su ve bitki örtüsü ile traverten terasları",
-    "link": "https://www.reddit.com/r/geology/comments/1x550e5/travertine_terraces_with_seeping_water_and/",
-    "abstract": "&#32; tarafından gönderildi &#32;  /u/Intelligent-Bass2044   [bağlantı] &#32; [yorumlar]",
-    "source": "Reddit (r/geology)",
-    "category": "forum",
-    "score": 4,
-    "added_at": "2026-10-14T11:13:00.026531+00:00"
-  },
-  {
-    "title": "Her eyaletin jeolojik haritasının .kml versiyonlarının bulunduğu USGS web sitesine ne oldu?",
-    "link": "https://www.reddit.com/r/geology/comments/1x54jwi/what_happened_to_the_usgs_website_that_had_kml/",
-    "abstract": "Maine için, belirli kıyı bölgelerinde hangi tür kayaların bulunduğunu görebilmek amacıyla bir harita arıyordum. Görünüşe göre her şey Ulusal Harita formatına taşınmış ve bireysel haritaları indirmek zorundayım. Bir alanı bütün olarak görmek istediğimde bu oldukça sinir bozucu.",
-    "source": "Reddit (r/geology)",
-    "category": "forum",
-    "score": 5,
-    "added_at": "2026-10-14T11:13:00.026531+00:00"
-  },
-  {
-    "title": "Son 4000 yılda Cascade Sıradağları'ndaki patlamalar",
-    "link": "https://www.reddit.com/r/geology/comments/1x4k28u/eruptions_in_the_cascade_range_during_the_past/",
-    "abstract": "Buradaki ve buradaki resimlerin kaynağı  &#32; gönderildi  &#32;  /u/dctroll_   [bağlantı] &#32; [yorumlar]",
-    "source": "Reddit (r/geology)",
-    "category": "forum",
-    "score": 6,
-    "added_at": "2026-10-14T11:13:00.026531+00:00"
-  },
-  {
-    "title": "Kentucky, Middlesboro: Bir meteor kraterinin içine inşa edilmiş bir kasaba [OC]",
-    "link": "https://www.reddit.com/r/geology/comments/1x4ja0e/middlesboro_kentucky_a_town_built_inside_a/",
-    "abstract": "Middlesboro, Kentucky'nin bulunduğu vadi, yaklaşık 6 km çapında bir meteor krateridir. USGS jeologları bunu 1962 yılında tanımlamış ve 1966 yılında Robert Dietz, sadece çarpışmalarda oluşan şatter konilerini kumtaşında bulmuştur. 1886 civarında, Knoxville'de yaşayan İskoç kökenli mühendis Alexander Arthur, bu konuya ilgi duymuştur.",
-    "source": "Reddit (r/geology)",
-    "category": "forum",
-    "score": 5,
-    "added_at": "2026-10-14T11:13:00.026531+00:00"
-  },
-  {
-    "title": "Bu monazit ve zirkon kristalleri ince kesit altında mı?",
-    "link": "https://www.reddit.com/r/geology/comments/1x4fkwc/are_these_monazite_and_zircon_crystals_under_thin/",
-    "abstract": "Yüksek dereceli girişim renkleri değil, ama yanlış da olabilirim; bunları ince kesit altında hiç incelemedim ve bu konuda birinin bilgisi olup olmadığını merak ediyorum. Oldukça büyükler, 0.3 mm ve bir kiltaşının içinde bulunuyorlar. Söylendiğine göre, apatit, zirkon, monazit ve diğer nadir toprak elementleri içeren kristallerin bulunması bekleniyor.",
-    "source": "Reddit (r/geology)",
-    "category": "forum",
-    "score": 6,
-    "added_at": "2026-10-14T11:13:00.026531+00:00"
-  },
-  {
-    "title": "Elektrik, mağaraları bulmamıza nasıl yardımcı olabilir?",
-    "link": "https://www.reddit.com/r/geology/comments/1x4f7tc/how_can_electricity_help_us_find_caves/",
-    "abstract": "2020 Haziran'ında yayımlanan, Colorado'daki olası mağara geçitlerini belirlemek için elektrosensitivite kullanımı hakkında bir makale  &#32; gönderildi  &#32;  /u/Affectionate-Ad-5255   [bağlantı] &#32; [yorumlar]",
-    "source": "Reddit (r/geology)",
-    "category": "forum",
-    "score": 5,
-    "added_at": "2026-10-14T11:13:00.026531+00:00"
-  },
-  {
-    "title": "Farklı nesillerin cep telefonlarının karşılaştırmalı elementel bileşimi ve geri dönüşüm üzerindeki sonuçları",
-    "link": "https://doi.org/10.1127/zdgg/0552",
-    "abstract": "",
-    "source": "Crossref",
-    "category": "makale",
-    "score": 5,
-    "added_at": "2026-10-14T11:13:00.026531+00:00"
   }
 ]
